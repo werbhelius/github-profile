@@ -1,9 +1,8 @@
 package com.fantasticthing.github
 
 import io.ktor.application.*
-import io.ktor.features.CallLogging
-import io.ktor.features.DefaultHeaders
-import io.ktor.response.respondText
+import io.ktor.features.*
+import io.ktor.response.*
 import io.ktor.routing.*
 
 
