@@ -18,3 +18,16 @@ class ParametersMissingException(private val keys: List<String>): ErrorException
     override fun errorMessage(): ErrorMessage = ErrorMessage(errorCode, "Parameters $keys Missing")
 
 }
+
+// 路由错误
+class RouterErrorException: ErrorException() {
+
+    override val httpCode: HttpStatusCode
+        get() = HttpStatusCode.NotFound
+
+    override val errorCode: String
+        get() = "RouterError"
+
+    override fun errorMessage(): ErrorMessage = ErrorMessage(errorCode, "Router Not Found ")
+
+}
