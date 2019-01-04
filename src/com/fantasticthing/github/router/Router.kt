@@ -1,7 +1,9 @@
 package com.fantasticthing.github.router
 
 import com.fantasticthing.github.exception.*
+import com.fantasticthing.github.location.*
 import io.ktor.application.*
+import io.ktor.locations.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
@@ -10,12 +12,12 @@ import io.ktor.routing.*
  */
 
 fun Routing.api() {
-    get("/") {
+    get<Index> {
         call.respondText("Hello World!")
     }
-    get("/profile") {
-        val username = call.request.queryParameters["username"]
-        if (username.isNullOrBlank()) {
+    get<Profile> { profile ->
+        val username = profile.username
+        if (username.isBlank()) {
             throw ParametersMissingException(listOf("username"))
         }
         call.respondText("username is $username")

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.*
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.jackson.*
+import io.ktor.locations.*
 import io.ktor.routing.*
 
 
@@ -13,6 +14,7 @@ import io.ktor.routing.*
 fun Application.main() {
     install(DefaultHeaders)
     install(CallLogging)
+    install(Locations)
     install(ContentNegotiation) {
         jackson {
             enable(SerializationFeature.INDENT_OUTPUT)

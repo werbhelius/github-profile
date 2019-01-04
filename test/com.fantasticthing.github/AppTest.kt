@@ -16,6 +16,10 @@ class AppTest {
             assertEquals(HttpStatusCode.OK, response.status())
             assertEquals("username is werb", response.content)
         }
+        with(handleRequest(HttpMethod.Get, "/profile")) {
+            assertEquals(HttpStatusCode.BadRequest, response.status())
+            assertEquals("username is werb", response.content)
+        }
     }
 
 }
