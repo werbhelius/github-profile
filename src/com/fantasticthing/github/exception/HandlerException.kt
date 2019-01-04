@@ -2,7 +2,6 @@ package com.fantasticthing.github.exception
 
 import io.ktor.application.*
 import io.ktor.features.*
-import io.ktor.http.*
 import io.ktor.response.*
 
 /**
@@ -10,10 +9,7 @@ import io.ktor.response.*
  */
 
 fun StatusPages.Configuration.handlerException() {
-    exception<AuthenticationException> {
-        call.respond(HttpStatusCode.Unauthorized, "please fill in correct username")
-    }
-    exception<AuthorizationException> {
-        call.respond(HttpStatusCode.Forbidden)
+    exception<ParametersMissingException> { case ->
+        call.respond(case.httpCode, case.errorMessage())
     }
 }

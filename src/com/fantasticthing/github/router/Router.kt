@@ -16,7 +16,7 @@ fun Routing.api() {
     get("/profile") {
         val username = call.request.queryParameters["username"]
         if (username.isNullOrBlank()) {
-            throw AuthenticationException()
+            throw ParametersMissingException(listOf("username"))
         }
         call.respondText("username is $username")
     }
