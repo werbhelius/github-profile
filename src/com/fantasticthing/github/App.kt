@@ -1,7 +1,12 @@
 package com.fantasticthing.github
 
+import com.fantasticthing.github.exception.*
+import com.fantasticthing.github.router.*
+import com.fasterxml.jackson.databind.*
 import io.ktor.application.*
 import io.ktor.features.*
+import io.ktor.http.*
+import io.ktor.jackson.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
@@ -10,10 +15,16 @@ import io.ktor.routing.*
 fun Application.main() {
     install(DefaultHeaders)
     install(CallLogging)
-    install(Routing) {
-        get("/") {
-            call.respondText("Hello World~~~~")
+    install(ContentNegotiation) {
+        jackson {
+            enable(SerializationFeature.INDENT_OUTPUT)
         }
+    }
+    install(StatusPages) {
+        handlerException()
+    }
+    install(Routing) {
+       api()
     }
 }
 
