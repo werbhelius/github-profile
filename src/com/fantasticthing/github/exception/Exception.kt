@@ -6,7 +6,6 @@ import io.ktor.http.*
  * Created by wanbo on 2019-01-04.
  */
 
-// 参数缺失
 class ParametersMissingException(private val keys: List<String>): ErrorException() {
 
     override val httpCode: HttpStatusCode
@@ -19,7 +18,6 @@ class ParametersMissingException(private val keys: List<String>): ErrorException
 
 }
 
-// 路由错误
 class RouterErrorException: ErrorException() {
 
     override val httpCode: HttpStatusCode
@@ -28,6 +26,6 @@ class RouterErrorException: ErrorException() {
     override val errorCode: String
         get() = "RouterError"
 
-    override fun errorMessage(): ErrorMessage = ErrorMessage(errorCode, "Router Not Found ")
+    override fun errorMessage(): ErrorMessage = ErrorMessage(errorCode, "Router Not Found")
 
 }
