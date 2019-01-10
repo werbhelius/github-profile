@@ -12,4 +12,4 @@ abstract class ErrorException : RuntimeException() {
     abstract fun errorMessage(): ErrorMessage
 }
 
-data class ErrorMessage(val code: String, val message: String)
+data class ErrorMessage(val code: String, val message: Any)

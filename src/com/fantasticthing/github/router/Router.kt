@@ -22,6 +22,6 @@ fun Routing.api() {
             throw ParametersMissingException(listOf("username"))
         }
         val response = UserAuthentication().request(username)
-        call.respondText(response)
+        call.respond(response)
     }
 }

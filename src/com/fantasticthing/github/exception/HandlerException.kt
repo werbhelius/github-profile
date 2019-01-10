@@ -17,4 +17,7 @@ fun StatusPages.Configuration.handlerException() {
     exception<ParametersMissingException> { case ->
         call.respond(case.httpCode, case.errorMessage())
     }
+    exception<BadRequestException> { case ->
+        call.respond(case.httpCode, case.errorMessage())
+    }
 }

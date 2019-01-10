@@ -29,3 +29,15 @@ class RouterErrorException: ErrorException() {
     override fun errorMessage(): ErrorMessage = ErrorMessage(errorCode, "Router Not Found")
 
 }
+
+class BadRequestException(private val error: Any): ErrorException() {
+
+    override val httpCode: HttpStatusCode
+        get() = HttpStatusCode.BadRequest
+
+    override val errorCode: String
+        get() = "BadRequest"
+
+    override fun errorMessage(): ErrorMessage = ErrorMessage(errorCode, error)
+
+}

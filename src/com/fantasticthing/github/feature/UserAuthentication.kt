@@ -27,17 +27,16 @@ class UserAuthentication {
                 "}"
     }
 
-    suspend fun request(userName: String): String {
-        return client.post(api) {
-            body = TextContent(
-                jacksonObjectMapper().writeValueAsString(
-                    GraphQLRequest(
-                        graphQL(),
-                        variables(userName)
-                    )
-                ), contentType = ContentType.Application.Json
-            )
-        }
+    suspend fun request(userName: String): Any {
+        val body = TextContent(
+            jacksonObjectMapper().writeValueAsString(
+                GraphQLRequest(
+                    graphQL(),
+                    variables(userName)
+                )
+            ), contentType = ContentType.Application.Json
+        )
+        return okRequest(body).data
     }
 
 }
