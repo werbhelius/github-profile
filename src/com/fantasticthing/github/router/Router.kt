@@ -1,6 +1,7 @@
 package com.fantasticthing.github.router
 
 import com.fantasticthing.github.exception.*
+import com.fantasticthing.github.feature.*
 import com.fantasticthing.github.location.*
 import io.ktor.application.*
 import io.ktor.locations.*
@@ -20,6 +21,7 @@ fun Routing.api() {
         if (username.isBlank()) {
             throw ParametersMissingException(listOf("username"))
         }
-        call.respondText("username is $username")
+        val response = UserAuthentication().request(username)
+        call.respondText(response)
     }
 }
