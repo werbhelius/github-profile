@@ -9,7 +9,6 @@ import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.request.post
 import io.ktor.content.TextContent
 import io.ktor.http.HttpMethod
-import okhttp3.Protocol
 
 /**
  * Created by wanbo on 2019-01-10.
