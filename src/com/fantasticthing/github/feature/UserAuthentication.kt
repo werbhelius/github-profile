@@ -2,6 +2,7 @@ package com.fantasticthing.github.feature
 
 import com.fantasticthing.github.exception.*
 import com.fantasticthing.github.http.*
+import com.fantasticthing.github.model.*
 import com.fasterxml.jackson.module.kotlin.*
 import io.ktor.content.*
 import io.ktor.http.*
@@ -26,7 +27,9 @@ class UserAuthentication {
                 "}"
     }
 
-    suspend fun request(userName: String): Any {
+    data class Response(val user: User)
+
+    suspend fun request(userName: String): String {
         val body = TextContent(
             jacksonObjectMapper().writeValueAsString(
                 GraphQLRequest(
@@ -36,11 +39,11 @@ class UserAuthentication {
             ), contentType = ContentType.Application.Json
         )
 
-        val response = okRequest(body)
+        val response = client.okRequest<GraphQLResponse<Response>>(body)
         response.errors?.also {
             throw ParametersNotFoundException("userName not found")
         }
-        return response.data
+        return response.data!!.user.id
     }
 
 }

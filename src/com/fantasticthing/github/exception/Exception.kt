@@ -53,3 +53,14 @@ class ParametersNotFoundException(private val error: Any): ErrorException() {
     override fun errorMessage(): ErrorMessage = ErrorMessage(errorCode, error)
 
 }
+
+class InternalServerErrorException : ErrorException() {
+    override val httpCode: HttpStatusCode
+        get() = HttpStatusCode.InternalServerError
+
+    override val errorCode: String
+        get() = "InternalServerError"
+
+    override fun errorMessage(): ErrorMessage = ErrorMessage(errorCode, HttpStatusCode.InternalServerError.description)
+
+}

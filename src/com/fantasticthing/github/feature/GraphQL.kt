@@ -5,4 +5,4 @@ package com.fantasticthing.github.feature
  */
 data class GraphQLRequest(val query: String, val variables: String)
 
-data class GraphQLResponse(val data: Any, val errors: Any?)
+data class GraphQLResponse <T> (val data: T?, val errors: Any?)
