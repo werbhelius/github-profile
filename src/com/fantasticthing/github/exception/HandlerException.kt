@@ -14,6 +14,9 @@ fun StatusPages.Configuration.handlerException() {
         val routerErrorException = RouterErrorException()
         call.respond(routerErrorException.httpCode, routerErrorException.errorMessage())
     }
+    status(HttpStatusCode.InternalServerError) {
+        call.respond(HttpStatusCode.InternalServerError, HttpStatusCode.InternalServerError.description)
+    }
     exception<ParametersMissingException> { case ->
         call.respond(case.httpCode, case.errorMessage())
     }

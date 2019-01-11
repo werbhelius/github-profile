@@ -40,5 +40,6 @@ dependencies {
     compile "io.ktor:ktor-client-jackson:$ktor_version"
     compile "io.ktor:ktor-jackson:$ktor_version"
     compile "io.ktor:ktor-locations:$ktor_version"
+    compile "com.natpryce:konfig:$konfig"
     testCompile "io.ktor:ktor-server-tests:$ktor_version"
 }

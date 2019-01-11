@@ -10,6 +10,7 @@ import io.ktor.locations.*
 import io.ktor.routing.*
 
 
+@KtorExperimentalLocationsAPI
 @Suppress("unused") // auto start by EngineMain in application.conf
 fun Application.main() {
     install(DefaultHeaders)

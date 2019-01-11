@@ -6,3 +6,4 @@
 *.ipr
 *.iws
 /local.properties
+/resources/config.properties
