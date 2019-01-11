@@ -1,17 +1,13 @@
 package com.fantasticthing.github.http
 
-import com.fantasticthing.github.exception.BadRequestException
-import com.fantasticthing.github.feature.GraphQLResponse
+import com.fantasticthing.github.feature.*
 import com.natpryce.konfig.*
 import com.natpryce.konfig.ConfigurationProperties.Companion.systemProperties
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.*
-import io.ktor.client.features.json.JacksonSerializer
-import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.request.post
-import io.ktor.content.TextContent
-import io.ktor.http.HttpMethod
-import java.io.*
+import io.ktor.client.features.json.*
+import io.ktor.client.request.*
+import io.ktor.content.*
 
 /**
  * Created by wanbo on 2019-01-10.
@@ -35,11 +31,7 @@ private val client = HttpClient(OkHttp) {
 }
 
 suspend fun okRequest(bodyJson: TextContent): GraphQLResponse {
-    val response = client.post<GraphQLResponse>(host) {
+    return client.post(host) {
         body = bodyJson
     }
-    response.errors?.also {
-        throw BadRequestException(response)
-    }
-    return response
 }

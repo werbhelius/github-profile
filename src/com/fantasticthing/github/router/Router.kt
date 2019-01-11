@@ -12,6 +12,7 @@ import io.ktor.routing.*
  * Created by wanbo on 2019-01-04.
  */
 
+@KtorExperimentalLocationsAPI
 fun Routing.api() {
     get<Index> {
         call.respondText("Hello World!")

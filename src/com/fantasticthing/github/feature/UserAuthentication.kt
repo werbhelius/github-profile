@@ -1,9 +1,8 @@
 package com.fantasticthing.github.feature
 
+import com.fantasticthing.github.exception.*
 import com.fantasticthing.github.http.*
-import com.fasterxml.jackson.databind.*
 import com.fasterxml.jackson.module.kotlin.*
-import io.ktor.client.request.*
 import io.ktor.content.*
 import io.ktor.http.*
 
@@ -36,7 +35,12 @@ class UserAuthentication {
                 )
             ), contentType = ContentType.Application.Json
         )
-        return okRequest(body).data
+
+        val response = okRequest(body)
+        response.errors?.also {
+            throw ParametersNotFoundException("userName not found")
+        }
+        return response.data
     }
 
 }

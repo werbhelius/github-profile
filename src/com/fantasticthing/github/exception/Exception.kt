@@ -41,3 +41,15 @@ class BadRequestException(private val error: Any): ErrorException() {
     override fun errorMessage(): ErrorMessage = ErrorMessage(errorCode, error)
 
 }
+
+class ParametersNotFoundException(private val error: Any): ErrorException() {
+
+    override val httpCode: HttpStatusCode
+        get() = HttpStatusCode.NotFound
+
+    override val errorCode: String
+        get() = "ParametersNotFound"
+
+    override fun errorMessage(): ErrorMessage = ErrorMessage(errorCode, error)
+
+}

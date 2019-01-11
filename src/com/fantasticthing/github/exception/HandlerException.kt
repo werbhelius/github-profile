@@ -17,10 +17,7 @@ fun StatusPages.Configuration.handlerException() {
     status(HttpStatusCode.InternalServerError) {
         call.respond(HttpStatusCode.InternalServerError, HttpStatusCode.InternalServerError.description)
     }
-    exception<ParametersMissingException> { case ->
-        call.respond(case.httpCode, case.errorMessage())
-    }
-    exception<BadRequestException> { case ->
+    exception<ErrorException> { case ->
         call.respond(case.httpCode, case.errorMessage())
     }
 }
