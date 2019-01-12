@@ -1,5 +1,8 @@
 package com.fantasticthing.github.helper
 
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import io.ktor.content.TextContent
+import io.ktor.http.ContentType
 import java.util.*
 import java.text.SimpleDateFormat
 
@@ -19,4 +22,14 @@ fun getFromAndToTime(): Pair<String, String> {
     val isoFrom = dataFormat.format(Date(from.timeInMillis))
 
     return Pair(isoFrom, isoTo)
+}
+
+fun Any.toJson(): String {
+    return jacksonObjectMapper().writeValueAsString(this)
+}
+
+fun Any.toGraphQLBody(): TextContent {
+    return TextContent(
+        this.toJson(), contentType = ContentType.Application.Json
+    )
 }

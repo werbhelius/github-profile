@@ -3,9 +3,6 @@ package com.fantasticthing.github.feature
 import com.fantasticthing.github.exception.*
 import com.fantasticthing.github.helper.*
 import com.fantasticthing.github.http.*
-import com.fasterxml.jackson.module.kotlin.*
-import io.ktor.content.*
-import io.ktor.http.*
 
 /**
  * Created by wanbo on 2019-01-11.
@@ -159,15 +156,8 @@ class UserProfile {
 
     suspend fun request(userName: String, id: String): Any {
         val fromAndToTime = getFromAndToTime()
-        val body = TextContent(
-            jacksonObjectMapper().writeValueAsString(
-                GraphQLRequest(
-                    graphQL(),
-                    variables(userName, id, fromAndToTime.first, fromAndToTime.second)
-                )
-            ), contentType = ContentType.Application.Json
-        )
-
+        val body =
+            GraphQLRequest(graphQL(), variables(userName, id, fromAndToTime.first, fromAndToTime.second)).toGraphQLBody()
         val response = client.okRequest<GraphQLResponse<Any>>(body)
         response.errors?.also {
             throw BadRequestException(it)

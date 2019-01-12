@@ -1,11 +1,9 @@
 package com.fantasticthing.github.feature
 
 import com.fantasticthing.github.exception.*
+import com.fantasticthing.github.helper.toGraphQLBody
 import com.fantasticthing.github.http.*
 import com.fantasticthing.github.model.*
-import com.fasterxml.jackson.module.kotlin.*
-import io.ktor.content.*
-import io.ktor.http.*
 
 /**
  * Created by wanbo on 2019-01-10.
@@ -30,14 +28,10 @@ class UserAuthentication {
     data class Response(val user: User)
 
     suspend fun request(userName: String): String {
-        val body = TextContent(
-            jacksonObjectMapper().writeValueAsString(
-                GraphQLRequest(
-                    graphQL(),
-                    variables(userName)
-                )
-            ), contentType = ContentType.Application.Json
-        )
+        val body = GraphQLRequest(
+            graphQL(),
+            variables(userName)
+        ).toGraphQLBody()
 
         val response = client.okRequest<GraphQLResponse<Response>>(body)
         response.errors?.also {
