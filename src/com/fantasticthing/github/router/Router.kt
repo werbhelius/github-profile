@@ -20,7 +20,7 @@ fun Routing.api() {
     get<Profile> { profile ->
         val username = profile.username
         if (username.isBlank()) {
-            throw ParametersMissingException(listOf("username"))
+            throw ParametersMissingException(listOf(profile.username))
         }
         val id = UserAuthentication().request(username)
         val response = UserProfile().request(username, id)

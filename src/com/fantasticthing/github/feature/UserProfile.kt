@@ -40,7 +40,7 @@ class UserProfile {
                 "    }\n" +
                 "}\n" +
                 "\n" +
-                "# 个人信息\n" +
+                "# UserInfo\n" +
                 "fragment userInfo on User {\n" +
                 "    id\n" +
                 "    name\n" +
@@ -125,7 +125,7 @@ class UserProfile {
                 "    }\n" +
                 "}\n" +
                 "\n" +
-                "# commit id: MDQ6VXNlcjEyNzYzMjc3\n" +
+                "# commit id: XXX\n" +
                 "fragment reposCommit on RepositoryConnection {\n" +
                 "    nodes {\n" +
                 "        name\n" +
@@ -158,11 +158,77 @@ class UserProfile {
         val fromAndToTime = getFromAndToTime()
         val body =
             GraphQLRequest(graphQL(), variables(userName, id, fromAndToTime.first, fromAndToTime.second)).toGraphQLBody()
-        val response = client.okRequest<GraphQLResponse<Any>>(body)
+        val response = client.okRequest<GraphQLResponse<Response>>(body)
         response.errors?.also {
             throw BadRequestException(it)
         }
-        return response
+        return response.data!!
     }
 
+    data class Response(val user: User)
+
+    data class User(val id: String,
+                    val name: String,
+                    val login: String,
+                    val avatarUrl: String,
+                    val bio: String,
+                    val location: String,
+                    val createdAt: String,
+                    val email: String,
+                    val url: String,
+                    val company: String,
+                    val websiteUrl: String,
+                    val isDeveloperProgramMember: Boolean,
+                    val followers: XCount,
+                    val following: XCount,
+                    val repositories: XCount,
+                    val organizations: Organizations,
+                    val pinnedRepos: Repos,
+                    val myRepos: Repos,
+                    val starRepos: Repos,
+                    val contributionsCollection: Contributions?,
+                    val reposCommit: ReposCommit)
+
+    data class XCount(val totalCount: Int)
+
+    data class Organizations(val totalCount: Int, val nodes: List<Organization> = listOf())
+
+    data class Organization(val name: String)
+
+    data class Repos(val totalCount: Int, val nodes: List<Repo> = listOf())
+
+    data class Repo(val name: String,
+                    val description: String?,
+                    val url: String,
+                    val forkCount: Int,
+                    val stargazers: XCount,
+                    val primaryLanguage: Lang?)
+
+    data class ReposCommit(val nodes: List<RepoCommit> = listOf())
+
+    data class RepoCommit(val name: String,
+                          val refs: RepsRefs?)
+
+    data class RepsRefs(val nodes: List<RepsRef> = listOf())
+
+    data class RepsRef(val name: String, val target: RepsRefTarget)
+
+    data class RepsRefTarget(val history: XCount)
+
+    data class Lang(val name: String, val color: String)
+
+    data class Contributions(val contributionCalendar: ContributionCalendar)
+
+    data class ContributionCalendar(val totalContributions: Int,
+                                    val colors: List<String> = listOf(),
+                                    val months: List<ContributionMonth> = listOf(),
+                                    val weeks: List<ContributionWeek> = listOf())
+
+    data class ContributionMonth(val name: String,
+                                 val totalWeeks: Int)
+
+    data class ContributionWeek(val contributionDays: List<ContributionDay> = listOf())
+
+    data class ContributionDay(val color: String,
+                               val contributionCount: Int)
 }

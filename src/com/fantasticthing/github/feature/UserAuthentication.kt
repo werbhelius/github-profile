@@ -3,7 +3,6 @@ package com.fantasticthing.github.feature
 import com.fantasticthing.github.exception.*
 import com.fantasticthing.github.helper.toGraphQLBody
 import com.fantasticthing.github.http.*
-import com.fantasticthing.github.model.*
 
 /**
  * Created by wanbo on 2019-01-10.
@@ -25,8 +24,6 @@ class UserAuthentication {
                 "}"
     }
 
-    data class Response(val user: User)
-
     suspend fun request(userName: String): String {
         val body = GraphQLRequest(
             graphQL(),
@@ -39,5 +36,9 @@ class UserAuthentication {
         }
         return response.data!!.user.id
     }
+
+    data class Response(val user: User)
+
+    data class User(val id: String)
 
 }
