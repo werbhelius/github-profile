@@ -34,10 +34,12 @@ class UserAuthentication {
         response.errors?.also {
             throw ParametersNotFoundException("userName not found")
         }
-        return response.data!!.user.id
+        response.data?.user?.id?.also {
+            return it
+        }
     }
 
-    data class Response(val user: User)
+    data class Response(val user: User?)
 
     data class User(val id: String)
 
