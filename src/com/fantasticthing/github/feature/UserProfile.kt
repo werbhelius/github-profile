@@ -156,7 +156,7 @@ class UserProfile {
 
     suspend fun request(userName: String, id: String): Any {
         Cache.getUser(userName)?.also {
-            return it
+            return it.format()
         }
 
         val fromAndToTime = getFromAndToTime()
@@ -168,8 +168,8 @@ class UserProfile {
         }
 
         response.data?.user?.also {
-            Cache.putUserProfile(it)
-            return response.data
+            Cache.putUser(it)
+            return it.format()
         }
     }
 
@@ -194,7 +194,13 @@ class UserProfile {
                     val myRepos: Repos,
                     val starRepos: Repos,
                     val contributionsCollection: Contributions?,
-                    val reposCommit: ReposCommit)
+                    val reposCommit: ReposCommit) {
+
+        fun format(): User {
+            return this
+        }
+
+    }
 
     data class XCount(val totalCount: Int)
 

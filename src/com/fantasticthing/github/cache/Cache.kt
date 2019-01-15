@@ -13,13 +13,13 @@ import java.util.concurrent.*
 object Cache {
 
     private const val path = "cache/userinfo"
-    private val userProfiles = readUserProfilesFromDisk()
+    private val users = readUserProfilesFromDisk()
 
-    fun putUserProfile(user: UserProfile.User) {
-        userProfiles[user.login] = user.toJson()
+    fun putUser(user: UserProfile.User) {
+        users[user.login] = user.toJson()
         CoroutineScope(Dispatchers.IO).launch {
             with(ByteArrayOutputStream()) {
-                ObjectOutputStream(this).writeObject(userProfiles)
+                ObjectOutputStream(this).writeObject(users)
                 File(path).apply {
                     if (!exists()) {
                         parentFile.mkdirs()
@@ -31,7 +31,7 @@ object Cache {
         }
     }
 
-    fun getUser(username: String) = userProfiles[username.toLowerCase()]?.toAny<UserProfile.User>()
+    fun getUser(username: String) = users[username.toLowerCase()]?.toAny<UserProfile.User>()
 
     private fun readUserProfilesFromDisk(): ConcurrentHashMap<String, String> {
         File(path).apply {
