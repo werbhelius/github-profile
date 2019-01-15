@@ -30,7 +30,7 @@ class UserAuthentication {
             variables(userName)
         ).toGraphQLBody()
 
-        val response = client.okRequest<GraphQLResponse<Response>>(body)
+        val response = client.okGraphQLRequest<GraphQLResponse<Response>>(body)
         response.errors?.also {
             throw ParametersNotFoundException("userName not found")
         }

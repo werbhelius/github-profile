@@ -4,6 +4,7 @@ import com.fantasticthing.github.cache.*
 import com.fantasticthing.github.exception.*
 import com.fantasticthing.github.helper.*
 import com.fantasticthing.github.http.*
+import kotlinx.coroutines.*
 
 /**
  * Created by wanbo on 2019-01-11.
@@ -161,13 +162,26 @@ class UserProfile {
 
         val fromAndToTime = getFromAndToTime()
         val body =
-            GraphQLRequest(graphQL(), variables(userName, id, fromAndToTime.first, fromAndToTime.second)).toGraphQLBody()
-        val response = client.okRequest<GraphQLResponse<Response>>(body)
-        response.errors?.also {
+            GraphQLRequest(
+                graphQL(),
+                variables(userName, id, fromAndToTime.first, fromAndToTime.second)
+            ).toGraphQLBody()
+
+        return coroutineScope {
+            val task1 = async {
+                client.okGraphQLRequest<GraphQLResponse<Response>>(body)
+            }
+            val task2 = async { UserRank().request(userName) }
+            return@coroutineScope deal(task1.await(), task2.await())
+        }
+    }
+
+    private fun deal(userResponse: GraphQLResponse<Response>, rankResponse: UserRank.Response): User {
+        userResponse.errors?.also {
             throw BadRequestException(it)
         }
-
-        response.data?.user?.also {
+        userResponse.data?.user?.also {
+            it.rank = rankResponse.user.rankings
             Cache.putUser(it)
             return it.format()
         }
@@ -175,26 +189,29 @@ class UserProfile {
 
     data class Response(val user: User)
 
-    data class User(val id: String,
-                    val name: String,
-                    val login: String,
-                    val avatarUrl: String,
-                    val bio: String,
-                    val location: String,
-                    val createdAt: String,
-                    val email: String,
-                    val url: String,
-                    val company: String,
-                    val websiteUrl: String,
-                    val followers: XCount,
-                    val following: XCount,
-                    val repositories: XCount,
-                    val organizations: Organizations,
-                    val pinnedRepos: Repos,
-                    val myRepos: Repos,
-                    val starRepos: Repos,
-                    val contributionsCollection: Contributions?,
-                    val reposCommit: ReposCommit) {
+    data class User(
+        val id: String,
+        val name: String,
+        val login: String,
+        val avatarUrl: String,
+        val bio: String,
+        val location: String,
+        val createdAt: String,
+        val email: String,
+        val url: String,
+        val company: String,
+        val websiteUrl: String,
+        val followers: XCount,
+        val following: XCount,
+        val repositories: XCount,
+        var rank: List<UserRank.Rank> = listOf(),
+        val organizations: Organizations,
+        val pinnedRepos: Repos,
+        val myRepos: Repos,
+        val starRepos: Repos,
+        val contributionsCollection: Contributions?,
+        val reposCommit: ReposCommit
+    ) {
 
         fun format(): User {
             return this
@@ -210,17 +227,21 @@ class UserProfile {
 
     data class Repos(val totalCount: Int, val nodes: List<Repo> = listOf())
 
-    data class Repo(val name: String,
-                    val description: String?,
-                    val url: String,
-                    val forkCount: Int,
-                    val stargazers: XCount,
-                    val primaryLanguage: Lang?)
+    data class Repo(
+        val name: String,
+        val description: String?,
+        val url: String,
+        val forkCount: Int,
+        val stargazers: XCount,
+        val primaryLanguage: Lang?
+    )
 
     data class ReposCommit(val nodes: List<RepoCommit> = listOf())
 
-    data class RepoCommit(val name: String,
-                          val refs: RepsRefs?)
+    data class RepoCommit(
+        val name: String,
+        val refs: RepsRefs?
+    )
 
     data class RepsRefs(val nodes: List<RepsRef> = listOf())
 
@@ -232,16 +253,22 @@ class UserProfile {
 
     data class Contributions(val contributionCalendar: ContributionCalendar)
 
-    data class ContributionCalendar(val totalContributions: Int,
-                                    val colors: List<String> = listOf(),
-                                    val months: List<ContributionMonth> = listOf(),
-                                    val weeks: List<ContributionWeek> = listOf())
+    data class ContributionCalendar(
+        val totalContributions: Int,
+        val colors: List<String> = listOf(),
+        val months: List<ContributionMonth> = listOf(),
+        val weeks: List<ContributionWeek> = listOf()
+    )
 
-    data class ContributionMonth(val name: String,
-                                 val totalWeeks: Int)
+    data class ContributionMonth(
+        val name: String,
+        val totalWeeks: Int
+    )
 
     data class ContributionWeek(val contributionDays: List<ContributionDay> = listOf())
 
-    data class ContributionDay(val color: String,
-                               val contributionCount: Int)
+    data class ContributionDay(
+        val color: String,
+        val contributionCount: Int
+    )
 }

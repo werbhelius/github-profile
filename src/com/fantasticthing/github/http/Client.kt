@@ -18,6 +18,7 @@ private val config = systemProperties() overriding
         ConfigurationProperties.fromResource("config.properties")
 
 val host = config[Key("github.host", stringType)]
+val rank = config[Key("github.rank", stringType)]
 val token = config[Key("github.token", stringType)]
 
 val client = HttpClient(OkHttp) {
@@ -32,7 +33,7 @@ val client = HttpClient(OkHttp) {
 }
 
 @Suppress("UNCHECKED_CAST")
-suspend inline fun <reified T> HttpClient.okRequest(bodyJson: TextContent): T {
+suspend inline fun <reified T> HttpClient.okGraphQLRequest(bodyJson: TextContent): T {
     return call(host) {
         method = HttpMethod.Post
         body = bodyJson
