@@ -1,5 +1,6 @@
 package com.fantasticthing.github.feature
 
+import com.fantasticthing.github.cache.*
 import com.fantasticthing.github.exception.*
 import com.fantasticthing.github.helper.*
 import com.fantasticthing.github.http.*
@@ -53,7 +54,6 @@ class UserProfile {
                 "    email\n" +
                 "    url\n" +
                 "    websiteUrl\n" +
-                "    isDeveloperProgramMember\n" +
                 "    followers {\n" +
                 "        totalCount\n" +
                 "    }\n" +
@@ -155,6 +155,10 @@ class UserProfile {
     }
 
     suspend fun request(userName: String, id: String): Any {
+        Cache.getUser(userName)?.also {
+            return it
+        }
+
         val fromAndToTime = getFromAndToTime()
         val body =
             GraphQLRequest(graphQL(), variables(userName, id, fromAndToTime.first, fromAndToTime.second)).toGraphQLBody()
@@ -162,7 +166,11 @@ class UserProfile {
         response.errors?.also {
             throw BadRequestException(it)
         }
-        return response.data!!
+
+        response.data?.user?.also {
+            Cache.putUserProfile(it)
+            return response.data
+        }
     }
 
     data class Response(val user: User)
@@ -178,7 +186,6 @@ class UserProfile {
                     val url: String,
                     val company: String,
                     val websiteUrl: String,
-                    val isDeveloperProgramMember: Boolean,
                     val followers: XCount,
                     val following: XCount,
                     val repositories: XCount,

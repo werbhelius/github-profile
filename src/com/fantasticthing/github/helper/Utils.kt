@@ -33,3 +33,7 @@ fun Any.toGraphQLBody(): TextContent {
         this.toJson(), contentType = ContentType.Application.Json
     )
 }
+
+inline fun <reified T> String.toAny(): T {
+    return jacksonObjectMapper().readValue(this, T::class.java)
+}
