@@ -42,7 +42,7 @@ class UserProfile {
                 "    }\n" +
                 "}\n" +
                 "\n" +
-                "# UserInfo\n" +
+                "# 个人信息\n" +
                 "fragment userInfo on User {\n" +
                 "    id\n" +
                 "    name\n" +
@@ -64,10 +64,12 @@ class UserProfile {
                 "    repositories {\n" +
                 "        totalCount\n" +
                 "    }\n" +
-                "    organizations(first : 100) {\n" +
+                "    organizations(first : 10) {\n" +
                 "        totalCount\n" +
                 "        nodes {\n" +
                 "            name\n" +
+                "          \tavatarUrl\n" +
+                "          \turl\n" +
                 "        }\n" +
                 "    }\n" +
                 "}\n" +
@@ -126,7 +128,7 @@ class UserProfile {
                 "    }\n" +
                 "}\n" +
                 "\n" +
-                "# commit id: XXX\n" +
+                "# commit id: ###\n" +
                 "fragment reposCommit on RepositoryConnection {\n" +
                 "    nodes {\n" +
                 "        name\n" +
@@ -212,6 +214,11 @@ class UserProfile {
         val contributionsCollection: Contributions?,
         val reposCommit: ReposCommit
     ) {
+
+        // Every two months contributions count
+        val contributionsEveryTwoMonth: List<Int> = listOf()
+        // The language of dabbling by myRepos
+        val dabblingLanguage: List<String> = listOf()
 
         fun format(): User {
             return this
