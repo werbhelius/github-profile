@@ -215,10 +215,21 @@ class UserProfile {
         val reposCommit: ReposCommit
     ) {
 
-        // Every two months contributions count
         val contributionsEveryTwoMonth: List<Int> = listOf()
-        // The language of dabbling by myRepos
-        val dabblingLanguage: List<String> = listOf()
+        val dabblingLanguageByMyRepos: List<DabblingLanguage> = listOf()
+        val dabblingLanguageByMyStar: List<DabblingLanguage> = listOf()
+        val reposAnalyzes: List<ReposAnalyze> = listOf()
+
+        data class DabblingLanguage(
+            val name: String,
+            val color: String,
+            val ratio: Float = 0f,
+            val starCount: Int = 0,
+            val commitCount: Int = 0
+        )
+
+        data class ReposAnalyze(val name: String,
+                                val ratio: Float = 0f)
 
         fun format(): User {
             return this
