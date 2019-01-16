@@ -172,11 +172,11 @@ class UserProfile {
                 client.okGraphQLRequest<GraphQLResponse<Response>>(body)
             }
             val task2 = async { UserRank().request(userName) }
-            return@coroutineScope deal(task1.await(), task2.await())
+            return@coroutineScope dealTask(task1.await(), task2.await())
         }
     }
 
-    private fun deal(userResponse: GraphQLResponse<Response>, rankResponse: UserRank.Response): User {
+    private fun dealTask(userResponse: GraphQLResponse<Response>, rankResponse: UserRank.Response): User {
         userResponse.errors?.also {
             throw BadRequestException(it)
         }
