@@ -15,7 +15,7 @@ class UserProfile {
         return "query(\$name: String!, \$from: DateTime!, \$to: DateTime!, \$id: ID!) {\n" +
                 "    user(login: \$name) {\n" +
                 "        ...userInfo\n" +
-                "        pinnedRepos: pinnedRepositories(first: 10) {\n" +
+                "        pinnedRepos: pinnedRepositories(first: 6) {\n" +
                 "            ...repos\n" +
                 "        }\n" +
                 "        myRepos: repositories(first : 100, orderBy: {\n" +
