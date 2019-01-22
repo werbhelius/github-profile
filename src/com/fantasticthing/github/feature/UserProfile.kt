@@ -218,10 +218,12 @@ class UserProfile {
     ) {
 
         val requestTime = System.currentTimeMillis()
+        var contributionsByMonth = arrayListOf<ContributionByMonth>()
         var languageRatioByMyRepos = arrayListOf<LanguageRatio>()
         var languageRatioByMyReposWithStar = arrayListOf<LanguageRatio>()
         var languageRatioByStarRepos = arrayListOf<LanguageRatio>()
-        var contributions = arrayListOf<ContributionByMonth>()
+        var languageRatioByMyReposCommit = arrayListOf<LanguageRatio>()
+        var commitTopRepos = arrayListOf<Repo>()
 
         data class LanguageRatio(val language: Lang, var count: Int, var ratio: Float = 0f)
 
@@ -237,7 +239,10 @@ class UserProfile {
             val formatContributionsWithMonth = async(Dispatchers.IO) {
                 return@async formatContributionsWithMonth()
             }
-            if (formatMyRepos.await() && formatStarRepos.await() && formatContributionsWithMonth.await()) {
+            val formatCommitByMyRepos = async(Dispatchers.IO) {
+                return@async formatCommitByMyRepos()
+            }
+            if (formatMyRepos.await() && formatStarRepos.await() && formatContributionsWithMonth.await() && formatCommitByMyRepos.await()) {
                 return@coroutineScope this@User
             } else {
                 throw RuntimeException()
@@ -293,6 +298,7 @@ class UserProfile {
                 languageRatioByMyReposWithStar.sortByDescending { it.count }
                 return@async true
             }
+
             return@coroutineScope languageRatio.await() && languageRatioWithStar.await()
         }
 
@@ -332,64 +338,103 @@ class UserProfile {
                     contributionByMonth.ratio = contributionByMonth.count.toFloat() / contributionByMonth.totalCount
                 }
                 start = end
-                contributions.add(contributionByMonth)
+                contributionsByMonth.add(contributionByMonth)
             }
             return@coroutineScope true
         }
 
-    }
+        private suspend fun formatCommitByMyRepos(): Boolean = coroutineScope {
+            val languageRatioWithCommit = async(Dispatchers.IO) {
+                val allCommitCount = myRepos.nodes.filter { !it.isFork }
+                    .sumBy { it.refs?.nodes?.sumBy { it.target.history.totalCount } ?: 0 }
+                myRepos.nodes.filter { !it.isFork }.forEach { repo ->
+                    repo.commitCount = repo.refs?.nodes?.sumBy { it.target.history.totalCount } ?: 0
+                    repo.commitRadio = repo.commitCount.toFloat() / allCommitCount
+                    languageRatioByMyReposCommit.find { it.language.name == repo.primaryLanguage?.name ?: "unKnow" }?.also {
+                        it.count = it.count + repo.commitCount
+                        it.ratio = (it.count.toFloat()) / allCommitCount
+                    } ?: run {
+                        repo.primaryLanguage?.also {
+                            languageRatioByMyReposCommit.add(
+                                LanguageRatio(
+                                    it,
+                                    repo.commitCount,
+                                    repo.commitCount.toFloat() / allCommitCount
+                                )
+                            )
+                        } ?: run {
+                            languageRatioByMyReposCommit.add(
+                                LanguageRatio(
+                                    Lang.default(),
+                                    repo.commitCount,
+                                    repo.commitCount.toFloat() / allCommitCount
+                                )
+                            )
+                        }
+                    }
+                }
+                languageRatioByMyReposCommit.sortByDescending { it.count }
+                commitTopRepos.addAll(myRepos.nodes.sortedByDescending { it.commitCount })
+                return@async true
+            }
+            return@coroutineScope languageRatioWithCommit.await()
 
-    data class XCount(val totalCount: Int)
-
-    data class Organizations(val totalCount: Int, val nodes: List<Organization> = listOf())
-
-    data class Organization(val name: String)
-
-    data class Repos(val totalCount: Int, val nodes: List<Repo> = listOf())
-
-    data class Repo(
-        val name: String,
-        val description: String?,
-        val url: String,
-        val forkCount: Int,
-        @get:JsonProperty("isFork")
-        val isFork: Boolean = false,
-        val stargazers: XCount,
-        val primaryLanguage: Lang?,
-        val refs: RepsRefs?
-    )
-
-    data class RepsRefs(val nodes: List<RepsRef> = listOf())
-
-    data class RepsRef(val name: String, val target: RepsRefTarget)
-
-    data class RepsRefTarget(val history: XCount)
-
-    data class Lang(val name: String, val color: String) {
-
-        companion object {
-            fun default(): Lang = Lang("unKnow", "#FF4A4A4A")
         }
 
+        data class XCount(val totalCount: Int)
+
+        data class Organizations(val totalCount: Int, val nodes: List<Organization> = listOf())
+
+        data class Organization(val name: String)
+
+        data class Repos(val totalCount: Int, val nodes: List<Repo> = listOf())
+
+        data class Repo(
+            val name: String,
+            val description: String?,
+            val url: String,
+            val forkCount: Int,
+            @get:JsonProperty("isFork")
+            val isFork: Boolean = false,
+            val stargazers: XCount,
+            var commitCount: Int = 0,
+            var commitRadio: Float = 0f,
+            val primaryLanguage: Lang?,
+            val refs: RepsRefs?
+        )
+
+        data class RepsRefs(val nodes: List<RepsRef> = listOf())
+
+        data class RepsRef(val name: String, val target: RepsRefTarget)
+
+        data class RepsRefTarget(val history: XCount)
+
+        data class Lang(val name: String, val color: String) {
+
+            companion object {
+                fun default(): Lang = Lang("unKnow", "#FF4A4A4A")
+            }
+
+        }
+
+        data class Contributions(val contributionCalendar: ContributionCalendar)
+
+        data class ContributionCalendar(
+            val totalContributions: Int,
+            val months: List<ContributionMonth> = listOf(),
+            val weeks: List<ContributionWeek> = listOf()
+        )
+
+        data class ContributionMonth(
+            val name: String,
+            val totalWeeks: Int
+        )
+
+        data class ContributionWeek(val contributionDays: List<ContributionDay> = listOf())
+
+        data class ContributionDay(
+            val color: String,
+            val contributionCount: Int
+        )
     }
-
-    data class Contributions(val contributionCalendar: ContributionCalendar)
-
-    data class ContributionCalendar(
-        val totalContributions: Int,
-        val months: List<ContributionMonth> = listOf(),
-        val weeks: List<ContributionWeek> = listOf()
-    )
-
-    data class ContributionMonth(
-        val name: String,
-        val totalWeeks: Int
-    )
-
-    data class ContributionWeek(val contributionDays: List<ContributionDay> = listOf())
-
-    data class ContributionDay(
-        val color: String,
-        val contributionCount: Int
-    )
 }
