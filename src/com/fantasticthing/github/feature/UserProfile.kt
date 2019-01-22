@@ -12,17 +12,17 @@ import kotlinx.coroutines.*
 class UserProfile {
 
     private fun graphQL(): String {
-        return "query(\$name: String!, \$id: ID!) {\n" +
+        return "query(\$name: String! \$id: ID!) {\n" +
                 "    user(login: \$name) {\n" +
                 "        ...userInfo\n" +
-                "        pinnedRepos: pinnedRepositories(first: 6) {\n" +
-                "            ...repos\n" +
+                "        pinnedRepos: pinnedRepositories(first: 10) {\n" +
+                "            ...pinnedRepos\n" +
                 "        }\n" +
-                "        myRepos: repositories(first : 100, isFork: false, orderBy: {\n" +
+                "        myRepos: repositories(first : 100, orderBy: {\n" +
                 "            direction: DESC\n" +
                 "            field : STARGAZERS\n" +
                 "        }) {\n" +
-                "            ...repos\n" +
+                "            ...myRepos\n" +
                 "        }\n" +
                 "        starRepos: starredRepositories(first : 100, orderBy: {\n" +
                 "            direction: DESC\n" +
@@ -32,12 +32,6 @@ class UserProfile {
                 "        }\n" +
                 "        contributionsCollection {\n" +
                 "            ...contributions\n" +
-                "        }\n" +
-                "        reposCommit: repositories(first:100, orderBy: {\n" +
-                "            direction: DESC\n" +
-                "            field: STARGAZERS\n" +
-                "        }) {\n" +
-                "            ...reposCommit\n" +
                 "        }\n" +
                 "    }\n" +
                 "}\n" +
@@ -88,7 +82,36 @@ class UserProfile {
                 "}\n" +
                 "\n" +
                 "# pinned and me repos\n" +
-                "fragment repos on RepositoryConnection {\n" +
+                "fragment myRepos on RepositoryConnection {\n" +
+                "    totalCount\n" +
+                "    nodes {\n" +
+                "        name\n" +
+                "        description\n" +
+                "        url\n" +
+                "        forkCount\n" +
+                "        stargazers {\n" +
+                "            totalCount\n" +
+                "        }\n" +
+                "        primaryLanguage {\n" +
+                "            name\n" +
+                "            color\n" +
+                "        }\n" +
+                "        refs(first: 100, refPrefix: \"refs/heads/\") {\n" +
+                "            nodes {\n" +
+                "                name\n" +
+                "                target {\n" +
+                "                ... on Commit {\n" +
+                "                        history(first: 0, author: {id : \$id}) {\n" +
+                "                            totalCount\n" +
+                "                        }\n" +
+                "                    }\n" +
+                "                }\n" +
+                "            }\n" +
+                "    \t\t}\n" +
+                "    }\n" +
+                "}\n" +
+                "\n" +
+                "fragment pinnedRepos on RepositoryConnection {\n" +
                 "    totalCount\n" +
                 "    nodes {\n" +
                 "        name\n" +
@@ -121,25 +144,6 @@ class UserProfile {
                 "            color\n" +
                 "        }\n" +
                 "    }\n" +
-                "}\n" +
-                "\n" +
-                "# commit id: ###\n" +
-                "fragment reposCommit on RepositoryConnection {\n" +
-                "    nodes {\n" +
-                "        name\n" +
-                "        refs(first: 100, refPrefix: \"refs/heads/\") {\n" +
-                "            nodes {\n" +
-                "                name\n" +
-                "                target {\n" +
-                "                ... on Commit {\n" +
-                "                        history(first: 0, author: {id : \$id}) {\n" +
-                "                            totalCount\n" +
-                "                        }\n" +
-                "                    }\n" +
-                "                }\n" +
-                "            }\n" +
-                "    \t\t}\n" +
-                "\t\t}\n" +
                 "}"
     }
 
@@ -203,8 +207,7 @@ class UserProfile {
         val pinnedRepos: Repos,
         val myRepos: Repos,
         val starRepos: Repos,
-        val contributionsCollection: Contributions?,
-        val reposCommit: ReposCommit
+        val contributionsCollection: Contributions?
     ) {
 
         val contributionsEveryTwoMonth: List<Int> = listOf()
@@ -245,13 +248,7 @@ class UserProfile {
         val url: String,
         val forkCount: Int,
         val stargazers: XCount,
-        val primaryLanguage: Lang?
-    )
-
-    data class ReposCommit(val nodes: List<RepoCommit> = listOf())
-
-    data class RepoCommit(
-        val name: String,
+        val primaryLanguage: Lang?,
         val refs: RepsRefs?
     )
 
