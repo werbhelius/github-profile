@@ -158,7 +158,7 @@ class UserProfile {
 
     suspend fun request(userName: String, id: String): Any {
         Cache.getUser(userName)?.also {
-            return it.format()
+            return it
         }
 
         val body =
@@ -219,12 +219,18 @@ class UserProfile {
 
         data class LanguageRatio(val language: Lang, var count: Int, var ratio: Float = 0f)
 
-        suspend fun format(): User {
-            if (formatMyRepos() && formatStarRepos()) {
-                return this
+        suspend fun format(): User = coroutineScope {
+            val formatMyRepos = async {
+                return@async formatMyRepos()
             }
-
-            throw RuntimeException()
+            val formatStarRepos = async {
+                return@async formatStarRepos()
+            }
+            if (formatMyRepos.await() && formatStarRepos.await()) {
+                return@coroutineScope this@User
+            } else {
+                throw RuntimeException()
+            }
         }
 
         private suspend fun formatMyRepos(): Boolean = coroutineScope {
