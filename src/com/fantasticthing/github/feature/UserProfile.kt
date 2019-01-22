@@ -12,7 +12,7 @@ import kotlinx.coroutines.*
 class UserProfile {
 
     private fun graphQL(): String {
-        return "query(\$name: String!, \$from: DateTime!, \$to: DateTime!, \$id: ID!) {\n" +
+        return "query(\$name: String!, \$id: ID!) {\n" +
                 "    user(login: \$name) {\n" +
                 "        ...userInfo\n" +
                 "        pinnedRepos: pinnedRepositories(first: 6) {\n" +
@@ -30,7 +30,7 @@ class UserProfile {
                 "        }) {\n" +
                 "            ...starRepos\n" +
                 "        }\n" +
-                "        contributionsCollection(from: \$from, to: \$to) {\n" +
+                "        contributionsCollection() {\n" +
                 "            ...contributions\n" +
                 "        }\n" +
                 "        reposCommit: repositories(first:100, orderBy: {\n" +
@@ -147,11 +147,9 @@ class UserProfile {
                 "}"
     }
 
-    private fun variables(userName: String, id: String, fromTime: String, toTime: String): String {
+    private fun variables(userName: String, id: String): String {
         return "{\n" +
                 "  \"name\": \"$userName\",\n" +
-                "  \"from\": \"$fromTime\",\n" +
-                "  \"to\": \"$toTime\",\n" +
                 "  \"id\": \"$id\"\n" +
                 "}"
     }
@@ -161,11 +159,10 @@ class UserProfile {
             return it.format()
         }
 
-        val fromAndToTime = getFromAndToTime()
         val body =
             GraphQLRequest(
                 graphQL(),
-                variables(userName, id, fromAndToTime.first, fromAndToTime.second)
+                variables(userName, id)
             ).toGraphQLBody()
 
         return coroutineScope {
