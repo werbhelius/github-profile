@@ -30,7 +30,7 @@ class UserProfile {
                 "        }) {\n" +
                 "            ...starRepos\n" +
                 "        }\n" +
-                "        contributionsCollection() {\n" +
+                "        contributionsCollection {\n" +
                 "            ...contributions\n" +
                 "        }\n" +
                 "        reposCommit: repositories(first:100, orderBy: {\n" +
@@ -78,10 +78,6 @@ class UserProfile {
                 "fragment contributions on ContributionsCollection {\n" +
                 "    contributionCalendar {\n" +
                 "        totalContributions\n" +
-                "        months {\n" +
-                "            name\n" +
-                "            totalWeeks\n" +
-                "        }\n" +
                 "        weeks {\n" +
                 "            contributionDays {\n" +
                 "                color\n" +
@@ -271,13 +267,7 @@ class UserProfile {
 
     data class ContributionCalendar(
         val totalContributions: Int,
-        val months: List<ContributionMonth> = listOf(),
         val weeks: List<ContributionWeek> = listOf()
-    )
-
-    data class ContributionMonth(
-        val name: String,
-        val totalWeeks: Int
     )
 
     data class ContributionWeek(val contributionDays: List<ContributionDay> = listOf())
