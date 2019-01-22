@@ -215,12 +215,12 @@ class UserProfile {
 
         val requestTime = System.currentTimeMillis()
         var languageRatioByMyRepos = arrayListOf<LanguageRatio>()
+        var languageRatioByStarRepos = arrayListOf<LanguageRatio>()
 
         data class LanguageRatio(val language: Lang, var count: Int, var ratio: Float = 0f)
 
         suspend fun format(): User {
-            val formatMyRepos = formatMyRepos()
-            if (formatMyRepos) {
+            if (formatMyRepos() && formatStarRepos()) {
                 return this
             }
 
@@ -243,6 +243,29 @@ class UserProfile {
 
                     }
                 }
+                languageRatioByMyRepos.sortByDescending { it.count }
+                return@async true
+            }
+            return@coroutineScope languageRatio.await()
+        }
+
+        private suspend fun formatStarRepos(): Boolean = coroutineScope {
+            val allStarRepos = starRepos.totalCount
+            val languageRatio = async {
+                starRepos.nodes.forEach { repo ->
+                    languageRatioByStarRepos.find { it.language.name == repo.primaryLanguage?.name ?: "unKnow" }?.also {
+                        it.count++
+                        it.ratio = (it.count.toFloat()) / allStarRepos
+                    } ?: run {
+                        repo.primaryLanguage?.also {
+                            languageRatioByStarRepos.add(LanguageRatio(it, 1, 1f / allStarRepos))
+                        } ?: run {
+                            languageRatioByStarRepos.add(LanguageRatio(Lang.default(), 1, 1f / allStarRepos))
+                        }
+
+                    }
+                }
+                languageRatioByStarRepos.sortByDescending { it.count }
                 return@async true
             }
             return@coroutineScope languageRatio.await()
