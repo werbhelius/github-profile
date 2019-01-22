@@ -73,6 +73,10 @@ class UserProfile {
                 "fragment contributions on ContributionsCollection {\n" +
                 "    contributionCalendar {\n" +
                 "        totalContributions\n" +
+                "        months {\n" +
+                "            name\n" +
+                "            totalWeeks\n" +
+                "        }\n" +
                 "        weeks {\n" +
                 "            contributionDays {\n" +
                 "                color\n" +
@@ -217,8 +221,11 @@ class UserProfile {
         var languageRatioByMyRepos = arrayListOf<LanguageRatio>()
         var languageRatioByMyReposWithStar = arrayListOf<LanguageRatio>()
         var languageRatioByStarRepos = arrayListOf<LanguageRatio>()
+        var contributions = arrayListOf<ContributionByMonth>()
 
         data class LanguageRatio(val language: Lang, var count: Int, var ratio: Float = 0f)
+
+        data class ContributionByMonth(val name: String, var count: Int = 0, var ratio: Float = 0f, val totalCount: Int)
 
         suspend fun format(): User = coroutineScope {
             val formatMyRepos = async(Dispatchers.IO) {
@@ -227,7 +234,10 @@ class UserProfile {
             val formatStarRepos = async(Dispatchers.IO) {
                 return@async formatStarRepos()
             }
-            if (formatMyRepos.await() && formatStarRepos.await()) {
+            val formatContributionsWithMonth = async(Dispatchers.IO) {
+                return@async formatContributionsWithMonth()
+            }
+            if (formatMyRepos.await() && formatStarRepos.await() && formatContributionsWithMonth.await()) {
                 return@coroutineScope this@User
             } else {
                 throw RuntimeException()
@@ -255,15 +265,27 @@ class UserProfile {
             }
             val languageRatioWithStar = async(Dispatchers.IO) {
                 val allMyReposStarCount = myRepos.nodes.sumBy { it.stargazers.totalCount }
-                myRepos.nodes.filter{ !it.isFork}.forEach{ repo ->
+                myRepos.nodes.filter { !it.isFork }.forEach { repo ->
                     languageRatioByMyReposWithStar.find { it.language.name == repo.primaryLanguage?.name ?: "unKnow" }?.also {
                         it.count = it.count + repo.stargazers.totalCount
                         it.ratio = (it.count.toFloat()) / allMyReposStarCount
                     } ?: run {
                         repo.primaryLanguage?.also {
-                            languageRatioByMyReposWithStar.add(LanguageRatio(it, repo.stargazers.totalCount, repo.stargazers.totalCount.toFloat() / allMyReposStarCount))
+                            languageRatioByMyReposWithStar.add(
+                                LanguageRatio(
+                                    it,
+                                    repo.stargazers.totalCount,
+                                    repo.stargazers.totalCount.toFloat() / allMyReposStarCount
+                                )
+                            )
                         } ?: run {
-                            languageRatioByMyReposWithStar.add(LanguageRatio(Lang.default(), repo.stargazers.totalCount, repo.stargazers.totalCount.toFloat() / allMyReposStarCount))
+                            languageRatioByMyReposWithStar.add(
+                                LanguageRatio(
+                                    Lang.default(),
+                                    repo.stargazers.totalCount,
+                                    repo.stargazers.totalCount.toFloat() / allMyReposStarCount
+                                )
+                            )
                         }
 
                     }
@@ -294,6 +316,25 @@ class UserProfile {
                 return@async true
             }
             return@coroutineScope languageRatio.await()
+        }
+
+        private suspend fun formatContributionsWithMonth(): Boolean = coroutineScope {
+            var start = 0
+            var end = 0
+            contributionsCollection?.contributionCalendar?.months?.forEach { month ->
+                end += month.totalWeeks
+                val contributionByMonth = ContributionByMonth(
+                    month.name,
+                    totalCount = contributionsCollection.contributionCalendar.totalContributions
+                )
+                (start until end).forEach { index ->
+                    contributionByMonth.count += contributionsCollection.contributionCalendar.weeks[index].contributionDays.sumBy { it.contributionCount }
+                    contributionByMonth.ratio = contributionByMonth.count.toFloat() / contributionByMonth.totalCount
+                }
+                start = end
+                contributions.add(contributionByMonth)
+            }
+            return@coroutineScope true
         }
 
     }
@@ -336,7 +377,13 @@ class UserProfile {
 
     data class ContributionCalendar(
         val totalContributions: Int,
+        val months: List<ContributionMonth> = listOf(),
         val weeks: List<ContributionWeek> = listOf()
+    )
+
+    data class ContributionMonth(
+        val name: String,
+        val totalWeeks: Int
     )
 
     data class ContributionWeek(val contributionDays: List<ContributionDay> = listOf())
