@@ -78,7 +78,6 @@ class UserProfile {
                 "fragment contributions on ContributionsCollection {\n" +
                 "    contributionCalendar {\n" +
                 "        totalContributions\n" +
-                "        colors\n" +
                 "        months {\n" +
                 "            name\n" +
                 "            totalWeeks\n" +
@@ -275,7 +274,6 @@ class UserProfile {
 
     data class ContributionCalendar(
         val totalContributions: Int,
-        val colors: List<String> = listOf(),
         val months: List<ContributionMonth> = listOf(),
         val weeks: List<ContributionWeek> = listOf()
     )
