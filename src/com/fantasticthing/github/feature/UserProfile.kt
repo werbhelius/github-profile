@@ -4,6 +4,7 @@ import com.fantasticthing.github.cache.*
 import com.fantasticthing.github.exception.*
 import com.fantasticthing.github.helper.*
 import com.fantasticthing.github.http.*
+import com.fasterxml.jackson.annotation.*
 import kotlinx.coroutines.*
 
 /**
@@ -89,6 +90,7 @@ class UserProfile {
                 "        description\n" +
                 "        url\n" +
                 "        forkCount\n" +
+                "        isFork" +
                 "        stargazers {\n" +
                 "            totalCount\n" +
                 "        }\n" +
@@ -96,7 +98,7 @@ class UserProfile {
                 "            name\n" +
                 "            color\n" +
                 "        }\n" +
-                "        refs(first: 100, refPrefix: \"refs/heads/\") {\n" +
+                "        refs(first: 8, refPrefix: \"refs/heads/\") {\n" +
                 "            nodes {\n" +
                 "                name\n" +
                 "                target {\n" +
@@ -247,6 +249,8 @@ class UserProfile {
         val description: String?,
         val url: String,
         val forkCount: Int,
+        @get:JsonProperty("isFork")
+        val isFork: Boolean = false,
         val stargazers: XCount,
         val primaryLanguage: Lang?,
         val refs: RepsRefs?
