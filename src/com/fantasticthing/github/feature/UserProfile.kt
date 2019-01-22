@@ -176,14 +176,15 @@ class UserProfile {
         }
     }
 
-    private fun dealTask(userResponse: GraphQLResponse<Response>, rankResponse: UserRank.Response): User {
+    private suspend fun dealTask(userResponse: GraphQLResponse<Response>, rankResponse: UserRank.Response): User {
         userResponse.errors?.also {
             throw BadRequestException(it)
         }
         userResponse.data?.user?.also {
-            it.rank = rankResponse.user.rankings
-            Cache.putUser(it)
-            return it.format()
+            return it.format().apply {
+                it.rank = rankResponse.user.rankings
+                Cache.putUser(this)
+            }
         }
     }
 
@@ -212,26 +213,39 @@ class UserProfile {
         val contributionsCollection: Contributions?
     ) {
 
-        val contributionsEveryTwoMonth: List<Int> = listOf()
-        val dabblingLanguageByMyRepos: List<DabblingLanguage> = listOf()
-        val dabblingLanguageByMyStar: List<DabblingLanguage> = listOf()
-        val reposAnalyzes: List<ReposAnalyze> = listOf()
-
         val requestTime = System.currentTimeMillis()
+        var languageRatioByMyRepos = arrayListOf<LanguageRatio>()
 
-        data class DabblingLanguage(
-            val name: String,
-            val color: String,
-            val ratio: Float = 0f,
-            val starCount: Int = 0,
-            val commitCount: Int = 0
-        )
+        data class LanguageRatio(val language: Lang, var count: Int, var ratio: Float = 0f)
 
-        data class ReposAnalyze(val name: String,
-                                val ratio: Float = 0f)
+        suspend fun format(): User {
+            val formatMyRepos = formatMyRepos()
+            if (formatMyRepos) {
+                return this
+            }
 
-        fun format(): User {
-            return this
+            throw RuntimeException()
+        }
+
+        private suspend fun formatMyRepos(): Boolean = coroutineScope {
+            val allMyRepos = myRepos.totalCount
+            val languageRatio = async {
+                myRepos.nodes.forEach { repo ->
+                    languageRatioByMyRepos.find { it.language.name == repo.primaryLanguage?.name ?: "unKnow" }?.also {
+                        it.count++
+                        it.ratio = (it.count.toFloat()) / allMyRepos
+                    } ?: run {
+                        repo.primaryLanguage?.also {
+                            languageRatioByMyRepos.add(LanguageRatio(it, 1, 1f / allMyRepos))
+                        } ?: run {
+                            languageRatioByMyRepos.add(LanguageRatio(Lang.default(), 1, 1f / allMyRepos))
+                        }
+
+                    }
+                }
+                return@async true
+            }
+            return@coroutineScope languageRatio.await()
         }
 
     }
@@ -262,7 +276,13 @@ class UserProfile {
 
     data class RepsRefTarget(val history: XCount)
 
-    data class Lang(val name: String, val color: String)
+    data class Lang(val name: String, val color: String) {
+
+        companion object {
+            fun default(): Lang = Lang("unKnow", "#FF4A4A4A")
+        }
+
+    }
 
     data class Contributions(val contributionCalendar: ContributionCalendar)
 
