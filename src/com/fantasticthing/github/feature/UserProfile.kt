@@ -18,7 +18,7 @@ class UserProfile {
                 "        pinnedRepos: pinnedRepositories(first: 6) {\n" +
                 "            ...repos\n" +
                 "        }\n" +
-                "        myRepos: repositories(first : 100, orderBy: {\n" +
+                "        myRepos: repositories(first : 100, isFork: false, orderBy: {\n" +
                 "            direction: DESC\n" +
                 "            field : STARGAZERS\n" +
                 "        }) {\n" +
@@ -219,6 +219,8 @@ class UserProfile {
         val dabblingLanguageByMyRepos: List<DabblingLanguage> = listOf()
         val dabblingLanguageByMyStar: List<DabblingLanguage> = listOf()
         val reposAnalyzes: List<ReposAnalyze> = listOf()
+
+        val requestTime = System.currentTimeMillis()
 
         data class DabblingLanguage(
             val name: String,

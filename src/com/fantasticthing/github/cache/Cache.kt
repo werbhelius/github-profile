@@ -4,6 +4,8 @@ import com.fantasticthing.github.feature.*
 import com.fantasticthing.github.helper.*
 import kotlinx.coroutines.*
 import java.io.*
+import java.time.*
+import java.time.temporal.*
 import java.util.concurrent.*
 
 
@@ -31,7 +33,16 @@ object Cache {
         }
     }
 
-    fun getUser(username: String) = users[username.toLowerCase()]?.toAny<UserProfile.User>()
+    fun getUser(username: String): UserProfile.User? {
+        users[username.toLowerCase()]?.toAny<UserProfile.User>()?.also {
+            return if (ChronoUnit.HOURS.between(Instant.ofEpochMilli(it.requestTime), Instant.now()) > 6) {
+                null
+            } else {
+                it
+            }
+        }
+        return null
+    }
 
     private fun readUserProfilesFromDisk(): ConcurrentHashMap<String, String> {
         File(path).apply {
