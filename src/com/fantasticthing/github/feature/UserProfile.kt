@@ -161,10 +161,6 @@ class UserProfile {
     }
 
     suspend fun request(userName: String, id: String): Any {
-        Cache.getUser(userName)?.also {
-            return it
-        }
-
         val body =
             GraphQLRequest(
                 graphQL(),

@@ -1,5 +1,6 @@
 package com.fantasticthing.github.router
 
+import com.fantasticthing.github.cache.*
 import com.fantasticthing.github.exception.*
 import com.fantasticthing.github.feature.*
 import com.fantasticthing.github.location.*
@@ -22,8 +23,13 @@ fun Routing.api() {
         if (username.isBlank()) {
             throw ParametersMissingException(listOf(profile.username))
         }
-        val id = UserAuthentication().request(username)
-        val response = UserProfile().request(username, id)
-        call.respond(response)
+
+        Cache.getUser(username)?.also {
+            call.respond(it)
+        } ?: run {
+            val id = UserAuthentication().request(username)
+            val response = UserProfile().request(username, id)
+            call.respond(response)
+        }
     }
 }
