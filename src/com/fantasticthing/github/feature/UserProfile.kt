@@ -243,7 +243,7 @@ class UserProfile {
             if (formatMyRepos.await() && formatStarRepos.await() && formatContributionsWithMonth.await() && formatCommitByMyRepos.await()) {
                 return@coroutineScope this@User
             } else {
-                throw RuntimeException()
+                throw InternalServerErrorException()
             }
         }
 
