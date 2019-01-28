@@ -37,6 +37,8 @@ class UserAuthentication {
         response.data?.user?.id?.also {
             return it
         }
+
+        throw InternalServerErrorException()
     }
 
     data class Response(val user: User?)

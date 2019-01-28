@@ -186,6 +186,8 @@ class UserProfile {
                 Cache.putUser(this)
             }
         }
+
+        throw InternalServerErrorException()
     }
 
     data class Response(val user: User)
