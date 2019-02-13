@@ -34,7 +34,7 @@ object Cache {
     }
 
     fun getUser(username: String): UserProfile.User? {
-        users[username.toLowerCase()]?.toAny<UserProfile.User>()?.also {
+        users[username]?.toAny<UserProfile.User>()?.also {
             return if (ChronoUnit.HOURS.between(Instant.ofEpochMilli(it.requestTime), Instant.now()) > 6) {
                 null
             } else {
