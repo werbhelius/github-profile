@@ -45,6 +45,7 @@ class UserProfile {
                 "    avatarUrl\n" +
                 "    bio\n" +
                 "    location\n" +
+                "    isDeveloperProgramMember\n" +
                 "    company\n" +
                 "    createdAt\n" +
                 "    email\n" +
@@ -199,6 +200,8 @@ class UserProfile {
         val avatarUrl: String,
         val bio: String,
         val location: String,
+        @get:JsonProperty("isDeveloperProgramMember")
+        val isDeveloperProgramMember: Boolean,
         val createdAt: String,
         val email: String,
         val url: String,
