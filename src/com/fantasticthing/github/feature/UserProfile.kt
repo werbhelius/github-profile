@@ -349,7 +349,7 @@ class UserProfile {
         private suspend fun formatCommitByMyRepos(): Boolean = coroutineScope {
             val languageRatioWithCommit = async(Dispatchers.IO) {
                 val allCommitCount = myRepos.nodes.filter { !it.isFork }
-                    .sumBy { it.refs?.nodes?.sumBy { it.target.history.totalCount } ?: 0 }
+                    .sumBy { repo -> repo.refs?.nodes?.sumBy { it.target.history.totalCount } ?: 0 }
                 myRepos.nodes.filter { !it.isFork }.forEach { repo ->
                     repo.commitCount = repo.refs?.nodes?.sumBy { it.target.history.totalCount } ?: 0
                     repo.commitRadio = repo.commitCount.toFloat() / allCommitCount

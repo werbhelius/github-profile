@@ -19,18 +19,7 @@ object Cache {
 
     fun putUser(user: UserProfile.User) {
         users[user.login] = user.toJson()
-        CoroutineScope(Dispatchers.IO).launch {
-            with(ByteArrayOutputStream()) {
-                ObjectOutputStream(this).writeObject(users)
-                File(path).apply {
-                    if (!exists()) {
-                        parentFile.mkdirs()
-                        createNewFile()
-                    }
-                    writeBytes(this@with.toByteArray())
-                }
-            }
-        }
+        writeFile()
     }
 
     fun getUser(username: String): UserProfile.User? {
@@ -42,6 +31,20 @@ object Cache {
             }
         }
         return null
+    }
+
+    @Synchronized
+    private fun writeFile() = runBlocking(Dispatchers.IO) {
+        with(ByteArrayOutputStream()) {
+            ObjectOutputStream(this).writeObject(users)
+            File(path).apply {
+                if (!exists()) {
+                    parentFile.mkdirs()
+                    createNewFile()
+                }
+                writeBytes(this@with.toByteArray())
+            }
+        }
     }
 
     private fun readUserProfilesFromDisk(): ConcurrentHashMap<String, String> {
