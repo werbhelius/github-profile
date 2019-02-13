@@ -388,7 +388,7 @@ class UserProfile {
 
         data class Organizations(val totalCount: Int, val nodes: List<Organization> = listOf())
 
-        data class Organization(val name: String)
+        data class Organization(val name: String, val avatarUrl: String, val url: String)
 
         data class Repos(val totalCount: Int, val nodes: List<Repo> = listOf())
 
@@ -412,7 +412,7 @@ class UserProfile {
 
         data class RepsRefTarget(val history: XCount)
 
-        data class Lang(val name: String, val color: String) {
+        data class Lang(val name: String, val color: String?) {
 
             companion object {
                 fun default(): Lang = Lang("unKnow", "#FF4A4A4A")
