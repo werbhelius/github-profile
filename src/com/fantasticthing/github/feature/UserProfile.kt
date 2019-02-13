@@ -161,7 +161,7 @@ class UserProfile {
                 "}"
     }
 
-    suspend fun request(userName: String, id: String): Any {
+    suspend fun request(userName: String, id: String): User {
         val body =
             GraphQLRequest(
                 graphQL(),

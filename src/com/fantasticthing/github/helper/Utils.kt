@@ -37,3 +37,15 @@ fun Any.toGraphQLBody(): TextContent {
 inline fun <reified T> String.toAny(): T {
     return jacksonObjectMapper().readValue(this, T::class.java)
 }
+
+fun <T> List<T>.subListSafe(fromIndex: Int, toIndex: Int): List<T> {
+    var from = fromIndex
+    var to = toIndex
+    if (fromIndex < 0) {
+        from = 0
+    }
+    if (toIndex > size) {
+        to = size
+    }
+    return  this.subList(from, to)
+}

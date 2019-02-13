@@ -4,6 +4,7 @@ import com.fantasticthing.github.cache.*
 import com.fantasticthing.github.exception.*
 import com.fantasticthing.github.feature.*
 import com.fantasticthing.github.location.*
+import com.fantasticthing.github.model.*
 import io.ktor.application.*
 import io.ktor.locations.*
 import io.ktor.response.*
@@ -25,11 +26,11 @@ fun Routing.api() {
         }
 
         Cache.getUser(username)?.also {
-            call.respond(it)
+            call.respond(it.toGithubProfile())
         } ?: run {
             val id = UserAuthentication().request(username)
-            val response = UserProfile().request(username, id)
-            call.respond(response)
+            val giihubProfile = UserProfile().request(username, id).toGithubProfile()
+            call.respond(giihubProfile)
         }
     }
 }
