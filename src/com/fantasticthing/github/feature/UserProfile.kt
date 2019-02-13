@@ -219,6 +219,7 @@ class UserProfile {
     ) {
 
         val requestTime = System.currentTimeMillis()
+        var contributions = 0
         var contributionsByMonth = arrayListOf<ContributionByMonth>()
         var languageRatioByMyRepos = arrayListOf<LanguageRatio>()
         var languageRatioByMyReposWithStar = arrayListOf<LanguageRatio>()
@@ -328,6 +329,7 @@ class UserProfile {
         private suspend fun formatContributionsWithMonth(): Boolean = coroutineScope {
             var start = 0
             var end = 0
+            contributions = contributionsCollection?.contributionCalendar?.totalContributions ?: 0
             contributionsCollection?.contributionCalendar?.months?.forEach { month ->
                 end += month.totalWeeks
                 val contributionByMonth = ContributionByMonth(
