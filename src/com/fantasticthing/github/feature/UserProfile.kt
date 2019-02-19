@@ -91,7 +91,7 @@ class UserProfile {
                 "fragment myRepos on RepositoryConnection {\n" +
                 "    totalCount\n" +
                 "    nodes {\n" +
-                "        name\n" +
+                "        nameWithOwner\n" +
                 "        description\n" +
                 "        url\n" +
                 "        forkCount\n" +
@@ -121,7 +121,7 @@ class UserProfile {
                 "fragment pinnedRepos on RepositoryConnection {\n" +
                 "    totalCount\n" +
                 "    nodes {\n" +
-                "        name\n" +
+                "        nameWithOwner\n" +
                 "        description\n" +
                 "        url\n" +
                 "        forkCount\n" +
@@ -139,7 +139,7 @@ class UserProfile {
                 "fragment starRepos on StarredRepositoryConnection {\n" +
                 "    totalCount\n" +
                 "    nodes {\n" +
-                "        name\n" +
+                "        nameWithOwner\n" +
                 "        description\n" +
                 "        url\n" +
                 "        forkCount\n" +
@@ -393,7 +393,7 @@ class UserProfile {
         data class Repos(val totalCount: Int, val nodes: List<Repo> = listOf())
 
         data class Repo(
-            val name: String,
+            val nameWithOwner: String,
             val description: String?,
             val url: String,
             val forkCount: Int,
