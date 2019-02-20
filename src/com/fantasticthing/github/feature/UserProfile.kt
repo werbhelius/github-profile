@@ -415,7 +415,7 @@ class UserProfile {
         data class Lang(val name: String, val color: String?) {
 
             companion object {
-                fun default(): Lang = Lang("unKnow", "#FF4A4A4A")
+                fun default(): Lang = Lang("UnKnow", "#FF4A4A4A")
             }
 
         }
