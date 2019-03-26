@@ -171,8 +171,8 @@ class UserProfile {
         return coroutineScope {
             val task1 = async {
                 client.okGraphQLRequest<GraphQLResponse<Response>>(body)
-            }
-            val task2 = async { UserRank().request(userName) }
+            }.apply { start() }
+            val task2 = async { UserRank().request(userName) }.apply { start() }
             return@coroutineScope dealTask(task1.await(), task2.await())
         }
     }
@@ -232,18 +232,10 @@ class UserProfile {
         data class ContributionByMonth(val name: String, var count: Int = 0, var ratio: Float = 0f, val totalCount: Int)
 
         suspend fun format(): User = coroutineScope {
-            val formatMyRepos = async(Dispatchers.IO) {
-                return@async formatMyRepos()
-            }
-            val formatStarRepos = async(Dispatchers.IO) {
-                return@async formatStarRepos()
-            }
-            val formatContributionsWithMonth = async(Dispatchers.IO) {
-                return@async formatContributionsWithMonth()
-            }
-            val formatCommitByMyRepos = async(Dispatchers.IO) {
-                return@async formatCommitByMyRepos()
-            }
+            val formatMyRepos = formatMyRepos().apply { start() }
+            val formatStarRepos = formatStarRepos().apply { start() }
+            val formatContributionsWithMonth = formatContributionsWithMonth().apply { start() }
+            val formatCommitByMyRepos = formatCommitByMyRepos().apply { start() }
             if (formatMyRepos.await() && formatStarRepos.await() && formatContributionsWithMonth.await() && formatCommitByMyRepos.await()) {
                 return@coroutineScope this@User
             } else {
@@ -251,8 +243,8 @@ class UserProfile {
             }
         }
 
-        private suspend fun formatMyRepos(): Boolean = coroutineScope {
-            val languageRatio = async(Dispatchers.IO) {
+        private fun formatMyRepos(): Deferred<Boolean> = GlobalScope.async(Dispatchers.IO) {
+            launch {
                 val allMyRepos = myRepos.totalCount
                 myRepos.nodes.forEach { repo ->
                     languageRatioByMyRepos.find { it.language.name == repo.primaryLanguage?.name ?: "unKnow" }?.also {
@@ -268,9 +260,8 @@ class UserProfile {
                     }
                 }
                 languageRatioByMyRepos.sortByDescending { it.count }
-                return@async true
             }
-            val languageRatioWithStar = async(Dispatchers.IO) {
+            launch {
                 val allMyReposStarCount = myRepos.nodes.sumBy { it.stargazers.totalCount }
                 myRepos.nodes.filter { !it.isFork }.forEach { repo ->
                     languageRatioByMyReposWithStar.find { it.language.name == repo.primaryLanguage?.name ?: "unKnow" }?.also {
@@ -298,35 +289,31 @@ class UserProfile {
                     }
                 }
                 languageRatioByMyReposWithStar.sortByDescending { it.count }
-                return@async true
             }
 
-            return@coroutineScope languageRatio.await() && languageRatioWithStar.await()
+            return@async true
         }
 
-        private suspend fun formatStarRepos(): Boolean = coroutineScope {
+        private fun formatStarRepos(): Deferred<Boolean> = GlobalScope.async(Dispatchers.IO) {
             val allStarRepos = starRepos.totalCount
-            val languageRatio = async(Dispatchers.IO) {
-                starRepos.nodes.forEach { repo ->
-                    languageRatioByStarRepos.find { it.language.name == repo.primaryLanguage?.name ?: "unKnow" }?.also {
-                        it.count++
-                        it.ratio = (it.count.toFloat()) / allStarRepos
+            starRepos.nodes.forEach { repo ->
+                languageRatioByStarRepos.find { it.language.name == repo.primaryLanguage?.name ?: "unKnow" }?.also {
+                    it.count++
+                    it.ratio = (it.count.toFloat()) / allStarRepos
+                } ?: run {
+                    repo.primaryLanguage?.also {
+                        languageRatioByStarRepos.add(LanguageRatio(it, 1, 1f / allStarRepos))
                     } ?: run {
-                        repo.primaryLanguage?.also {
-                            languageRatioByStarRepos.add(LanguageRatio(it, 1, 1f / allStarRepos))
-                        } ?: run {
-                            languageRatioByStarRepos.add(LanguageRatio(Lang.default(), 1, 1f / allStarRepos))
-                        }
-
+                        languageRatioByStarRepos.add(LanguageRatio(Lang.default(), 1, 1f / allStarRepos))
                     }
+
                 }
-                languageRatioByStarRepos.sortByDescending { it.count }
-                return@async true
             }
-            return@coroutineScope languageRatio.await()
+            languageRatioByStarRepos.sortByDescending { it.count }
+            return@async true
         }
 
-        private suspend fun formatContributionsWithMonth(): Boolean = coroutineScope {
+        private fun formatContributionsWithMonth(): Deferred<Boolean> = GlobalScope.async(Dispatchers.IO) {
             var start = 0
             var end = 0
             contributions = contributionsCollection?.contributionCalendar?.totalContributions ?: 0
@@ -343,11 +330,11 @@ class UserProfile {
                 start = end
                 contributionsByMonth.add(contributionByMonth)
             }
-            return@coroutineScope true
+            return@async true
         }
 
-        private suspend fun formatCommitByMyRepos(): Boolean = coroutineScope {
-            val languageRatioWithCommit = async(Dispatchers.IO) {
+        private fun formatCommitByMyRepos(): Deferred<Boolean> = GlobalScope.async(Dispatchers.IO) {
+            launch {
                 val allCommitCount = myRepos.nodes.filter { !it.isFork }
                     .sumBy { repo -> repo.refs?.nodes?.sumBy { it.target.history.totalCount } ?: 0 }
                 myRepos.nodes.filter { !it.isFork }.forEach { repo ->
@@ -378,10 +365,8 @@ class UserProfile {
                 }
                 languageRatioByMyReposCommit.sortByDescending { it.count }
                 commitTopRepos.addAll(myRepos.nodes.sortedByDescending { it.commitCount })
-                return@async true
             }
-            return@coroutineScope languageRatioWithCommit.await()
-
+            return@async true
         }
 
         data class XCount(val totalCount: Int)
