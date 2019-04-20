@@ -15,7 +15,12 @@ import java.util.concurrent.*
 object Cache {
 
     private const val path = "cache/userinfo"
-    private val users = readUserProfilesFromDisk()
+    private lateinit var users: ConcurrentHashMap<String, String>
+
+    fun init() {
+        users = readUserProfilesFromDisk()
+        logger.debug("Cache init succeed！")
+    }
 
     fun putUser(user: UserProfile.User) {
         users[user.login] = user.toJson()

@@ -5,6 +5,7 @@ import io.ktor.content.TextContent
 import io.ktor.http.ContentType
 import java.util.*
 import java.text.SimpleDateFormat
+import org.slf4j.LoggerFactory
 
 /**
  * Created by wanbo on 2019-01-11.
@@ -49,3 +50,5 @@ fun <T> List<T>.subListSafe(fromIndex: Int, toIndex: Int): List<T> {
     }
     return  this.subList(from, to)
 }
+
+val logger = LoggerFactory.getLogger("Application")

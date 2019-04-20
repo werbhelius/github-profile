@@ -1,5 +1,6 @@
 package com.fantasticthing.github
 
+import com.fantasticthing.github.cache.Cache
 import com.fantasticthing.github.exception.*
 import com.fantasticthing.github.router.*
 import com.fasterxml.jackson.databind.*
@@ -27,5 +28,6 @@ fun Application.main() {
     install(Routing) {
        api()
     }
+    Cache.init()
 }
 
