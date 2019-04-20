@@ -9,6 +9,8 @@ import io.ktor.application.*
 import io.ktor.locations.*
 import io.ktor.response.*
 import io.ktor.routing.*
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 /**
  * Created by wanbo on 2019-01-04.
@@ -25,11 +27,15 @@ fun Routing.api() {
             throw ParametersMissingException(listOf(profile.username))
         }
 
+        val auth = async {
+            UserAuthentication().request(username)
+        }
+
         Cache.getUser(username)?.also {
+            launch { auth.cancel() }
             call.respond(it.toGithubProfile())
         } ?: run {
-            val id = UserAuthentication().request(username)
-            val githubProfile = UserProfile().request(username, id).toGithubProfile()
+            val githubProfile = UserProfile().request(username, auth.await()).toGithubProfile()
             call.respond(githubProfile)
         }
     }
