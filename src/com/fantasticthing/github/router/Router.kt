@@ -29,8 +29,8 @@ fun Routing.api() {
             call.respond(it.toGithubProfile())
         } ?: run {
             val id = UserAuthentication().request(username)
-            val giihubProfile = UserProfile().request(username, id).toGithubProfile()
-            call.respond(giihubProfile)
+            val githubProfile = UserProfile().request(username, id).toGithubProfile()
+            call.respond(githubProfile)
         }
     }
 }
