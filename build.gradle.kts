@@ -3,16 +3,6 @@ val ktorVersion = "1.1.4"
 val logbackVersion= "1.2.1"
 val konfig = "1.6.10.0"
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
-    }
-}
-
 plugins {
     application
     kotlin("jvm") version "1.3.30"
@@ -49,5 +39,6 @@ dependencies {
     implementation("io.ktor:ktor-jackson:$ktorVersion")
     implementation("io.ktor:ktor-locations:$ktorVersion")
     implementation("com.natpryce:konfig:$konfig")
+    implementation("io.ktor:ktor-freemarker:$ktorVersion")
     testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
 }
