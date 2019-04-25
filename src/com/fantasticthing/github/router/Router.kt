@@ -29,7 +29,7 @@ fun Routing.api() {
 
         val auth = async {
             UserAuthentication().request(username)
-        }
+        }.apply { start() }
 
         Cache.getUser(username)?.also {
             launch { auth.cancel() }
