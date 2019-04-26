@@ -6,6 +6,7 @@ import com.fantasticthing.github.feature.*
 import com.fantasticthing.github.location.*
 import com.fantasticthing.github.model.*
 import io.ktor.application.*
+import io.ktor.freemarker.*
 import io.ktor.locations.*
 import io.ktor.response.*
 import io.ktor.routing.*
@@ -19,7 +20,7 @@ import kotlinx.coroutines.launch
 @KtorExperimentalLocationsAPI
 fun Routing.api() {
     get<Index> {
-        call.respondText("Hello World!")
+        call.respond(FreeMarkerContent("index.ftl", null))
     }
     get<Profile> { profile ->
         val username = profile.username
