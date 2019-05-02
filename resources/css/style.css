@@ -1,0 +1,44 @@
+body {
+    background-color: #23292F;
+}
+
+@font-face {
+    font-family: "ProducSansBold";
+    src: url("./fonts/Product Sans Bold.ttf");
+}
+
+@font-face {
+    font-family: "ProducSansRegular";
+    src: url("./fonts/Product Sans Regular.ttf");
+}
+
+.index-title {
+    font-size: 64px;
+    text-align: center;
+    margin-top: 18vh;
+    font-family: ProducSansBold, serif;
+    color: #ffffff;
+}
+
+.index-title-span {
+    color: #F18E33;
+}
+
+.index-footer {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 65px;
+    background-color: #1B1F22;
+}
+
+.index-footer-title {
+    font-size: 14px;
+    font-family: ProducSansRegular, serif;
+    color: #C4C4C4;
+    width: 33.33%;
+    text-align: center;
+}
