@@ -85,3 +85,11 @@ a:hover img {
     -moz-opacity: 0.8;
     opacity: 0.8;
 }
+
+a {
+    text-decoration:none;
+}
+
+a:hover {
+    text-decoration:none;
+}
