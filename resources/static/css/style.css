@@ -5,12 +5,12 @@ body {
 
 @font-face {
     font-family: "ProducSansBold";
-    src: url("./fonts/Product Sans Bold.ttf");
+    src: url("fonts/Product Sans Bold.ttf");
 }
 
 @font-face {
     font-family: "ProducSansRegular";
-    src: url("./fonts/Product Sans Regular.ttf");
+    src: url("fonts/Product Sans Regular.ttf");
 }
 
 .index-title {

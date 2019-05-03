@@ -26,7 +26,7 @@ fun Application.install() {
     install(CallLogging)
     install(Locations)
     install(FreeMarker) {
-        templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")
+        templateLoader = ClassTemplateLoader(this::class.java.classLoader, "static")
     }
     install(ContentNegotiation) {
         jackson {
@@ -37,6 +37,8 @@ fun Application.install() {
         handlerException()
     }
     install(Routing) {
+        staticFile()
+        handlerNotMatchedRouter()
         api()
     }
 }

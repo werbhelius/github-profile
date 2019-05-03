@@ -7,11 +7,13 @@ import com.fantasticthing.github.location.*
 import com.fantasticthing.github.model.*
 import io.ktor.application.*
 import io.ktor.freemarker.*
+import io.ktor.http.content.*
 import io.ktor.locations.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import java.io.File
 
 /**
  * Created by wanbo on 2019-01-04.
@@ -20,7 +22,7 @@ import kotlinx.coroutines.launch
 @KtorExperimentalLocationsAPI
 fun Routing.api() {
     get<Index> {
-        call.respond(FreeMarkerContent("index.ftl", null))
+        call.respond(FreeMarkerContent("index.html", null))
     }
     get<Profile> { profile ->
         val username = profile.username
@@ -38,6 +40,28 @@ fun Routing.api() {
         } ?: run {
             val githubProfile = UserProfile().request(username, auth.await()).toGithubProfile()
             call.respond(githubProfile)
+        }
+    }
+
+
+}
+
+fun Routing.staticFile() {
+    val staticPath = "resources/static"
+    static {
+        staticBasePackage = "static"
+        route("static") {
+            files(File(staticPath))
+            default("$staticPath/index.html")
+        }
+    }
+
+}
+
+fun Routing.handlerNotMatchedRouter() {
+    route("{...}") {
+        handle {
+            call.respond(FreeMarkerContent("index.html", null))
         }
     }
 }
