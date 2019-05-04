@@ -93,3 +93,43 @@ a {
 a:hover {
     text-decoration:none;
 }
+
+.shake {
+    animation: shakeAnim 500ms ease;
+}
+
+@keyframes shakeAnim {
+    0%, 100% {
+        -webkit-transform: translateX(0);
+    }
+    10% {
+        -webkit-transform: translateX(-15px);
+    }
+    20% {
+        -webkit-transform: translateX(15px);
+    }
+    30% {
+        -webkit-transform: translateX(-12px);
+    }
+    40% {
+        -webkit-transform: translateX(12px);
+    }
+    50% {
+        -webkit-transform: translateX(-10px);
+    }
+    60% {
+        -webkit-transform: translateX(10px);
+    }
+    70% {
+        -webkit-transform: translateX(-6px);
+    }
+    80% {
+        -webkit-transform: translateX(6px);
+    }
+    90% {
+        -webkit-transform: translateX(-3px);
+    }
+    95% {
+        -webkit-transform: translateX(3px);
+    }
+}
