@@ -9,7 +9,7 @@
 <p class="index-title">GitHub Profile <span class="index-title-span">Summary</span></p>
 <div id="userNameDiv" class="index-input-div">
     <input id='userNameInput' class="index-input" placeholder="Input your GitHub Username Like 'werbhelius'"
-           onkeypress="requestName(event)"/>
+           onkeypress="checkName(event)"/>
 </div>
 <p class="index-find-me">Find me on&nbsp;&nbsp;&nbsp;
     <a target="_blank" href="http://github.com/werbhelius"><img src="static/css/svg/github.svg"></a> ,&nbsp;&nbsp;&nbsp;
@@ -30,7 +30,7 @@
             class="index-title-span">Github</span></a></p>
 </footer>
 <script>
-    function requestName(e) {
+    function checkName(e) {
         if (e.code !== "Enter") return;
         var input = document.getElementById("userNameInput");
         if (input.value === "") {
@@ -38,6 +38,20 @@
             setTimeout(function() {
                 input.classList.remove("shake");
             }, 500);
+        } else {
+            requestName(input.value)
+        }
+    }
+
+    function requestName(name) {
+        var ajaxObj = new XMLHttpRequest();
+        ajaxObj.open('get', 'profile?username=' + name);
+        ajaxObj.send();
+        ajaxObj.onreadystatechange = function () {
+            if (ajaxObj.readyState === 4 && ajaxObj.status === 200) {
+                console.log('数据返回成功');
+                console.log(ajaxObj.responseText);
+            }
         }
     }
 </script>
