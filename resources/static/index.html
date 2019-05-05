@@ -35,7 +35,7 @@
         var input = document.getElementById("userNameInput");
         if (input.value === "") {
             input.classList.add("shake");
-            setTimeout(function() {
+            setTimeout(function () {
                 input.classList.remove("shake");
             }, 500);
         } else {
@@ -48,7 +48,7 @@
         ajaxObj.open('get', 'profile?username=' + name);
         ajaxObj.send();
         ajaxObj.onreadystatechange = function () {
-            if (ajaxObj.readyState === 4 && ajaxObj.status === 200) {
+            if (ajaxObj.readyState === 4 && ajaxObj.status >= 200 && ajaxObj.status < 400) {
                 console.log('数据返回成功');
                 console.log(ajaxObj.responseText);
             }
