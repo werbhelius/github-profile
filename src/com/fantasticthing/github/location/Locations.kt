@@ -11,5 +11,9 @@ import io.ktor.locations.*
 class Index
 
 @KtorExperimentalLocationsAPI
-@Location("/profile")
+@Location("/profile/{username}")
 class Profile(val username: String = "")
+
+@KtorExperimentalLocationsAPI
+@Location("/api/user")
+class User(val username: String = "")

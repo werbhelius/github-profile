@@ -30,19 +30,32 @@ fun Routing.api() {
             throw ParametersMissingException(listOf(profile.username))
         }
 
+        Cache.getUser(username)?.also {
+            call.respond(it.toGithubProfile())
+        }
+    }
+
+    // API
+    get<User> { user ->
+        val username = user.username
+        if (username.isBlank()) {
+            throw ParametersMissingException(listOf(user.username))
+        }
+
         val auth = async {
             UserAuthentication().request(username)
         }.apply { start() }
 
-        Cache.getUser(username)?.also {
+        val loginName = Cache.getUser(username)?.let {
             launch { auth.cancel() }
-            call.respond(it.toGithubProfile())
+            return@let it.login
         } ?: run {
             val githubProfile = UserProfile().request(username, auth.await()).toGithubProfile()
-            call.respond(githubProfile)
+            return@run githubProfile.login
         }
-    }
 
+        call.respondText("/profile/$loginName")
+    }
 
 }
 

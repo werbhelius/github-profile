@@ -45,12 +45,11 @@
 
     function requestName(name) {
         var ajaxObj = new XMLHttpRequest();
-        ajaxObj.open('get', 'profile?username=' + name);
+        ajaxObj.open('get', '/api/user?username=' + name);
         ajaxObj.send();
         ajaxObj.onreadystatechange = function () {
             if (ajaxObj.readyState === 4 && ajaxObj.status >= 200 && ajaxObj.status < 400) {
-                console.log('数据返回成功');
-                console.log(ajaxObj.responseText);
+                window.location = ajaxObj.responseText
             }
         }
     }
