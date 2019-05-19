@@ -2,6 +2,7 @@ package com.fantasticthing.github.exception
 
 import io.ktor.application.*
 import io.ktor.features.*
+import io.ktor.freemarker.FreeMarkerContent
 import io.ktor.http.*
 import io.ktor.response.*
 
@@ -12,12 +13,33 @@ import io.ktor.response.*
 fun StatusPages.Configuration.handlerException() {
     status(HttpStatusCode.NotFound) {
         val routerErrorException = RouterErrorException()
-        call.respond(routerErrorException.httpCode, routerErrorException.errorMessage())
+        call.respond(
+            routerErrorException.httpCode,
+            FreeMarkerContent(
+                "error.ftl",
+                ErrorMessage(
+                    routerErrorException.httpCode.value.toString(),
+                    routerErrorException.errorMessage().message
+                )
+            )
+        )
     }
     status(HttpStatusCode.InternalServerError) {
-        call.respond(HttpStatusCode.InternalServerError, HttpStatusCode.InternalServerError.description)
+        call.respond(
+            HttpStatusCode.InternalServerError,
+            FreeMarkerContent(
+                "error.ftl",
+                ErrorMessage(
+                    HttpStatusCode.InternalServerError.value.toString(),
+                    HttpStatusCode.InternalServerError.description
+                )
+            )
+        )
     }
     exception<ErrorException> { case ->
-        call.respond(case.httpCode, case.errorMessage())
+        call.respond(case.httpCode, FreeMarkerContent("error.ftl", ErrorMessage(
+            case.httpCode.value.toString(),
+            case.errorMessage().message
+        )))
     }
 }

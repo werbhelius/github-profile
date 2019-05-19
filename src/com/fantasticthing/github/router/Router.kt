@@ -24,7 +24,7 @@ fun Routing.api() {
 
     // Render
     get<Index> {
-        call.respond(FreeMarkerContent("error.html", null))
+        call.respond(FreeMarkerContent("index.html", null))
     }
     get<Profile> { profile ->
         val username = profile.username

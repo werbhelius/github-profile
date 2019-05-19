@@ -153,8 +153,47 @@ body {
     text-align: center;
 }
 
+.error-code {
+    font-size: 300px;
+    font-family: ProducSansBold, serif;
+    color: #4B565F;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 0;
+}
+
+.error-message {
+    font-size: 50px;
+    font-family: ProducSansBold, serif;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.error-button {
+    background-color: #21A25A;
+    width: 300px;
+    height: 44px;
+    border-radius: 8px;
+    color: #ffffff;
+    border: none;
+    margin-top: 60px;
+    cursor:pointer;
+    font-size: 15px;
+    font-family: ProducSansBold, serif;
+}
+
 input:focus {
     outline: none;
+}
+
+button:focus {
+    outline: none;
+}
+
+.error-button:hover {
+    background-color: #1F8C4F;
 }
 
 a:hover img {

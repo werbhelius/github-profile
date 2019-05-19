@@ -195,10 +195,10 @@ class UserProfile {
 
     data class User(
         val id: String,
-        val name: String,
+        val name: String? = "",
         val login: String,
         val avatarUrl: String,
-        val bio: String,
+        val bio: String? = "",
         val location: String,
         @get:JsonProperty("isDeveloperProgramMember")
         val isDeveloperProgramMember: Boolean,

@@ -6,18 +6,21 @@
     <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
-<p class="index-title">GitHub Profile <span class="index-title-span">Summary</span></p>
-<div id="userNameDiv" class="index-input-div">
-    <input id='userNameInput' class="index-input" placeholder="Input your GitHub Username Like 'werbhelius'"
-           onkeypress="checkName(event)"/>
+<div id="index-page">
+    <p class="index-title">GitHub Profile <span class="index-title-span">Summary</span></p>
+    <div id="userNameDiv" class="index-input-div">
+        <input id='userNameInput' class="index-input" placeholder="Input your GitHub Username Like 'werbhelius'"
+               onkeypress="checkName(event, this)"/>
+    </div>
+    <p class="index-find-me">Find me on&nbsp;&nbsp;&nbsp;
+        <a target="_blank" href="http://github.com/werbhelius"><img src="static/css/svg/github.svg"></a> ,&nbsp;&nbsp;&nbsp;
+        <a target="_blank" href="https://twitter.com/WerbHelius"><img src="static/css/svg/twitter.svg"></a> ,&nbsp;&nbsp;&nbsp;
+        <a target="_blank" href="https://weibo.com/singerwannber"><img src="static/css/svg/weibo.svg"></a> ,&nbsp;&nbsp;&nbsp;
+        <a target="_blank" href="https://www.instagram.com/i.am.werb/"><img
+                src="static/css/svg/ins.svg"></a>&nbsp;&nbsp;<span class="index-title-span">and</span>&nbsp;&nbsp;
+        <a target="_blank" href="mailto:werbhelius@gmail.com"><img src="static/css/svg/email.svg"></a> .</p>
 </div>
-<p class="index-find-me">Find me on&nbsp;&nbsp;&nbsp;
-    <a target="_blank" href="http://github.com/werbhelius"><img src="static/css/svg/github.svg"></a> ,&nbsp;&nbsp;&nbsp;
-    <a target="_blank" href="https://twitter.com/WerbHelius"><img src="static/css/svg/twitter.svg"></a> ,&nbsp;&nbsp;&nbsp;
-    <a target="_blank" href="https://weibo.com/singerwannber"><img src="static/css/svg/weibo.svg"></a> ,&nbsp;&nbsp;&nbsp;
-    <a target="_blank" href="https://www.instagram.com/i.am.werb/"><img
-            src="static/css/svg/ins.svg"></a>&nbsp;&nbsp;<span class="index-title-span">and</span>&nbsp;&nbsp;
-    <a target="_blank" href="mailto:werbhelius@gmail.com"><img src="static/css/svg/email.svg"></a> .</p>
+<div id="error-page"></div>
 <footer class="index-footer">
     <p class="index-footer-title">Licensed under the <a target="_blank"
                                                         href="https://github.com/werbhelius/github-profile"><span
@@ -30,9 +33,8 @@
             class="index-title-span">Github</span></a></p>
 </footer>
 <script>
-    function checkName(e) {
+    function checkName(e, input) {
         if (e.code !== "Enter") return;
-        var input = document.getElementById("userNameInput");
         if (input.value === "") {
             input.classList.add("shake");
             setTimeout(function () {
@@ -48,10 +50,25 @@
         ajaxObj.open('get', '/api/user?username=' + name);
         ajaxObj.send();
         ajaxObj.onreadystatechange = function () {
-            if (ajaxObj.readyState === 4 && ajaxObj.status >= 200 && ajaxObj.status < 400) {
+            if (ajaxObj.readyState !== 4) return ;
+            if (ajaxObj.status >= 200 && ajaxObj.status < 400) {
                 window.location = ajaxObj.responseText
+            } else {
+                document.getElementById("index-page").style.display = "none";
+                var errorPage = document.getElementById("error-page");
+                errorPage.innerHTML = ajaxObj.responseText;
+                var errorCode = document.getElementById("errorCode");
+                errorCode.classList.add("shake");
+                setTimeout(function () {
+                    errorCode.classList.remove("shake");
+                }, 500);
             }
         }
+    }
+
+    function backToHome() {
+        document.getElementById("error-page").innerHTML = "";
+        document.getElementById("index-page").style.display = "block";
     }
 </script>
 </body>

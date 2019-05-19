@@ -38,10 +38,10 @@ data class GithubProfile(
 )
 
 fun UserProfile.User.toGithubProfile(): GithubProfile = GithubProfile(
-    this.name,
+    this.name ?: "",
     this.login,
     this.avatarUrl,
-    this.bio,
+    this.bio ?: "",
     this.location,
     this.isDeveloperProgramMember,
     this.createdAt,
@@ -56,8 +56,8 @@ fun UserProfile.User.toGithubProfile(): GithubProfile = GithubProfile(
     this.rank,
     this.organizations.nodes,
     this.pinnedRepos.nodes,
-    this.myRepos.nodes.subListSafe(0,10),
-    this.starRepos.nodes.subListSafe(0,10),
+    this.myRepos.nodes.subListSafe(0, 10),
+    this.starRepos.nodes.subListSafe(0, 10),
     this.contributionsByMonth,
     this.languageRatioByMyRepos,
     this.languageRatioByMyReposWithStar,
