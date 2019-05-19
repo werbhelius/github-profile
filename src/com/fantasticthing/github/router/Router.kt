@@ -21,6 +21,8 @@ import java.io.File
 
 @KtorExperimentalLocationsAPI
 fun Routing.api() {
+
+    // Render
     get<Index> {
         call.respond(FreeMarkerContent("index.html", null))
     }
