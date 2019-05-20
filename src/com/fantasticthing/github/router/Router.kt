@@ -33,7 +33,7 @@ fun Routing.api() {
         }
 
         Cache.getUser(username)?.also {
-            call.respond(it.toGithubProfile())
+            call.respond(FreeMarkerContent("profile.ftl", null))
         }
     }
 
