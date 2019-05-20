@@ -1,5 +1,5 @@
-body {
-    background-color: #23292F;
+html body {
+    background-color: #22282e;
     min-width: 1024px;
 }
 
@@ -145,6 +145,16 @@ body {
     background-color: #23292F;
 }
 
+.loading {
+    width: 100px;
+    height: 50px;
+    margin: 50px auto 0;
+}
+
+.line-scale-pulse-out > div {
+    background-color: #F18E33;
+}
+
 .index-footer-title {
     font-size: 14px;
     font-family: ProducSansRegular, serif;
@@ -179,7 +189,7 @@ body {
     color: #ffffff;
     border: none;
     margin-top: 60px;
-    cursor:pointer;
+    cursor: pointer;
     font-size: 15px;
     font-family: ProducSansBold, serif;
 }
@@ -203,11 +213,11 @@ a:hover img {
 }
 
 a {
-    text-decoration:none;
+    text-decoration: none;
 }
 
 a:hover {
-    text-decoration:none;
+    text-decoration: none;
 }
 
 .shake {

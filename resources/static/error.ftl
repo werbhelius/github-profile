@@ -2,7 +2,7 @@
     <div class="header-search">
         <img class="header-search-img" src="static/css/svg/search.svg"/>
         <div id="userNameDiv" class="header-search-input-div">
-            <input id='userNameInput' class="header-search-input"
+            <input id='userNameInput' class="header-search-input" spellcheck="false"
                    placeholder="Input your GitHub Username Like 'werbhelius'"
                    onkeypress="checkName(event, this)"/>
         </div>
