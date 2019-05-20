@@ -33,7 +33,7 @@ fun Routing.api() {
         }
 
         Cache.getUser(username)?.also {
-            call.respond(FreeMarkerContent("profile.ftl", null))
+            call.respond(FreeMarkerContent("profile.html", null))
         }
     }
 
