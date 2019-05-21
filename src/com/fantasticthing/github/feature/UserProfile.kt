@@ -10,6 +10,7 @@ import kotlinx.coroutines.*
 /**
  * Created by wanbo on 2019-01-11.
  */
+@Suppress("DeferredIsResult")
 class UserProfile {
 
     private fun graphQL(): String {
@@ -221,6 +222,7 @@ class UserProfile {
         val requestTime = System.currentTimeMillis()
         var contributions = 0
         var contributionsByMonth = arrayListOf<ContributionByMonth>()
+        var contributionsLevel = arrayListOf<Int>()
         var languageRatioByMyRepos = arrayListOf<LanguageRatio>()
         var languageRatioByMyReposWithStar = arrayListOf<LanguageRatio>()
         var languageRatioByStarRepos = arrayListOf<LanguageRatio>()
@@ -316,6 +318,7 @@ class UserProfile {
         private fun formatContributionsWithMonth(): Deferred<Boolean> = GlobalScope.async(Dispatchers.IO) {
             var start = 0
             var end = 0
+            var maxLevel = 0
             contributions = contributionsCollection?.contributionCalendar?.totalContributions ?: 0
             contributionsCollection?.contributionCalendar?.months?.forEach { month ->
                 end += month.totalWeeks
@@ -328,8 +331,18 @@ class UserProfile {
                     contributionByMonth.ratio = contributionByMonth.count.toFloat() / contributionByMonth.totalCount
                 }
                 start = end
+                if (contributionByMonth.count >= maxLevel) {
+                    maxLevel = contributionByMonth.count
+                }
                 contributionsByMonth.add(contributionByMonth)
             }
+
+            maxLevel = Math.round((maxLevel / 5f) / 10) * 10
+
+            repeat(6) {
+                contributionsLevel.add(0 + maxLevel * it)
+            }
+
             return@async true
         }
 
