@@ -359,6 +359,7 @@ a:hover {
     width: 764px;
     height: 100%;
     margin-left: 35px;
+    display: flex;
 }
 
 .user-contributions-month {
@@ -389,4 +390,12 @@ a:hover {
     font-family: ProducSansBold, serif;
     margin-right: 40px;
     margin-top: 0;
+}
+
+.margin-3 {
+    margin-bottom: 3px;
+}
+
+.dot {
+    margin-right: 55px;
 }

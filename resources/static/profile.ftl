@@ -31,63 +31,54 @@
     <div class="profile-user-info-div">
         <div id="user-info" class="profile-user-info">
             <div id="user-detail" class="user-detail">
-                <img class="user-img" src="https://avatars2.githubusercontent.com/u/12763277?s=460&v=4">
-                <p class="user-name">werbhelius (wanbo)</p>
-                <p class="user-bio">Less is More. https://t.me/werbhelius</p>
+                <img class="user-img" src="${avatarUrl}">
+                <p class="user-name">${login}(${name})</p>
+                <p class="user-bio">${bio}</p>
                 <div class="flex">
                     <div class="user-friends">
                         <img src="../static/css/svg/follower.svg">
                         <div>
-                            <p class="user-friends-count">366</p>
+                            <p class="user-friends-count">${followers}</p>
                             <p class="user-friends-name">Followers</p>
                         </div>
                     </div>
                     <div class="user-friends">
                         <img class="no-margin" src="../static/css/svg/following.svg">
                         <div>
-                            <p class="user-friends-count">27</p>
+                            <p class="user-friends-count">${following}</p>
                             <p class="user-friends-name">Following</p>
                         </div>
                     </div>
                     <div class="user-friends">
                         <img src="../static/css/svg/repositories.svg">
                         <div>
-                            <p class="user-friends-count">366</p>
+                            <p class="user-friends-count">${repositories}</p>
                             <p class="user-friends-name">Repositories</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div id="user-contributions" class="user-contributions">
-                <p class="user-contributions-count">3,274 contributions in the last year</p>
+                <p class="user-contributions-count">${contributions} contributions in the last year</p>
                 <div class="user-contributions-map">
                     <div >
-                        <p class="user-contributions-max-count">100</p>
-                        <p class="user-contributions-max-count">80</p>
-                        <p class="user-contributions-max-count">60</p>
-                        <p class="user-contributions-max-count">40</p>
-                        <p class="user-contributions-max-count">20</p>
-                        <p class="user-contributions-max-count">0</p>
+                        <#list contributionsCounts.counts as level>
+                            <p class="user-contributions-max-count">${level}</p>
+                        </#list>
                     </div>
                     <div class="user-contributions-chart">
-
+                        <#list contributionsByMonth as con>
+                            <div>
+                                <img class="dot margin-3" style="margin-top: ${155 - (con.count/contributionsCounts.maxCount* 155)}px" src="../static/css/svg/dot.svg">
+                            </div>
+                        </#list>
                     </div>
                     <p class="user-contributions-year">2019</p>
                 </div>
                 <div class="user-contributions-month">
-                    <p class="user-contributions-month-text">Feb</p>
-                    <p class="user-contributions-month-text">Mar</p>
-                    <p class="user-contributions-month-text">Apr</p>
-                    <p class="user-contributions-month-text">May</p>
-                    <p class="user-contributions-month-text">Jun</p>
-                    <p class="user-contributions-month-text">Jul</p>
-                    <p class="user-contributions-month-text">Aug</p>
-                    <p class="user-contributions-month-text" >Sep</p>
-                    <p class="user-contributions-month-text">Oct</p>
-                    <p class="user-contributions-month-text">Nov</p>
-                    <p class="user-contributions-month-text">Dec</p>
-                    <p class="user-contributions-month-text">Jan</p>
-                    <p class="user-contributions-month-text">Feb</p>
+                    <#list contributionsByMonth as con>
+                        <p class="user-contributions-month-text">${con.name}</p>
+                    </#list>
                 </div>
             </div>
         </div>

@@ -222,7 +222,7 @@ class UserProfile {
         val requestTime = System.currentTimeMillis()
         var contributions = 0
         var contributionsByMonth = arrayListOf<ContributionByMonth>()
-        var contributionsLevel = arrayListOf<Int>()
+        var contributionsCounts = ContributionsCounts(0, arrayListOf())
         var languageRatioByMyRepos = arrayListOf<LanguageRatio>()
         var languageRatioByMyReposWithStar = arrayListOf<LanguageRatio>()
         var languageRatioByStarRepos = arrayListOf<LanguageRatio>()
@@ -232,6 +232,8 @@ class UserProfile {
         data class LanguageRatio(val language: Lang, var count: Int, var ratio: Float = 0f)
 
         data class ContributionByMonth(val name: String, var count: Int = 0, var ratio: Float = 0f, val totalCount: Int)
+
+        data class ContributionsCounts(var maxCount: Int, var counts: MutableList<Int>)
 
         suspend fun format(): User = coroutineScope {
             val formatMyRepos = formatMyRepos().apply { start() }
@@ -318,7 +320,7 @@ class UserProfile {
         private fun formatContributionsWithMonth(): Deferred<Boolean> = GlobalScope.async(Dispatchers.IO) {
             var start = 0
             var end = 0
-            var maxLevel = 0
+            var maxCount = 0
             contributions = contributionsCollection?.contributionCalendar?.totalContributions ?: 0
             contributionsCollection?.contributionCalendar?.months?.forEach { month ->
                 end += month.totalWeeks
@@ -331,16 +333,16 @@ class UserProfile {
                     contributionByMonth.ratio = contributionByMonth.count.toFloat() / contributionByMonth.totalCount
                 }
                 start = end
-                if (contributionByMonth.count >= maxLevel) {
-                    maxLevel = contributionByMonth.count
+                if (contributionByMonth.count >= maxCount) {
+                    maxCount = contributionByMonth.count
                 }
                 contributionsByMonth.add(contributionByMonth)
             }
 
-            maxLevel = Math.round((maxLevel / 5f) / 10) * 10
-
+            maxCount = Math.round((maxCount / 5f) / 10) * 10
+            contributionsCounts.maxCount = maxCount * 5
             repeat(6) {
-                contributionsLevel.add(0 + maxLevel * it)
+                contributionsCounts.counts.add(0, 0 + maxCount * it)
             }
 
             return@async true
