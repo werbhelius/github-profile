@@ -288,7 +288,6 @@ a:hover {
 }
 
 .user-contributions {
-    background-color: #1F8C4F;
     width: 888px;
     height: 271px;
     padding: 78px 75px 34px 0;
@@ -297,7 +296,7 @@ a:hover {
 .user-img {
     width: 115px;
     height: 115px;
-    border-radius:50%;
+    border-radius: 50%;
     margin-left: 121px;
 }
 
@@ -340,4 +339,54 @@ a:hover {
     font-family: ProducSansRegular, serif;
     color: #757272;
     margin: 0 0 0 12px;
+}
+
+.user-contributions-count {
+    font-size: 22px;
+    font-family: ProducSansBold, serif;
+    color: #ffffff;
+    margin: 0 0 0 35px;
+}
+
+.user-contributions-map {
+    width: 100%;
+    height: 165px;
+    margin-top: 38px;
+    display: flex;
+}
+
+.user-contributions-chart {
+    width: 764px;
+    height: 100%;
+    margin-left: 35px;
+}
+
+.user-contributions-month {
+    margin-top: 26px;
+    margin-left: 52px;
+    width: 764px;
+    height: 15px;
+    display: flex;
+}
+
+.user-contributions-year {
+    color: #938C8C;
+    font-size: 15px;
+    font-family: ProducSansBold, serif;
+    margin-left: 44px;
+}
+
+.user-contributions-max-count {
+    font-size: 13px;
+    font-family: ProducSansBold, serif;
+    color: #938C8C;
+    margin: 0 0 15px 0;
+}
+
+.user-contributions-month-text {
+    color: #938C8C;
+    font-size: 13px;
+    font-family: ProducSansBold, serif;
+    margin-right: 40px;
+    margin-top: 0;
 }
