@@ -27,7 +27,7 @@
         </div>
     </div>
 </header>
-<div id="profile-page">
+<div id="profile-page" class="profile-page">
     <div class="profile-user-info-div">
         <div id="user-info" class="profile-user-info">
             <div id="user-detail" class="user-detail">
@@ -83,18 +83,58 @@
             </div>
         </div>
     </div>
+    <div class="profile-repos-div">
+        <div >
+            <div class="profile-more">
+                <p class="content-title">More</p>
+                <div style="margin-top: 36px">
+                    <p class="more-content">Company : Google, Inc.</p>
+                    <p class="more-content">Email : werbhelius@gmail.com </p>
+                    <p class="more-content">Location : Pittsburgh, PA, USA</p>
+                    <p class="more-content">Website : http://werbhelius.com</p>
+                </div>
+            </div>
+            <div class="profile-more">
+                <p class="content-title" style="margin-top: 50px">Organizations</p>
+                <div style="padding-top: 10px">
+                    <div class="organizations-div">
+                        <img class="organizations-img" src="https://avatars0.githubusercontent.com/u/1342004?s=70&v=4">
+                        <p class="organizations-name">Google</p>
+                    </div>
+                    <div class="organizations-div">
+                        <img class="organizations-img" src="https://avatars0.githubusercontent.com/u/1342004?s=70&v=4">
+                        <p class="organizations-name">Google</p>
+                    </div>
+                    <div class="organizations-div">
+                        <img class="organizations-img" src="https://avatars0.githubusercontent.com/u/1342004?s=70&v=4">
+                        <p class="organizations-name">Google</p>
+                    </div>
+                    <div class="organizations-div">
+                        <img class="organizations-img" src="https://avatars0.githubusercontent.com/u/1342004?s=70&v=4">
+                        <p class="organizations-name">Google</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="profile-repos-block">
+
+        </div>
+        <div class="profile-repos-block">
+
+        </div>
+    </div>
 </div>
 <div id="error-page"></div>
-<footer class="index-footer">
-    <p class="index-footer-title">Licensed under the <a target="_blank"
-                                                        href="https://github.com/werbhelius/github-profile"><span
-            class="index-title-span">Apache 2 license</span></a></p>
-    <p class="index-footer-title">Design & Develop <img src="../static/css/svg/heart.svg"> by <a target="_blank"
-                                                                                                 href="https://about.me/werbhelius"><span
-            class="index-title-span">werbhelius</span></a></p>
-    <p class="index-footer-title">Source is on <a target="_blank"
-                                                  href="https://github.com/werbhelius/github-profile"><span
-            class="index-title-span">Github</span></a></p>
-</footer>
+<!--<footer class="index-footer">-->
+    <!--<p class="index-footer-title">Licensed under the <a target="_blank"-->
+                                                        <!--href="https://github.com/werbhelius/github-profile"><span-->
+            <!--class="index-title-span">Apache 2 license</span></a></p>-->
+    <!--<p class="index-footer-title">Design & Develop <img src="../static/css/svg/heart.svg"> by <a target="_blank"-->
+                                                                                                 <!--href="https://about.me/werbhelius"><span-->
+            <!--class="index-title-span">werbhelius</span></a></p>-->
+    <!--<p class="index-footer-title">Source is on <a target="_blank"-->
+                                                  <!--href="https://github.com/werbhelius/github-profile"><span-->
+            <!--class="index-title-span">Github</span></a></p>-->
+<!--</footer>-->
 </body>
 </html>
