@@ -282,7 +282,6 @@ a:hover {
 }
 
 .user-detail {
-    background-color: #F18E33;
     width: 357px;
     height: 252px;
     padding: 76px 65px 55px 55px;
@@ -293,4 +292,52 @@ a:hover {
     width: 888px;
     height: 271px;
     padding: 78px 75px 34px 0;
+}
+
+.user-img {
+    width: 115px;
+    height: 115px;
+    border-radius:50%;
+    margin-left: 121px;
+}
+
+.user-name {
+    font-size: 18px;
+    font-family: ProducSansBold, serif;
+    color: #ffffff;
+    margin: 17px 0 0 0;
+    text-align: center;
+}
+
+.user-bio {
+    font-size: 14px;
+    font-family: ProducSansBold, serif;
+    color: #938C8C;
+    margin: 11px 0 0 0;
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+}
+
+.user-friends {
+    width: 33.3%;
+    height: 38px;
+    margin-top: 31px;
+    display: flex;
+}
+
+.user-friends-count {
+    font-size: 17px;
+    font-family: ProducSansBold, serif;
+    color: #ffffff;
+    margin: 2px 0 0 12px;
+}
+
+.user-friends-name {
+    font-size: 11px;
+    font-family: ProducSansRegular, serif;
+    color: #757272;
+    margin: 0 0 0 12px;
 }
