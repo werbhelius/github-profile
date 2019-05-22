@@ -412,9 +412,9 @@ a:hover {
 }
 
 .profile-more {
-    width: 294px;
-    margin-right: 116px;
     margin-left: 55px;
+    width: 310px;
+    margin-right: 100px;
 }
 
 .content-title {
@@ -427,8 +427,11 @@ a:hover {
 .more-content {
     color: #FFFFFF;
     font-size: 20px;
-    font-family: ProducSansBold, serif;
+    font-family: ProducSansRegular, serif;
     margin: 20px 0 0 0;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
 
 .organizations-div{
@@ -445,7 +448,67 @@ a:hover {
 .organizations-name {
     color: #FFFFFF;
     font-size: 20px;
-    font-family: ProducSansBold, serif;
+    font-family: ProducSansRegular, serif;
     margin: 0 0 0 20px;
     line-height: 47px;
+}
+
+.repos-bg {
+    width: 381px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 2px 7px 0 rgba(0,0,0,.10);
+    margin-top: 20px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.repos-star {
+    display: flex;
+    height: 18px;
+}
+
+.repos-lang {
+    width: 8px;
+    height: 8px;
+    border-radius: 50px;
+    background-color: #F18E33;
+    margin-top: 5px;
+}
+
+.repo {
+    margin: 8px 16px;
+}
+
+.repos-name {
+    color: #262626;
+    font-size: 16px;
+    font-family: ProducSansBold, serif;
+    margin: 0 0 10px 0;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.repos-desc {
+    color: #586069;
+    font-size: 14px;
+    font-family: ProducSansBold, serif;
+    margin: 0 0 10px 0;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.repos-star-text {
+    color: #999999;
+    font-size: 14px;
+    font-family: ProducSansBold, serif;
+    margin: 0 5px 0 3px;
+}
+
+.repos-line {
+    background-color: rgba(140, 140, 140, .25);
+    height: 1px;
+    width: 100%;
 }

@@ -87,11 +87,11 @@
         <div >
             <div class="profile-more">
                 <p class="content-title">More</p>
-                <div style="margin-top: 36px">
-                    <p class="more-content">Company : Google, Inc.</p>
-                    <p class="more-content">Email : werbhelius@gmail.com </p>
-                    <p class="more-content">Location : Pittsburgh, PA, USA</p>
-                    <p class="more-content">Website : http://werbhelius.com</p>
+                <div style="margin-top: 30px">
+                    <p class="more-content">Company : ${company}</p>
+                    <p class="more-content">Email : ${email} </p>
+                    <p class="more-content">Location : ${location}</p>
+                    <p class="more-content">Website : ${websiteUrl}</p>
                 </div>
             </div>
             <div class="profile-more">
@@ -116,11 +116,49 @@
                 </div>
             </div>
         </div>
-        <div class="profile-repos-block">
-
+        <div class="profile-repos-block" style="margin-right: 81px">
+            <p class="content-title">Pinned Repos</p>
+            <div class="repos-bg">
+                <#list pinnedRepos as repos>
+                    <div class="repo">
+                        <p class="repos-name">${repos.nameWithOwner}</p>
+                        <p class="repos-desc" >${repos.description}</p>
+                        <div class="repos-star">
+                            <div class="repos-lang" style="background-color:${repos.primaryLanguage.color};"></div>
+                            <p class="repos-star-text">${repos.primaryLanguage.name}</p>
+                            <img src="../static/css/svg/star.svg">
+                            <p class="repos-star-text" >${repos.stargazers.totalCount}</p>
+                            <img src="../static/css/svg/fork.svg">
+                            <p class="repos-star-text">${repos.forkCount}</p>
+                        </div>
+                    </div>
+                    <#if !repos?is_last>
+                        <div class="repos-line" ></div>
+                    </#if>
+                </#list>
+            </div>
         </div>
         <div class="profile-repos-block">
-
+            <p class="content-title">Top Star Repos</p>
+            <div class="repos-bg">
+                <#list myRepos as repos>
+                    <div class="repo">
+                        <p class="repos-name">${repos.nameWithOwner}</p>
+                        <p class="repos-desc" >${repos.description}</p>
+                        <div class="repos-star">
+                            <div class="repos-lang" style="background-color:${repos.primaryLanguage.color}"></div>
+                            <p class="repos-star-text">${repos.primaryLanguage.name}</p>
+                            <img src="../static/css/svg/star.svg">
+                            <p class="repos-star-text" >${repos.stargazers.totalCount}</p>
+                            <img src="../static/css/svg/fork.svg">
+                            <p class="repos-star-text">${repos.forkCount}</p>
+                        </div>
+                    </div>
+                    <#if !repos?is_last>
+                        <div class="repos-line" ></div>
+                    </#if>
+                </#list>
+            </div>
         </div>
     </div>
 </div>

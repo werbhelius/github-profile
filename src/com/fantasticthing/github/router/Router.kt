@@ -9,6 +9,7 @@ import io.ktor.application.*
 import io.ktor.freemarker.*
 import io.ktor.http.content.*
 import io.ktor.locations.*
+import io.ktor.request.header
 import io.ktor.response.*
 import io.ktor.routing.*
 import kotlinx.coroutines.async
@@ -34,7 +35,6 @@ fun Routing.api() {
 
         Cache.getUser(username)?.also {
             call.respond(FreeMarkerContent("profile.ftl", it.toGithubProfile()))
-//            call.respond(it.toGithubProfile())
         } ?: run {
             call.respond(FreeMarkerContent("index.html", null))
         }
@@ -51,15 +51,18 @@ fun Routing.api() {
             UserAuthentication().request(username)
         }.apply { start() }
 
-        val loginName = Cache.getUser(username)?.let {
+        val githubProfile = Cache.getUser(username)?.let {
             launch { auth.cancel() }
-            return@let it.login
+            return@let it.toGithubProfile()
         } ?: run {
-            val githubProfile = UserProfile().request(username, auth.await()).toGithubProfile()
-            return@run githubProfile.login
+            return@run UserProfile().request(username, auth.await()).toGithubProfile()
         }
 
-        call.respondText("/profile/$loginName")
+        if (call.request.header("client") == "web") {
+            call.respondText("/profile/${githubProfile.login}")
+        } else {
+            call.respond(githubProfile)
+        }
     }
 
 }

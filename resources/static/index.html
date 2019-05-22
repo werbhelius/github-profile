@@ -62,6 +62,7 @@
         document.getElementById("loading").style.display = "block";
         var name = input.value;
         var ajaxObj = new XMLHttpRequest();
+        ajaxObj.setRequestHeader("client", "web");
         ajaxObj.open('get', '/api/user?username=' + name);
         ajaxObj.send();
         ajaxObj.onreadystatechange = function () {
