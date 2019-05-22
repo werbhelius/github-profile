@@ -430,11 +430,11 @@ a:hover {
     font-family: ProducSansRegular, serif;
     margin: 20px 0 0 0;
     overflow: hidden;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.organizations-div{
+.organizations-div {
     display: flex;
     margin-top: 15px;
 }
@@ -457,7 +457,7 @@ a:hover {
     width: 381px;
     background-color: #FFFFFF;
     border-radius: 10px;
-    box-shadow: 0 2px 7px 0 rgba(0,0,0,.10);
+    box-shadow: 0 2px 7px 0 rgba(0, 0, 0, .10);
     margin-top: 20px;
     padding-top: 8px;
     padding-bottom: 8px;
@@ -486,7 +486,7 @@ a:hover {
     font-family: ProducSansBold, serif;
     margin: 0 0 10px 0;
     overflow: hidden;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
     white-space: nowrap;
 }
 
@@ -496,7 +496,7 @@ a:hover {
     font-family: ProducSansBold, serif;
     margin: 0 0 10px 0;
     overflow: hidden;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
     white-space: nowrap;
 }
 
@@ -519,17 +519,17 @@ a:hover {
     max-width: 1440px;
 }
 
-.profile-land-rank {
+.profile-lang-rank {
     margin-left: 55px;
     width: 333px;
-    margin-right: 100px;
+    margin-right: 74px;
 }
 
 .lang-bg {
     width: 333px;
     background-color: #FBFBFB;
     border-radius: 10px;
-    box-shadow: 0 2px 7px 0 rgba(0,0,0,.10);
+    box-shadow: 0 2px 7px 0 rgba(0, 0, 0, .10);
     margin-top: 20px;
     padding-top: 20px;
     padding-bottom: 2px;
@@ -545,7 +545,7 @@ a:hover {
     width: 29px;
     height: 29px;
     border-radius: 50px;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.10);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .10);
     text-align: center;
     line-height: 29px;
     color: #FFFFFF;
@@ -575,7 +575,6 @@ a:hover {
     color: #262626;
     font-size: 16px;
     font-family: ProducSansBold, serif;
-    text-align: center;
     height: 100%;
     margin-top: 0;
     margin-bottom: 0;
@@ -593,4 +592,72 @@ a:hover {
     margin-top: 0;
     margin-bottom: 0;
     line-height: 53px;
+}
+
+.profile-lang-world {
+    width: 886px;
+}
+
+.profile-lang-world-list {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.lang-world-bg {
+    min-width: 333px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 2px 7px 0 rgba(0, 0, 0, .10);
+    margin-top: 20px;
+    margin-right: 35px;
+    padding-bottom: 12px;
+}
+
+.lang-world-text {
+    color: #262626;
+    font-size: 18px;
+    font-family: ProducSansBold, serif;
+    margin: 20px 0 15px 20px;
+}
+
+.lang-world {
+    display: flex;
+    height: 30px;
+    margin-left: 25px;
+    margin-right: 28px;
+    margin-bottom: 25px;
+}
+
+.lang-img {
+    width: 30px;
+    height: 30px;
+}
+
+.lang-world-city-text {
+    color: #586069;
+    font-size: 18px;
+    font-family: ProducSansBold, serif;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 10px 0 30px;
+}
+
+.lang-world-rank-text {
+    color: #586069;
+    font-size: 18px;
+    font-family: ProducSansBold, serif;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 0 0 auto;
+}
+
+.lang-world-rank-text-high {
+    color: #F18E33;
+    font-size: 18px;
+    font-family: ProducSansBold, serif;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 0;
 }

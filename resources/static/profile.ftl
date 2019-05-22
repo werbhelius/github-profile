@@ -164,7 +164,7 @@
         </div>
     </div>
     <div class="profile-lang-div">
-        <div class="profile-land-rank">
+        <div class="profile-lang-rank">
             <p class="content-title">Top Star Language</p>
             <div class="lang-bg">
                 <#list rank as rn>
@@ -189,6 +189,31 @@
                             <p class="lang-rank-count">${rn.stars_count}</p>
                         </div>
                     </#if>
+                </#list>
+            </div>
+        </div>
+        <div class="profile-lang-world">
+            <p class="content-title">Top Star Language</p>
+            <div class="profile-lang-world-list">
+                <#list rank as rn>
+                    <div class="lang-world-bg">
+                        <p class="lang-world-text">${rn.language}</p>
+                        <div class="lang-world">
+                            <img class="lang-img" src="../static/css/svg/city.svg">
+                            <p class="lang-world-city-text">${city}</p>
+                            <p class="lang-world-rank-text"><span class="lang-world-rank-text-high">${rn.city_rank}</span> / ${rn.city_count}</p>
+                        </div>
+                        <div class="lang-world">
+                            <img class="lang-img" src="../static/css/svg/country.svg">
+                            <p class="lang-world-city-text">${country}</p>
+                            <p class="lang-world-rank-text"><span class="lang-world-rank-text-high">${rn.country_rank}</span> / ${rn.country_count}</p>
+                        </div>
+                        <div class="lang-world">
+                            <img class="lang-img" src="../static/css/svg/world.svg">
+                            <p class="lang-world-city-text">Worldwide</p>
+                            <p class="lang-world-rank-text"><span class="lang-world-rank-text-high">${rn.world_rank}</span> / ${rn.world_count}</p>
+                        </div>
+                    </div>
                 </#list>
             </div>
         </div>

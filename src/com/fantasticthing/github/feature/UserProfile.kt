@@ -184,6 +184,8 @@ class UserProfile {
         }
         userResponse.data?.user?.also {
             return it.format().apply {
+                it.city = rankResponse.user.city ?: ""
+                it.country = rankResponse.user.country ?: ""
                 it.rank = rankResponse.user.rankings
                 Cache.putUser(this)
             }
@@ -220,6 +222,8 @@ class UserProfile {
     ) {
 
         val requestTime = System.currentTimeMillis()
+        var city = ""
+        var country = ""
         var contributions = 0
         var contributionsByMonth = arrayListOf<ContributionByMonth>()
         var contributionsCounts = ContributionsCounts(0, arrayListOf())
