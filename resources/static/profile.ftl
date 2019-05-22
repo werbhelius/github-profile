@@ -20,9 +20,9 @@
         <p class="header-search-share">share to</p>
         <div class="header-search-share-imag">
             <a target="_blank" style="margin-right: 16px" href="http://github.com/werbhelius"><img
-                    src="../static/css/svg/share-twitter.svg"></a>
+                        src="../static/css/svg/share-twitter.svg"></a>
             <a target="_blank" style="margin-right: 16px" href="http://github.com/werbhelius"><img
-                    src="../static/css/svg/share-fb.svg"></a>
+                        src="../static/css/svg/share-fb.svg"></a>
             <a target="_blank" href="http://github.com/werbhelius"><img src="../static/css/svg/share-weibo.svg"></a>
         </div>
     </div>
@@ -61,7 +61,7 @@
             <div id="user-contributions" class="user-contributions">
                 <p class="user-contributions-count">${contributions} contributions in the last year</p>
                 <div class="user-contributions-map">
-                    <div >
+                    <div>
                         <#list contributionsCounts.counts as level>
                             <p class="user-contributions-max-count">${level}</p>
                         </#list>
@@ -69,7 +69,9 @@
                     <div class="user-contributions-chart">
                         <#list contributionsByMonth as con>
                             <div>
-                                <img class="dot margin-3" style="margin-top: ${155 - (con.count/contributionsCounts.maxCount* 155)}px" src="../static/css/svg/dot.svg">
+                                <img class="dot margin-3"
+                                     style="margin-top: ${155 - (con.count/contributionsCounts.maxCount* 155)}px"
+                                     src="../static/css/svg/dot.svg">
                             </div>
                         </#list>
                     </div>
@@ -84,7 +86,7 @@
         </div>
     </div>
     <div class="profile-repos-div">
-        <div >
+        <div>
             <div class="profile-more">
                 <p class="content-title">More</p>
                 <div style="margin-top: 30px">
@@ -122,18 +124,18 @@
                 <#list pinnedRepos as repos>
                     <div class="repo">
                         <p class="repos-name">${repos.nameWithOwner}</p>
-                        <p class="repos-desc" >${repos.description}</p>
+                        <p class="repos-desc">${repos.description}</p>
                         <div class="repos-star">
                             <div class="repos-lang" style="background-color:${repos.primaryLanguage.color};"></div>
                             <p class="repos-star-text">${repos.primaryLanguage.name}</p>
                             <img src="../static/css/svg/star.svg">
-                            <p class="repos-star-text" >${repos.stargazers.totalCount}</p>
+                            <p class="repos-star-text">${repos.stargazers.totalCount}</p>
                             <img src="../static/css/svg/fork.svg">
                             <p class="repos-star-text">${repos.forkCount}</p>
                         </div>
                     </div>
                     <#if !repos?is_last>
-                        <div class="repos-line" ></div>
+                        <div class="repos-line"></div>
                     </#if>
                 </#list>
             </div>
@@ -144,18 +146,48 @@
                 <#list myRepos as repos>
                     <div class="repo">
                         <p class="repos-name">${repos.nameWithOwner}</p>
-                        <p class="repos-desc" >${repos.description}</p>
+                        <p class="repos-desc">${repos.description}</p>
                         <div class="repos-star">
                             <div class="repos-lang" style="background-color:${repos.primaryLanguage.color}"></div>
                             <p class="repos-star-text">${repos.primaryLanguage.name}</p>
                             <img src="../static/css/svg/star.svg">
-                            <p class="repos-star-text" >${repos.stargazers.totalCount}</p>
+                            <p class="repos-star-text">${repos.stargazers.totalCount}</p>
                             <img src="../static/css/svg/fork.svg">
                             <p class="repos-star-text">${repos.forkCount}</p>
                         </div>
                     </div>
                     <#if !repos?is_last>
-                        <div class="repos-line" ></div>
+                        <div class="repos-line"></div>
+                    </#if>
+                </#list>
+            </div>
+        </div>
+    </div>
+    <div class="profile-lang-div">
+        <div class="profile-land-rank">
+            <p class="content-title">Top Star Language</p>
+            <div class="lang-bg">
+                <#list rank as rn>
+                    <#if rn?index < 4>
+                        <div class="lang-detail" <#if rn?index == 0 || rn?index == 2> style="background-color: #ffffff" </#if>>
+                            <#if rn?index == 0>
+                                <div class="lang-rank-bg" style="background-color: #FFBD43">1</div>
+                            </#if>
+                            <#if rn?index == 1>
+                                <div class="lang-rank-bg" style="background-color: #C7C7C7">2</div>
+                            </#if>
+                            <#if rn?index == 2>
+                                <div class="lang-rank-bg" style="background-color: #CD8989">3</div>
+                            </#if>
+                            <#if rn?index == 3>
+                                <div class="lang-rank-bg-without-shadow" style="color: #F18E33">4</div>
+                            </#if>
+                            <p class="lang-rank-lang">${rn.language}</p>
+                            <img style="margin-left: 14px" src="../static/css/svg/code-small.svg">
+                            <p class="lang-rank-count">${rn.repository_count}</p>
+                            <img style="margin-left: 14px" src="../static/css/svg/star-small.svg">
+                            <p class="lang-rank-count">${rn.stars_count}</p>
+                        </div>
                     </#if>
                 </#list>
             </div>
@@ -164,15 +196,15 @@
 </div>
 <div id="error-page"></div>
 <!--<footer class="index-footer">-->
-    <!--<p class="index-footer-title">Licensed under the <a target="_blank"-->
-                                                        <!--href="https://github.com/werbhelius/github-profile"><span-->
-            <!--class="index-title-span">Apache 2 license</span></a></p>-->
-    <!--<p class="index-footer-title">Design & Develop <img src="../static/css/svg/heart.svg"> by <a target="_blank"-->
-                                                                                                 <!--href="https://about.me/werbhelius"><span-->
-            <!--class="index-title-span">werbhelius</span></a></p>-->
-    <!--<p class="index-footer-title">Source is on <a target="_blank"-->
-                                                  <!--href="https://github.com/werbhelius/github-profile"><span-->
-            <!--class="index-title-span">Github</span></a></p>-->
+<!--<p class="index-footer-title">Licensed under the <a target="_blank"-->
+<!--href="https://github.com/werbhelius/github-profile"><span-->
+<!--class="index-title-span">Apache 2 license</span></a></p>-->
+<!--<p class="index-footer-title">Design & Develop <img src="../static/css/svg/heart.svg"> by <a target="_blank"-->
+<!--href="https://about.me/werbhelius"><span-->
+<!--class="index-title-span">werbhelius</span></a></p>-->
+<!--<p class="index-footer-title">Source is on <a target="_blank"-->
+<!--href="https://github.com/werbhelius/github-profile"><span-->
+<!--class="index-title-span">Github</span></a></p>-->
 <!--</footer>-->
 </body>
 </html>
