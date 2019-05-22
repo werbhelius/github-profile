@@ -218,6 +218,11 @@
             </div>
         </div>
     </div>
+    <div class="profile-chart">
+        <div class="profile-chart-div">
+            <div></div>
+        </div>
+    </div>
 </div>
 <div id="error-page"></div>
 <!--<footer class="index-footer">-->
