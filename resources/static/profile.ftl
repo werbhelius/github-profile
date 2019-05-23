@@ -201,17 +201,22 @@
                         <div class="lang-world">
                             <img class="lang-img" src="../static/css/svg/city.svg">
                             <p class="lang-world-city-text">${city}</p>
-                            <p class="lang-world-rank-text"><span class="lang-world-rank-text-high">${rn.city_rank}</span> / ${rn.city_count}</p>
+                            <p class="lang-world-rank-text"><span
+                                        class="lang-world-rank-text-high">${rn.city_rank}</span> / ${rn.city_count}</p>
                         </div>
                         <div class="lang-world">
                             <img class="lang-img" src="../static/css/svg/country.svg">
                             <p class="lang-world-city-text">${country}</p>
-                            <p class="lang-world-rank-text"><span class="lang-world-rank-text-high">${rn.country_rank}</span> / ${rn.country_count}</p>
+                            <p class="lang-world-rank-text"><span
+                                        class="lang-world-rank-text-high">${rn.country_rank}</span>
+                                / ${rn.country_count}</p>
                         </div>
                         <div class="lang-world">
                             <img class="lang-img" src="../static/css/svg/world.svg">
                             <p class="lang-world-city-text">Worldwide</p>
-                            <p class="lang-world-rank-text"><span class="lang-world-rank-text-high">${rn.world_rank}</span> / ${rn.world_count}</p>
+                            <p class="lang-world-rank-text"><span
+                                        class="lang-world-rank-text-high">${rn.world_rank}</span> / ${rn.world_count}
+                            </p>
                         </div>
                     </div>
                 </#list>
@@ -220,7 +225,71 @@
     </div>
     <div class="profile-chart">
         <div class="profile-chart-div">
-            <div></div>
+            <div class="profile-chart-1">
+                <div class="profile-chart-detail">
+                    <p class="content-title">My Repos per Language</p>
+                    <div class="pie">
+                        <svg width="285" height="285">
+                            <circle class="base-pie" r="111.5" cx="142.5" cy="142.5"/>
+                            <#assign angle = 0 >
+                            <#list languageRatioByMyRepos as langRatio >
+                                <#assign angle = angle!0 + langRatio.ratio >
+                                <#if langRatio?index == 0>
+                                    <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#303840" stroke-dasharray="${700*langRatio.ratio} ${700*(1-langRatio.ratio)}" transform="rotate(-90, 142.5,142.5)"/>
+                                </#if>
+                                <#if langRatio?index == 1>
+                                    <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#2A3139" stroke-dasharray="${700*langRatio.ratio} ${700*(1-langRatio.ratio)}" transform="rotate(${-90 + 360 *angle}, 142.5,142.5)"/>
+                                </#if>
+                                <#if langRatio?index == 2>
+                                    <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#303840" stroke-dasharray="${700*langRatio.ratio} ${700*(1-langRatio.ratio)}" transform="rotate(${-90 + 360 *angle}, 142.5,142.5)"/>
+                                </#if>
+                                <#if langRatio?index == 3>
+                                    <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#424D55" stroke-dasharray="${700*langRatio.ratio} ${700*(1-langRatio.ratio)}" transform="rotate(${-90 + 360 *angle}, 142.5,142.5)"/>
+                                </#if>
+                                <#if langRatio?index == 4>
+                                    <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#2A3139" stroke-dasharray="${700*langRatio.ratio} ${700*(1-langRatio.ratio)}" transform="rotate(${-90 + 360 *angle}, 142.5,142.5)"/>
+                                </#if>
+                                <#if langRatio?index == 5>
+                                    <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#303840" stroke-dasharray="${700*langRatio.ratio} ${700*(1-langRatio.ratio)}" transform="rotate(${-90 + 360 *angle}, 142.5,142.5)"/>
+                                </#if>
+                                <#if langRatio?index == 6>
+                                    <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#424D55" stroke-dasharray="${700*langRatio.ratio} ${700*(1-langRatio.ratio)}" transform="rotate(${-90 + 360 *angle}, 142.5,142.5)"/>
+                                </#if>
+                            </#list>
+                        </svg>
+                    </div>
+                    <div class="pie">
+                        <svg width="285" height="285">
+                        </svg>
+                    </div>
+                </div>
+                <div class="profile-chart-detail" style="margin: 0 auto">
+                    <p class="content-title">My Repos Stars per Language</p>
+                    <div class="pie">
+
+                    </div>
+                </div>
+                <div class="profile-chart-detail" style="margin-right: auto">
+                    <p class="content-title">My Repos Commits per Language</p>
+                    <div class="pie">
+
+                    </div>
+                </div>
+            </div>
+            <div class="profile-chart-2">
+                <div class="profile-chart-detail" style="margin-left: auto">
+                    <p class="content-title">My Stared Repos per Language</p>
+                    <div class="pie">
+
+                    </div>
+                </div>
+                <div class="profile-chart-detail" style="margin-right: auto">
+                    <p class="content-title">Commits per My Repos</p>
+                    <div class="pie">
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -202,7 +202,7 @@ class UserProfile {
         val login: String,
         val avatarUrl: String,
         val bio: String? = "",
-        val location: String,
+        val location: String? = "",
         @get:JsonProperty("isDeveloperProgramMember")
         val isDeveloperProgramMember: Boolean,
         val createdAt: String,

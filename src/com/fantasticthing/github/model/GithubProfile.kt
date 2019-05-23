@@ -45,7 +45,7 @@ fun UserProfile.User.toGithubProfile(): GithubProfile = GithubProfile(
     this.login,
     this.avatarUrl,
     this.bio ?: "",
-    this.location,
+    this.location ?: "",
     this.isDeveloperProgramMember,
     this.createdAt,
     this.email,
@@ -65,9 +65,9 @@ fun UserProfile.User.toGithubProfile(): GithubProfile = GithubProfile(
     this.starRepos.nodes.subListSafe(0, 6),
     this.contributionsCounts,
     this.contributionsByMonth,
-    this.languageRatioByMyRepos,
-    this.languageRatioByMyReposWithStar,
-    this.languageRatioByStarRepos,
-    this.languageRatioByMyReposCommit,
+    this.languageRatioByMyRepos.subListSafe(0, 6),
+    this.languageRatioByMyReposWithStar.subListSafe(0, 6),
+    this.languageRatioByStarRepos.subListSafe(0, 6),
+    this.languageRatioByMyReposCommit.subListSafe(0, 6),
     this.commitTopRepos
 )

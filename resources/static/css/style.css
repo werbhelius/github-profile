@@ -665,12 +665,52 @@ a:hover {
 
 .profile-chart {
     background-color: #1B1F22;
-    padding-top: 48px;
 }
 
 .profile-chart-div {
-    max-width: 1440px;
-    height: 300px;
-    background-color: #1F8C4F;
+    max-width: 1218px;
+    height: 970px;
     margin: 0 auto;
+    padding: 48px 111px 0 111px;
+}
+
+.profile-chart-1 {
+    display: flex;
+    margin-bottom: 55px;
+}
+
+.profile-chart-2 {
+    display: flex;
+    width: 761px;
+    margin: 0 auto 55px auto;
+}
+
+.profile-chart-detail {
+    height: 373px;
+}
+
+.pie {
+
+}
+
+.pie-svg {
+    transform: rotate(-90deg);
+}
+
+.base-pie {
+    fill: #1B1F22;
+    stroke: #303840;
+    stroke-width: 62px;
+}
+
+.pie-1 {
+    fill: none;
+    stroke-width: 62px;
+    box-shadow: 0 2px 7px 0 rgba(0, 0, 0, .10);
+}
+
+.pie-text-percent {
+    color: #FFFFFF;
+    font-size: 13px;
+    font-family: ProducSansBold, serif;
 }
