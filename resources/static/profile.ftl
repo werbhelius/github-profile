@@ -261,8 +261,14 @@
 
                                 <#assign r = r + langRatio.ratio>
                             </#list>
+                            <#assign r = 0>
                             <#list languageRatioByMyRepos as langRatio >
-                                <text class="pie-text-percent" data-angle="-45" fill="#ffffff" transform="rotate(90, 142.5,142.5)">${langRatio.ratio * 100}%</text>
+                                <#assign r = r + langRatio.ratio>
+                                <#if langRatio?index == 0>
+                                    <text class="pie-text-percent" data-angle="${360 * (r /2) - 90}" fill="#ffffff"
+                                          transform="rotate(90, 142.5,142.5)">${langRatio.ratio * 100}%
+                                    </text>
+                                </#if>
                             </#list>
                         </svg>
                     </div>
@@ -301,6 +307,15 @@
                                         transform="rotate(${rotate}, 142.5,142.5)"></circle>
 
                                 <#assign r = r + langRatio.ratio>
+                            </#list>
+                            <#assign r = 0>
+                            <#list languageRatioByMyReposWithStar as langRatio >
+                                <#assign r = r + langRatio.ratio>
+                                <#if langRatio?index == 0>
+                                    <text class="pie-text-percent" data-angle="${360 * (r /2) - 90}" fill="#ffffff"
+                                          transform="rotate(90, 142.5,142.5)">${langRatio.ratio * 100}%
+                                    </text>
+                                </#if>
                             </#list>
                         </svg>
                     </div>
@@ -446,7 +461,7 @@
             var text = texts[i];
             var angle = text.getAttribute("data-angle");
             text.setAttribute('x', 111.5 * Math.cos(angle) + 142.5);
-            text.setAttribute('y', 111.5 * Math.sin(angle) + 142.5 +10);
+            text.setAttribute('y', 111.5 * Math.sin(angle) + 142.5);
         }
     }
 </script>
