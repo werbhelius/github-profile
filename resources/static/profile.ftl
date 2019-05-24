@@ -229,32 +229,36 @@
                 <div class="profile-chart-detail">
                     <p class="content-title">My Repos per Language</p>
                     <div class="pie">
-                        <svg width="285" height="285">
-                            <circle class="base-pie" r="111.5" cx="142.5" cy="142.5"/>
-                            <#assign angle = 0 >
+                        <svg width="285" height="285" class="pie-svg">
+                            <#assign r = 0>
+                            <#assign bgColor = "#21A25A">
                             <#list languageRatioByMyRepos as langRatio >
-                                <#assign angle = angle!0 + langRatio.ratio >
-                                <#if langRatio?index == 0>
-                                    <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#303840" stroke-dasharray="${700*langRatio.ratio} ${700*(1-langRatio.ratio)}" transform="rotate(-90, 142.5,142.5)"/>
+                                <#if langRatio?index == 1 || langRatio?index == 4>
+                                    <#assign bgColor = "#2A3139">
                                 </#if>
-                                <#if langRatio?index == 1>
-                                    <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#2A3139" stroke-dasharray="${700*langRatio.ratio} ${700*(1-langRatio.ratio)}" transform="rotate(${-90 + 360 *angle}, 142.5,142.5)"/>
+
+                                <#if langRatio?index == 3 || langRatio?index == 6>
+                                    <#assign bgColor = "#424D55">
                                 </#if>
-                                <#if langRatio?index == 2>
-                                    <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#303840" stroke-dasharray="${700*langRatio.ratio} ${700*(1-langRatio.ratio)}" transform="rotate(${-90 + 360 *angle}, 142.5,142.5)"/>
+
+                                <#if langRatio?index == 2 || langRatio?index == 5>
+                                    <#assign bgColor = "#303840">
                                 </#if>
-                                <#if langRatio?index == 3>
-                                    <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#424D55" stroke-dasharray="${700*langRatio.ratio} ${700*(1-langRatio.ratio)}" transform="rotate(${-90 + 360 *angle}, 142.5,142.5)"/>
+
+
+                                <#assign rotate = 360 * r>
+                                <#assign start = 700*langRatio.ratio>
+                                <#assign end = 700*(1-langRatio.ratio)>
+
+                                <#if langRatio?is_last>
+                                    <#assign start = 700*((1-r))>
+                                    <#assign end = 700*(r)>
                                 </#if>
-                                <#if langRatio?index == 4>
-                                    <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#2A3139" stroke-dasharray="${700*langRatio.ratio} ${700*(1-langRatio.ratio)}" transform="rotate(${-90 + 360 *angle}, 142.5,142.5)"/>
-                                </#if>
-                                <#if langRatio?index == 5>
-                                    <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#303840" stroke-dasharray="${700*langRatio.ratio} ${700*(1-langRatio.ratio)}" transform="rotate(${-90 + 360 *angle}, 142.5,142.5)"/>
-                                </#if>
-                                <#if langRatio?index == 6>
-                                    <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#424D55" stroke-dasharray="${700*langRatio.ratio} ${700*(1-langRatio.ratio)}" transform="rotate(${-90 + 360 *angle}, 142.5,142.5)"/>
-                                </#if>
+
+                                <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
+                                stroke-dasharray="${start} ${end}" transform="rotate(${rotate}, 142.5,142.5)"></circle>
+
+                                <#assign r = r + langRatio.ratio>
                             </#list>
                         </svg>
                     </div>
