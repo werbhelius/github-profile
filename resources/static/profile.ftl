@@ -193,7 +193,7 @@
             </div>
         </div>
         <div class="profile-lang-world">
-            <p class="content-title">Top Star Language</p>
+            <p class="content-title">Top Language Rank</p>
             <div class="profile-lang-world-list">
                 <#list rank as rn>
                     <div class="lang-world-bg">
@@ -255,15 +255,9 @@
                                     <#assign end = 700*(r)>
                                 </#if>
 
-                                <#if langRatio?index == 0>
-                                    <circle class="pie-0" r="128.5" cx="176" cy="176" stroke="${bgColor}"
-                                            stroke-dasharray="${807*langRatio.ratio} ${807*(1-langRatio.ratio)}"
-                                            transform="rotate(${rotate}, 176,176)"></circle>
-                                <#else>
-                                    <circle class="pie-1" r="111.5" cx="176" cy="176" stroke="${bgColor}"
-                                            stroke-dasharray="${start} ${end}"
-                                            transform="rotate(${rotate}, 176,176)"></circle>
-                                </#if>
+                                <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
+                                        stroke-dasharray="${start} ${end}"
+                                        transform="rotate(${rotate}, 142.5,142.5)"></circle>
 
                                 <#assign r = r + langRatio.ratio>
                             </#list>
@@ -275,7 +269,7 @@
                     <div class="pie">
                         <svg class="pie-svg">
                             <#assign r = 0>
-                            <#assign bgColor = "#CB763A">
+                            <#assign bgColor = "#C9C34E">
                             <#list languageRatioByMyReposWithStar as langRatio >
                                 <#if langRatio?index == 1 || langRatio?index == 4>
                                     <#assign bgColor = "#2A3139">
@@ -299,15 +293,9 @@
                                     <#assign end = 700*(r)>
                                 </#if>
 
-                                <#if langRatio?index == 0>
-                                    <circle class="pie-0" r="128.5" cx="176" cy="176" stroke="${bgColor}"
-                                            stroke-dasharray="${807*langRatio.ratio} ${807*(1-langRatio.ratio)}"
-                                            transform="rotate(${rotate}, 176,176)"></circle>
-                                <#else>
-                                    <circle class="pie-1" r="111.5" cx="176" cy="176" stroke="${bgColor}"
-                                            stroke-dasharray="${start} ${end}"
-                                            transform="rotate(${rotate}, 176,176)"></circle>
-                                </#if>
+                                <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
+                                        stroke-dasharray="${start} ${end}"
+                                        transform="rotate(${rotate}, 142.5,142.5)"></circle>
 
                                 <#assign r = r + langRatio.ratio>
                             </#list>
@@ -319,7 +307,7 @@
                     <div class="pie">
                         <svg class="pie-svg">
                             <#assign r = 0>
-                            <#assign bgColor = "#5F7BFE">
+                            <#assign bgColor = "#4C5FBA">
                             <#list languageRatioByMyReposCommit as langRatio >
                                 <#if langRatio?index == 1 || langRatio?index == 4>
                                     <#assign bgColor = "#2A3139">
@@ -343,15 +331,9 @@
                                     <#assign end = 700*(r)>
                                 </#if>
 
-                                <#if langRatio?index == 0>
-                                    <circle class="pie-0" r="128.5" cx="176" cy="176" stroke="${bgColor}"
-                                            stroke-dasharray="${807*langRatio.ratio} ${807*(1-langRatio.ratio)}"
-                                            transform="rotate(${rotate}, 176,176)"></circle>
-                                <#else>
-                                    <circle class="pie-1" r="111.5" cx="176" cy="176" stroke="${bgColor}"
-                                            stroke-dasharray="${start} ${end}"
-                                            transform="rotate(${rotate}, 176,176)"></circle>
-                                </#if>
+                                <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
+                                        stroke-dasharray="${start} ${end}"
+                                        transform="rotate(${rotate}, 142.5,142.5)"></circle>
 
                                 <#assign r = r + langRatio.ratio>
                             </#list>
@@ -389,15 +371,9 @@
                                     <#assign end = 700*(r)>
                                 </#if>
 
-                                <#if langRatio?index == 0>
-                                    <circle class="pie-0" r="128.5" cx="176" cy="176" stroke="${bgColor}"
-                                            stroke-dasharray="${807*langRatio.ratio} ${807*(1-langRatio.ratio)}"
-                                            transform="rotate(${rotate}, 176,176)"></circle>
-                                <#else>
-                                    <circle class="pie-1" r="111.5" cx="176" cy="176" stroke="${bgColor}"
-                                            stroke-dasharray="${start} ${end}"
-                                            transform="rotate(${rotate}, 176,176)"></circle>
-                                </#if>
+                                <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
+                                        stroke-dasharray="${start} ${end}"
+                                        transform="rotate(${rotate}, 142.5,142.5)"></circle>
 
                                 <#assign r = r + langRatio.ratio>
                             </#list>
@@ -433,15 +409,9 @@
                                     <#assign end = 700*(r)>
                                 </#if>
 
-                                <#if repos?index == 0>
-                                    <circle class="pie-0" r="128.5" cx="176" cy="176" stroke="${bgColor}"
-                                            stroke-dasharray="${807*repos.commitRadio} ${807*(1-repos.commitRadio)}"
-                                            transform="rotate(${rotate}, 176,176)"></circle>
-                                <#else>
-                                    <circle class="pie-1" r="111.5" cx="176" cy="176" stroke="${bgColor}"
-                                            stroke-dasharray="${start} ${end}"
-                                            transform="rotate(${rotate}, 176,176)"></circle>
-                                </#if>
+                                <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
+                                        stroke-dasharray="${start} ${end}"
+                                        transform="rotate(${rotate}, 142.5,142.5)"></circle>
 
                                 <#assign r = r + repos.commitRadio>
                             </#list>
@@ -453,16 +423,16 @@
     </div>
 </div>
 <div id="error-page"></div>
-<!--<footer class="index-footer">-->
-<!--<p class="index-footer-title">Licensed under the <a target="_blank"-->
-<!--href="https://github.com/werbhelius/github-profile"><span-->
-<!--class="index-title-span">Apache 2 license</span></a></p>-->
-<!--<p class="index-footer-title">Design & Develop <img src="../static/css/svg/heart.svg"> by <a target="_blank"-->
-<!--href="https://about.me/werbhelius"><span-->
-<!--class="index-title-span">werbhelius</span></a></p>-->
-<!--<p class="index-footer-title">Source is on <a target="_blank"-->
-<!--href="https://github.com/werbhelius/github-profile"><span-->
-<!--class="index-title-span">Github</span></a></p>-->
-<!--</footer>-->
+<footer class="profile-footer">
+    <p class="index-footer-title">Licensed under the <a target="_blank"
+                                                        href="https://github.com/werbhelius/github-profile"><span
+                    class="index-title-span">Apache 2 license</span></a></p>
+    <p class="index-footer-title">Design & Develop <img src="../static/css/svg/heart.svg"> by <a target="_blank"
+                                                                                                 href="https://about.me/werbhelius"><span
+                    class="index-title-span">werbhelius</span></a></p>
+    <p class="index-footer-title">Source is on <a target="_blank"
+                                                  href="https://github.com/werbhelius/github-profile"><span
+                    class="index-title-span">Github</span></a></p>
+</footer>
 </body>
 </html>

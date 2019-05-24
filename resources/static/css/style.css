@@ -669,7 +669,7 @@ a:hover {
 
 .profile-chart-div {
     max-width: 1218px;
-    height: 970px;
+    height: 900px;
     margin: 0 auto;
     padding: 48px 111px 0 111px;
 }
@@ -690,8 +690,8 @@ a:hover {
 
 .pie {
     margin-top: 28px;
-    width: 352px;
-    height: 352px;
+    width: 285px;
+    height: 285px;
 }
 
 .pie-svg {
@@ -722,4 +722,12 @@ a:hover {
     color: #FFFFFF;
     font-size: 13px;
     font-family: ProducSansBold, serif;
+}
+
+.profile-footer {
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 65px;
+    background-color: #161A1B;
 }
