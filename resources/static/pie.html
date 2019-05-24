@@ -8,16 +8,33 @@
 <body>
 
 <div class="pie">
-    <svg class="pie-svg">
-        <g>
-            <circle class="pie-0" r="128.5" cx="176" cy="176" stroke="#303840" stroke-dasharray="202 605" transform="rotate(0, 176,176)"></circle>
-        </g>
-        <circle class="pie-1" r="111.5" cx="176" cy="176" stroke="#2A3139" stroke-dasharray="126 574" transform="rotate(90, 176,176)"></circle>
-        <circle class="pie-1" r="111.5" cx="176" cy="176" stroke="#303840" stroke-dasharray="91 609" transform="rotate(154.8, 176,176)"></circle>
-        <circle class="pie-1" r="111.5" cx="176" cy="176" stroke="#424D55" stroke-dasharray="252 448" transform="rotate(201.6, 176,176)"></circle>
-        <circle class="pie-1" r="111.5" cx="176" cy="176" stroke="#2A3139" stroke-dasharray="56 644" transform="rotate(331.2, 176,176)"></circle>
+    <svg width="285" height="285" class="pie-svg" onload="calculateXY(this)">
+        <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#303840" stroke-dasharray="175 525"
+                transform="rotate(0, 142.5,142.5)"></circle>
+        <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#2A3139" stroke-dasharray="126 574"
+                transform="rotate(90, 142.5,142.5)"></circle>
+        <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#303840" stroke-dasharray="91 609"
+                transform="rotate(154.8, 142.5,142.5)"></circle>
+        <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#424D55" stroke-dasharray="252 448"
+                transform="rotate(201.6, 142.5,142.5)"></circle>
+        <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#2A3139" stroke-dasharray="56 644"
+                transform="rotate(331.2, 142.5,142.5)"></circle>
+        <text class="pie-text-percent" data-angle="-45" fill="#ffffff" transform="rotate(90, 142.5,142.5)">25%</text>
     </svg>
 </div>
 
+
+<script>
+    function calculateXY(svg) {
+        var texts = svg.getElementsByTagName("text");
+        console.log(texts.length);
+        for (var i = 0; i < texts.length; i++) {
+            var text = texts[i];
+            var angle = text.getAttribute("data-angle");
+            text.setAttribute('x', 111.5 * Math.cos(angle) + 142.5);
+            text.setAttribute('y', 111.5 * Math.sin(angle) + 142.5 +10);
+        }
+    }
+</script>
 </body>
 </html>

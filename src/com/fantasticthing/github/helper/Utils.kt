@@ -6,6 +6,9 @@ import io.ktor.http.ContentType
 import java.util.*
 import java.text.SimpleDateFormat
 import org.slf4j.LoggerFactory
+import java.text.DecimalFormat
+
+
 
 /**
  * Created by wanbo on 2019-01-11.
@@ -52,3 +55,9 @@ fun <T> List<T>.subListSafe(fromIndex: Int, toIndex: Int): List<T> {
 }
 
 val logger = LoggerFactory.getLogger("Application")
+
+
+fun Float.format(): Float {
+    val df = DecimalFormat("#.000")
+    return df.format(this).toFloat()
+}

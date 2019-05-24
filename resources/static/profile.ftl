@@ -229,7 +229,7 @@
                 <div class="profile-chart-detail">
                     <p class="content-title">My Repos per Language</p>
                     <div class="pie">
-                        <svg class="pie-svg">
+                        <svg class="pie-svg" onload="calculateXY(this)">
                             <#assign r = 0>
                             <#assign bgColor = "#21A25A">
                             <#list languageRatioByMyRepos as langRatio >
@@ -260,6 +260,9 @@
                                         transform="rotate(${rotate}, 142.5,142.5)"></circle>
 
                                 <#assign r = r + langRatio.ratio>
+                            </#list>
+                            <#list languageRatioByMyRepos as langRatio >
+                                <text class="pie-text-percent" data-angle="-45" fill="#ffffff" transform="rotate(90, 142.5,142.5)">${langRatio.ratio * 100}%</text>
                             </#list>
                         </svg>
                     </div>
@@ -434,5 +437,18 @@
                                                   href="https://github.com/werbhelius/github-profile"><span
                     class="index-title-span">Github</span></a></p>
 </footer>
+
+<script>
+    function calculateXY(svg) {
+        var texts = svg.getElementsByTagName("text");
+        console.log(texts.length);
+        for (var i = 0; i < texts.length; i++) {
+            var text = texts[i];
+            var angle = text.getAttribute("data-angle");
+            text.setAttribute('x', 111.5 * Math.cos(angle) + 142.5);
+            text.setAttribute('y', 111.5 * Math.sin(angle) + 142.5 +10);
+        }
+    }
+</script>
 </body>
 </html>
