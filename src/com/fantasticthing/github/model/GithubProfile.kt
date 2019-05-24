@@ -69,5 +69,5 @@ fun UserProfile.User.toGithubProfile(): GithubProfile = GithubProfile(
     this.languageRatioByMyReposWithStar.subListSafe(0, 6),
     this.languageRatioByStarRepos.subListSafe(0, 6),
     this.languageRatioByMyReposCommit.subListSafe(0, 6),
-    this.commitTopRepos
+    this.commitTopRepos.subListSafe(0, 6)
 )
