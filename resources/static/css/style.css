@@ -686,15 +686,18 @@ a:hover {
 }
 
 .profile-chart-detail {
-    height: 373px;
 }
 
 .pie {
-
+    margin-top: 28px;
+    width: 352px;
+    height: 352px;
 }
 
 .pie-svg {
     transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
 }
 
 .base-pie {
@@ -706,6 +709,12 @@ a:hover {
 .pie-1 {
     fill: none;
     stroke-width: 62px;
+    box-shadow: 0 2px 7px 0 rgba(0, 0, 0, .10);
+}
+
+.pie-0 {
+    fill: none;
+    stroke-width: 97px;
     box-shadow: 0 2px 7px 0 rgba(0, 0, 0, .10);
 }
 

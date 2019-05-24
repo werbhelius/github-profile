@@ -229,7 +229,7 @@
                 <div class="profile-chart-detail">
                     <p class="content-title">My Repos per Language</p>
                     <div class="pie">
-                        <svg width="285" height="285" class="pie-svg">
+                        <svg class="pie-svg">
                             <#assign r = 0>
                             <#assign bgColor = "#21A25A">
                             <#list languageRatioByMyRepos as langRatio >
@@ -255,42 +255,197 @@
                                     <#assign end = 700*(r)>
                                 </#if>
 
-                                <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
-                                stroke-dasharray="${start} ${end}" transform="rotate(${rotate}, 142.5,142.5)"></circle>
+                                <#if langRatio?index == 0>
+                                    <circle class="pie-0" r="128.5" cx="176" cy="176" stroke="${bgColor}"
+                                            stroke-dasharray="${807*langRatio.ratio} ${807*(1-langRatio.ratio)}"
+                                            transform="rotate(${rotate}, 176,176)"></circle>
+                                <#else>
+                                    <circle class="pie-1" r="111.5" cx="176" cy="176" stroke="${bgColor}"
+                                            stroke-dasharray="${start} ${end}"
+                                            transform="rotate(${rotate}, 176,176)"></circle>
+                                </#if>
 
                                 <#assign r = r + langRatio.ratio>
                             </#list>
-                        </svg>
-                    </div>
-                    <div class="pie">
-                        <svg width="285" height="285">
                         </svg>
                     </div>
                 </div>
                 <div class="profile-chart-detail" style="margin: 0 auto">
                     <p class="content-title">My Repos Stars per Language</p>
                     <div class="pie">
+                        <svg class="pie-svg">
+                            <#assign r = 0>
+                            <#assign bgColor = "#CB763A">
+                            <#list languageRatioByMyReposWithStar as langRatio >
+                                <#if langRatio?index == 1 || langRatio?index == 4>
+                                    <#assign bgColor = "#2A3139">
+                                </#if>
 
+                                <#if langRatio?index == 3 || langRatio?index == 6>
+                                    <#assign bgColor = "#424D55">
+                                </#if>
+
+                                <#if langRatio?index == 2 || langRatio?index == 5>
+                                    <#assign bgColor = "#303840">
+                                </#if>
+
+
+                                <#assign rotate = 360 * r>
+                                <#assign start = 700*langRatio.ratio>
+                                <#assign end = 700*(1-langRatio.ratio)>
+
+                                <#if langRatio?is_last>
+                                    <#assign start = 700*((1-r))>
+                                    <#assign end = 700*(r)>
+                                </#if>
+
+                                <#if langRatio?index == 0>
+                                    <circle class="pie-0" r="128.5" cx="176" cy="176" stroke="${bgColor}"
+                                            stroke-dasharray="${807*langRatio.ratio} ${807*(1-langRatio.ratio)}"
+                                            transform="rotate(${rotate}, 176,176)"></circle>
+                                <#else>
+                                    <circle class="pie-1" r="111.5" cx="176" cy="176" stroke="${bgColor}"
+                                            stroke-dasharray="${start} ${end}"
+                                            transform="rotate(${rotate}, 176,176)"></circle>
+                                </#if>
+
+                                <#assign r = r + langRatio.ratio>
+                            </#list>
+                        </svg>
                     </div>
                 </div>
                 <div class="profile-chart-detail" style="margin-right: auto">
                     <p class="content-title">My Repos Commits per Language</p>
                     <div class="pie">
+                        <svg class="pie-svg">
+                            <#assign r = 0>
+                            <#assign bgColor = "#5F7BFE">
+                            <#list languageRatioByMyReposCommit as langRatio >
+                                <#if langRatio?index == 1 || langRatio?index == 4>
+                                    <#assign bgColor = "#2A3139">
+                                </#if>
 
+                                <#if langRatio?index == 3 || langRatio?index == 6>
+                                    <#assign bgColor = "#424D55">
+                                </#if>
+
+                                <#if langRatio?index == 2 || langRatio?index == 5>
+                                    <#assign bgColor = "#303840">
+                                </#if>
+
+
+                                <#assign rotate = 360 * r>
+                                <#assign start = 700*langRatio.ratio>
+                                <#assign end = 700*(1-langRatio.ratio)>
+
+                                <#if langRatio?is_last>
+                                    <#assign start = 700*((1-r))>
+                                    <#assign end = 700*(r)>
+                                </#if>
+
+                                <#if langRatio?index == 0>
+                                    <circle class="pie-0" r="128.5" cx="176" cy="176" stroke="${bgColor}"
+                                            stroke-dasharray="${807*langRatio.ratio} ${807*(1-langRatio.ratio)}"
+                                            transform="rotate(${rotate}, 176,176)"></circle>
+                                <#else>
+                                    <circle class="pie-1" r="111.5" cx="176" cy="176" stroke="${bgColor}"
+                                            stroke-dasharray="${start} ${end}"
+                                            transform="rotate(${rotate}, 176,176)"></circle>
+                                </#if>
+
+                                <#assign r = r + langRatio.ratio>
+                            </#list>
+                        </svg>
                     </div>
                 </div>
             </div>
             <div class="profile-chart-2">
-                <div class="profile-chart-detail" style="margin-left: auto">
+                <div class="profile-chart-detail" style="width: 50%">
                     <p class="content-title">My Stared Repos per Language</p>
                     <div class="pie">
+                        <svg class="pie-svg">
+                            <#assign r = 0>
+                            <#assign bgColor = "#C67FA5">
+                            <#list languageRatioByStarRepos as langRatio >
+                                <#if langRatio?index == 1 || langRatio?index == 4>
+                                    <#assign bgColor = "#2A3139">
+                                </#if>
 
+                                <#if langRatio?index == 3 || langRatio?index == 6>
+                                    <#assign bgColor = "#424D55">
+                                </#if>
+
+                                <#if langRatio?index == 2 || langRatio?index == 5>
+                                    <#assign bgColor = "#303840">
+                                </#if>
+
+
+                                <#assign rotate = 360 * r>
+                                <#assign start = 700*langRatio.ratio>
+                                <#assign end = 700*(1-langRatio.ratio)>
+
+                                <#if langRatio?is_last>
+                                    <#assign start = 700*((1-r))>
+                                    <#assign end = 700*(r)>
+                                </#if>
+
+                                <#if langRatio?index == 0>
+                                    <circle class="pie-0" r="128.5" cx="176" cy="176" stroke="${bgColor}"
+                                            stroke-dasharray="${807*langRatio.ratio} ${807*(1-langRatio.ratio)}"
+                                            transform="rotate(${rotate}, 176,176)"></circle>
+                                <#else>
+                                    <circle class="pie-1" r="111.5" cx="176" cy="176" stroke="${bgColor}"
+                                            stroke-dasharray="${start} ${end}"
+                                            transform="rotate(${rotate}, 176,176)"></circle>
+                                </#if>
+
+                                <#assign r = r + langRatio.ratio>
+                            </#list>
+                        </svg>
                     </div>
                 </div>
-                <div class="profile-chart-detail" style="margin-right: auto">
+                <div class="profile-chart-detail" style="width: 50%">
                     <p class="content-title">Commits per My Repos</p>
                     <div class="pie">
+                        <svg class="pie-svg">
+                            <#assign r = 0>
+                            <#assign bgColor = "#67A9E7">
+                            <#list commitTopRepos as repos >
+                                <#if repos?index == 1 || repos?index == 4>
+                                    <#assign bgColor = "#2A3139">
+                                </#if>
 
+                                <#if repos?index == 3 || repos?index == 6>
+                                    <#assign bgColor = "#424D55">
+                                </#if>
+
+                                <#if repos?index == 2 || repos?index == 5>
+                                    <#assign bgColor = "#303840">
+                                </#if>
+
+
+                                <#assign rotate = 360 * r>
+                                <#assign start = 700*repos.commitRadio>
+                                <#assign end = 700*(1-repos.commitRadio)>
+
+                                <#if repos?is_last>
+                                    <#assign start = 700*((1-r))>
+                                    <#assign end = 700*(r)>
+                                </#if>
+
+                                <#if repos?index == 0>
+                                    <circle class="pie-0" r="128.5" cx="176" cy="176" stroke="${bgColor}"
+                                            stroke-dasharray="${807*repos.commitRadio} ${807*(1-repos.commitRadio)}"
+                                            transform="rotate(${rotate}, 176,176)"></circle>
+                                <#else>
+                                    <circle class="pie-1" r="111.5" cx="176" cy="176" stroke="${bgColor}"
+                                            stroke-dasharray="${start} ${end}"
+                                            transform="rotate(${rotate}, 176,176)"></circle>
+                                </#if>
+
+                                <#assign r = r + repos.commitRadio>
+                            </#list>
+                        </svg>
                     </div>
                 </div>
             </div>

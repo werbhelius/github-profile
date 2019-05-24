@@ -253,7 +253,7 @@ class UserProfile {
 
         private fun formatMyRepos(): Deferred<Boolean> = GlobalScope.async(Dispatchers.IO) {
             launch {
-                val allMyRepos = myRepos.totalCount
+                val allMyRepos = myRepos.nodes.size
                 myRepos.nodes.forEach { repo ->
                     languageRatioByMyRepos.find { it.language.name == repo.primaryLanguage?.name ?: "unKnow" }?.also {
                         it.count++
@@ -303,7 +303,7 @@ class UserProfile {
         }
 
         private fun formatStarRepos(): Deferred<Boolean> = GlobalScope.async(Dispatchers.IO) {
-            val allStarRepos = starRepos.totalCount
+            val allStarRepos = starRepos.nodes.size
             starRepos.nodes.forEach { repo ->
                 languageRatioByStarRepos.find { it.language.name == repo.primaryLanguage?.name ?: "unKnow" }?.also {
                     it.count++
