@@ -361,7 +361,7 @@ class UserProfile {
                     repo.commitRadio = (repo.commitCount.toFloat() / allCommitCount).format()
                     languageRatioByMyReposCommit.find { it.language.name == repo.primaryLanguage?.name ?: "unKnow" }?.also {
                         it.count = it.count + repo.commitCount
-                        it.ratio = (it.count.toFloat()) / allCommitCount
+                        it.ratio = ((it.count.toFloat()) / allCommitCount).format()
                     } ?: run {
                         repo.primaryLanguage?.also {
                             languageRatioByMyReposCommit.add(

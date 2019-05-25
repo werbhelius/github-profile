@@ -261,12 +261,18 @@
 
                                 <#assign r = r + langRatio.ratio>
                             </#list>
-                            <#assign r = 0>
+                            <#assign angle = 0>
                             <#list languageRatioByMyRepos as langRatio >
-                                <#assign r = r + langRatio.ratio>
-                                <#if langRatio?index == 0>
-                                    <text class="pie-text-percent" data-angle="${(180 * r - 90)}" fill="#ffffff"
-                                          transform="rotate(90, 142.5,142.5)">${langRatio.ratio * 100}%
+                                <#assign r = angle + langRatio.ratio / 2>
+                                <#assign angle = angle + langRatio.ratio>
+                                <#assign ratio = langRatio.ratio>
+                                <#if langRatio?is_last>
+                                    <#assign r = angle + (1- angle) / 2>
+                                    <#assign ratio = (1- angle)>
+                                </#if>
+                                <#if ratio gt 0.002>
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" fill="#ffffff"
+                                          transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
                             </#list>
@@ -308,12 +314,18 @@
 
                                 <#assign r = r + langRatio.ratio>
                             </#list>
-                            <#assign r = 0>
+                            <#assign angle = 0>
                             <#list languageRatioByMyReposWithStar as langRatio >
-                                <#assign r = r + langRatio.ratio>
-                                <#if langRatio?index == 0>
-                                    <text class="pie-text-percent" data-angle="${(180 * r - 90)}" fill="#ffffff"
-                                          transform="rotate(90, 142.5,142.5)">${langRatio.ratio * 100}%
+                                <#assign r = angle + langRatio.ratio / 2>
+                                <#assign angle = angle + langRatio.ratio>
+                                <#assign ratio = langRatio.ratio>
+                                <#if langRatio?is_last>
+                                    <#assign r = angle + (1- angle) / 2>
+                                    <#assign ratio = (1- angle)>
+                                </#if>
+                                <#if ratio gt 0.002>
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" fill="#ffffff"
+                                          transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
                             </#list>
@@ -355,12 +367,18 @@
 
                                 <#assign r = r + langRatio.ratio>
                             </#list>
-                            <#assign r = 0>
+                            <#assign angle = 0>
                             <#list languageRatioByMyReposCommit as langRatio >
-                                <#assign r = r + langRatio.ratio>
-                                <#if langRatio?index == 0>
-                                    <text class="pie-text-percent" data-angle="${(180 * r - 90)}" fill="#ffffff"
-                                          transform="rotate(90, 142.5,142.5)">${langRatio.ratio * 100}%
+                                <#assign r = angle + langRatio.ratio / 2>
+                                <#assign angle = angle + langRatio.ratio>
+                                <#assign ratio = langRatio.ratio>
+                                <#if langRatio?is_last>
+                                    <#assign r = angle + (1- angle) / 2>
+                                    <#assign ratio = (1- angle)>
+                                </#if>
+                                <#if ratio gt 0.002>
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" fill="#ffffff"
+                                          transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
                             </#list>
@@ -404,12 +422,18 @@
 
                                 <#assign r = r + langRatio.ratio>
                             </#list>
-                            <#assign r = 0>
+                            <#assign angle = 0>
                             <#list languageRatioByStarRepos as langRatio >
-                                <#assign r = r + langRatio.ratio>
-                                <#if langRatio?index == 0>
-                                    <text class="pie-text-percent" data-angle="${(180 * r - 90)}" fill="#ffffff"
-                                          transform="rotate(90, 142.5,142.5)">${langRatio.ratio * 100}%
+                                <#assign r = angle + langRatio.ratio / 2>
+                                <#assign angle = angle + langRatio.ratio>
+                                <#assign ratio = langRatio.ratio>
+                                <#if langRatio?is_last>
+                                    <#assign r = angle + (1- angle) / 2>
+                                    <#assign ratio = (1- angle)>
+                                </#if>
+                                <#if ratio gt 0.002>
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" fill="#ffffff"
+                                          transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
                             </#list>
@@ -452,12 +476,18 @@
 
                                 <#assign r = r + repos.commitRadio>
                             </#list>
-                            <#assign r = 0>
+                            <#assign angle = 0>
                             <#list commitTopRepos as repos >
-                                <#assign r = r + repos.commitRadio>
-                                <#if repos?index == 0>
-                                    <text class="pie-text-percent" data-angle="${(180 * r - 90)}" fill="#ffffff"
-                                          transform="rotate(90, 142.5,142.5)">${repos.commitRadio * 100}%
+                                <#assign r = angle + repos.commitRadio / 2>
+                                <#assign angle = angle + repos.commitRadio>
+                                <#assign ratio = repos.commitRadio>
+                                <#if repos?is_last>
+                                    <#assign r = angle + (1- angle) / 2>
+                                    <#assign ratio = (1- angle)>
+                                </#if>
+                                <#if ratio gt 0.002>
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" fill="#ffffff"
+                                          transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
                             </#list>
@@ -489,8 +519,8 @@
         for (var i = 0; i < texts.length; i++) {
             var text = texts[i];
             var angle = text.getAttribute("data-angle");
-            text.setAttribute('x', (111.5 * Math.cos(angle * 3.14/180) + 142.5).toFixed(1));
-            text.setAttribute('y', (111.5 * Math.sin(angle * 3.14/180) + 142.5).toFixed(1));
+            text.setAttribute('x', (111.5 * Math.cos(angle * 3.14 / 180) + 142.5 - 12).toFixed(1));
+            text.setAttribute('y', (111.5 * Math.sin(angle * 3.14 / 180) + 142.5 + 8).toFixed(1));
         }
     }
 </script>
