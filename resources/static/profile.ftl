@@ -265,7 +265,7 @@
                             <#list languageRatioByMyRepos as langRatio >
                                 <#assign r = r + langRatio.ratio>
                                 <#if langRatio?index == 0>
-                                    <text class="pie-text-percent" data-angle="${360 * (r /2) - 90}" fill="#ffffff"
+                                    <text class="pie-text-percent" data-angle="${(180 * r - 90)}" fill="#ffffff"
                                           transform="rotate(90, 142.5,142.5)">${langRatio.ratio * 100}%
                                     </text>
                                 </#if>
@@ -276,7 +276,7 @@
                 <div class="profile-chart-detail" style="margin: 0 auto">
                     <p class="content-title">My Repos Stars per Language</p>
                     <div class="pie">
-                        <svg class="pie-svg">
+                        <svg class="pie-svg" onload="calculateXY(this)">
                             <#assign r = 0>
                             <#assign bgColor = "#C9C34E">
                             <#list languageRatioByMyReposWithStar as langRatio >
@@ -312,7 +312,7 @@
                             <#list languageRatioByMyReposWithStar as langRatio >
                                 <#assign r = r + langRatio.ratio>
                                 <#if langRatio?index == 0>
-                                    <text class="pie-text-percent" data-angle="${360 * (r /2) - 90}" fill="#ffffff"
+                                    <text class="pie-text-percent" data-angle="${(180 * r - 90)}" fill="#ffffff"
                                           transform="rotate(90, 142.5,142.5)">${langRatio.ratio * 100}%
                                     </text>
                                 </#if>
@@ -323,7 +323,7 @@
                 <div class="profile-chart-detail" style="margin-right: auto">
                     <p class="content-title">My Repos Commits per Language</p>
                     <div class="pie">
-                        <svg class="pie-svg">
+                        <svg class="pie-svg" onload="calculateXY(this)">
                             <#assign r = 0>
                             <#assign bgColor = "#4C5FBA">
                             <#list languageRatioByMyReposCommit as langRatio >
@@ -355,6 +355,15 @@
 
                                 <#assign r = r + langRatio.ratio>
                             </#list>
+                            <#assign r = 0>
+                            <#list languageRatioByMyReposCommit as langRatio >
+                                <#assign r = r + langRatio.ratio>
+                                <#if langRatio?index == 0>
+                                    <text class="pie-text-percent" data-angle="${(180 * r - 90)}" fill="#ffffff"
+                                          transform="rotate(90, 142.5,142.5)">${langRatio.ratio * 100}%
+                                    </text>
+                                </#if>
+                            </#list>
                         </svg>
                     </div>
                 </div>
@@ -363,7 +372,7 @@
                 <div class="profile-chart-detail" style="width: 50%">
                     <p class="content-title">My Stared Repos per Language</p>
                     <div class="pie">
-                        <svg class="pie-svg">
+                        <svg class="pie-svg" onload="calculateXY(this)">
                             <#assign r = 0>
                             <#assign bgColor = "#C67FA5">
                             <#list languageRatioByStarRepos as langRatio >
@@ -395,13 +404,23 @@
 
                                 <#assign r = r + langRatio.ratio>
                             </#list>
+                            <#assign r = 0>
+                            <#list languageRatioByStarRepos as langRatio >
+                                <#assign r = r + langRatio.ratio>
+                                <#if langRatio?index == 0>
+                                    <text class="pie-text-percent" data-angle="${(180 * r - 90)}" fill="#ffffff"
+                                          transform="rotate(90, 142.5,142.5)">${langRatio.ratio * 100}%
+                                    </text>
+                                </#if>
+                            </#list>
+
                         </svg>
                     </div>
                 </div>
                 <div class="profile-chart-detail" style="width: 50%">
                     <p class="content-title">Commits per My Repos</p>
                     <div class="pie">
-                        <svg class="pie-svg">
+                        <svg class="pie-svg" onload="calculateXY(this)">
                             <#assign r = 0>
                             <#assign bgColor = "#67A9E7">
                             <#list commitTopRepos as repos >
@@ -433,6 +452,16 @@
 
                                 <#assign r = r + repos.commitRadio>
                             </#list>
+                            <#assign r = 0>
+                            <#list commitTopRepos as repos >
+                                <#assign r = r + repos.commitRadio>
+                                <#if repos?index == 0>
+                                    <text class="pie-text-percent" data-angle="${(180 * r - 90)}" fill="#ffffff"
+                                          transform="rotate(90, 142.5,142.5)">${repos.commitRadio * 100}%
+                                    </text>
+                                </#if>
+                            </#list>
+
                         </svg>
                     </div>
                 </div>
@@ -460,8 +489,8 @@
         for (var i = 0; i < texts.length; i++) {
             var text = texts[i];
             var angle = text.getAttribute("data-angle");
-            text.setAttribute('x', 111.5 * Math.cos(angle) + 142.5);
-            text.setAttribute('y', 111.5 * Math.sin(angle) + 142.5);
+            text.setAttribute('x', (111.5 * Math.cos(angle * 3.14/180) + 142.5).toFixed(1));
+            text.setAttribute('y', (111.5 * Math.sin(angle * 3.14/180) + 142.5).toFixed(1));
         }
     }
 </script>
