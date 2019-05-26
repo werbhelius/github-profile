@@ -7,8 +7,8 @@
 </head>
 <body>
 
-<div class="pie">
-    <svg width="285" height="285" class="pie-svg" onload="calculateXY(this)">
+<div class="pie" id="pie">
+    <svg width="285" height="285" class="pie-svg" onload="calculateXY(this, 'pie')">
         <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#303840" stroke-dasharray="175 525"
                 transform="rotate(0, 142.5,142.5)"></circle>
         <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#2A3139" stroke-dasharray="126 574"
@@ -19,20 +19,41 @@
                 transform="rotate(201.6, 142.5,142.5)"></circle>
         <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="#2A3139" stroke-dasharray="56 644"
                 transform="rotate(331.2, 142.5,142.5)"></circle>
-        <text class="pie-text-percent" data-angle="0" fill="#ffffff" transform="rotate(90, 142.5,142.5)" >20</text>
+        <text class="pie-text-percent" data-angle="-45" data-name="Kotlin" fill="#ffffff"
+              transform="rotate(90, 142.5,142.5)">20
+        </text>
     </svg>
 </div>
 
 
 <script>
-    function calculateXY(svg) {
+    function calculateXY(svg, div) {
         var texts = svg.getElementsByTagName("text");
         console.log(texts.length);
         for (var i = 0; i < texts.length; i++) {
             var text = texts[i];
             var angle = text.getAttribute("data-angle");
-            text.setAttribute('x', (111.5 * Math.cos(angle * 3.14/180) + 142.5).toFixed(1));
-            text.setAttribute('y', (111.5 * Math.sin(angle * 3.14/180) + 142.5).toFixed(1));
+
+            var x = (111.5 * Math.cos(angle * 3.14 / 180) + 142.5).toFixed(1);
+            var y = (111.5 * Math.sin(angle * 3.14 / 180) + 142.5).toFixed(1);
+
+            text.setAttribute('x', x);
+            text.setAttribute('y', y);
+
+            var targetDiv = document.getElementById(div);
+            var tipDiv = document.createElement("div");
+            tipDiv.className = "tip";
+            var p = document.createElement("p");
+            p.className = "bubble";
+            p.textContent = text.getAttribute("data-name");
+            var triangleDiv = document.createElement("div");
+            triangleDiv.className = "triangle";
+            tipDiv.appendChild(p);
+            tipDiv.appendChild(triangleDiv);
+            targetDiv.appendChild(tipDiv);
+            var width = tipDiv.offsetWidth;
+            tipDiv.style.left = x - width / 2 + 6.5 + "px";
+            tipDiv.style.top = y - 45 + "px";
         }
     }
 </script>

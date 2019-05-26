@@ -693,6 +693,7 @@ a:hover {
     margin-top: 28px;
     width: 285px;
     height: 285px;
+    position: relative;
 }
 
 .pie-svg {
@@ -724,6 +725,35 @@ a:hover {
     color: #FFFFFF;
     font-size: 13px;
     font-family: ProducSansBold, serif;
+}
+
+.tip {
+    width: fit-content;
+    position: absolute;
+}
+
+.bubble {
+    padding: 5px 16px;
+    margin: 0;
+    text-align: center;
+    color: #586069;
+    font-size: 11px;
+    font-family: ProducSansBold, serif;
+    background: #FFFFFF;
+    width: fit-content;
+    border-radius: 50px;
+    box-shadow: 0 2px 7px 0 rgba(0, 0, 0, .10);
+    z-index: -100;
+}
+
+.triangle {
+    width: 8px;
+    height: 4px;
+    background-image: url("./svg/triangle.svg");
+    margin: -.8px auto;
+    background-repeat: no-repeat;
+    z-index: 100;
+    box-shadow: 0 2px 7px 0 rgba(0, 0, 0, .10);
 }
 
 .profile-footer {

@@ -228,8 +228,8 @@
             <div class="profile-chart-1">
                 <div class="profile-chart-detail">
                     <p class="content-title">My Repos per Language</p>
-                    <div class="pie">
-                        <svg class="pie-svg" onload="calculateXY(this)">
+                    <div class="pie" id="languageRatioByMyRepos">
+                        <svg class="pie-svg" onload="calculateXY(this, 'languageRatioByMyRepos')">
                             <#assign r = 0>
                             <#assign bgColor = "#21A25A">
                             <#list languageRatioByMyRepos as langRatio >
@@ -271,7 +271,7 @@
                                     <#assign ratio = (1- angle)>
                                 </#if>
                                 <#if ratio gt 0.002>
-                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" fill="#ffffff"
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${langRatio.language.name}"  fill="#ffffff"
                                           transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
@@ -281,8 +281,8 @@
                 </div>
                 <div class="profile-chart-detail" style="margin: 0 auto">
                     <p class="content-title">My Repos Stars per Language</p>
-                    <div class="pie">
-                        <svg class="pie-svg" onload="calculateXY(this)">
+                    <div class="pie" id="languageRatioByMyReposWithStar">
+                        <svg class="pie-svg" onload="calculateXY(this, 'languageRatioByMyReposWithStar')">
                             <#assign r = 0>
                             <#assign bgColor = "#C9C34E">
                             <#list languageRatioByMyReposWithStar as langRatio >
@@ -324,7 +324,7 @@
                                     <#assign ratio = (1- angle)>
                                 </#if>
                                 <#if ratio gt 0.002>
-                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" fill="#ffffff"
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${langRatio.language.name}" fill="#ffffff"
                                           transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
@@ -334,8 +334,8 @@
                 </div>
                 <div class="profile-chart-detail" style="margin-right: auto">
                     <p class="content-title">My Repos Commits per Language</p>
-                    <div class="pie">
-                        <svg class="pie-svg" onload="calculateXY(this)">
+                    <div class="pie" id="languageRatioByMyReposCommit">
+                        <svg class="pie-svg" onload="calculateXY(this, 'languageRatioByMyReposCommit')">
                             <#assign r = 0>
                             <#assign bgColor = "#4C5FBA">
                             <#list languageRatioByMyReposCommit as langRatio >
@@ -377,7 +377,7 @@
                                     <#assign ratio = (1- angle)>
                                 </#if>
                                 <#if ratio gt 0.002>
-                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" fill="#ffffff"
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${langRatio.language.name}" fill="#ffffff"
                                           transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
@@ -389,8 +389,8 @@
             <div class="profile-chart-2">
                 <div class="profile-chart-detail" style="width: 50%">
                     <p class="content-title">My Stared Repos per Language</p>
-                    <div class="pie">
-                        <svg class="pie-svg" onload="calculateXY(this)">
+                    <div class="pie" id="languageRatioByStarRepos">
+                        <svg class="pie-svg" onload="calculateXY(this, 'languageRatioByStarRepos')">
                             <#assign r = 0>
                             <#assign bgColor = "#C67FA5">
                             <#list languageRatioByStarRepos as langRatio >
@@ -432,7 +432,7 @@
                                     <#assign ratio = (1- angle)>
                                 </#if>
                                 <#if ratio gt 0.002>
-                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" fill="#ffffff"
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${langRatio.language.name}" fill="#ffffff"
                                           transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
@@ -443,8 +443,8 @@
                 </div>
                 <div class="profile-chart-detail" style="width: 50%">
                     <p class="content-title">Commits per My Repos</p>
-                    <div class="pie">
-                        <svg class="pie-svg" onload="calculateXY(this)">
+                    <div class="pie" id="commitTopRepos">
+                        <svg class="pie-svg" onload="calculateXY(this, 'commitTopRepos')">
                             <#assign r = 0>
                             <#assign bgColor = "#67A9E7">
                             <#list commitTopRepos as repos >
@@ -486,7 +486,7 @@
                                     <#assign ratio = (1- angle)>
                                 </#if>
                                 <#if ratio gt 0.002>
-                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" fill="#ffffff"
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" fill="#ffffff" data-name="${repos.nameWithOwner}"
                                           transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
@@ -513,14 +513,33 @@
 </footer>
 
 <script>
-    function calculateXY(svg) {
+    function calculateXY(svg, div) {
         var texts = svg.getElementsByTagName("text");
         console.log(texts.length);
         for (var i = 0; i < texts.length; i++) {
             var text = texts[i];
             var angle = text.getAttribute("data-angle");
-            text.setAttribute('x', (111.5 * Math.cos(angle * 3.14 / 180) + 142.5 - 12).toFixed(1));
-            text.setAttribute('y', (111.5 * Math.sin(angle * 3.14 / 180) + 142.5 + 8).toFixed(1));
+
+            var x = (111.5 * Math.cos(angle * 3.14 / 180) + 142.5 - 12).toFixed(1);
+            var y = (111.5 * Math.sin(angle * 3.14 / 180) + 142.5 + 8).toFixed(1);
+
+            text.setAttribute('x', x);
+            text.setAttribute('y', y);
+
+            var targetDiv = document.getElementById(div);
+            var tipDiv = document.createElement("div");
+            tipDiv.className = "tip";
+            var p = document.createElement("p");
+            p.className = "bubble";
+            p.textContent = text.getAttribute("data-name");
+            var triangleDiv = document.createElement("div");
+            triangleDiv.className = "triangle";
+            tipDiv.appendChild(p);
+            tipDiv.appendChild(triangleDiv);
+            targetDiv.appendChild(tipDiv);
+            var width = tipDiv.offsetWidth;
+            tipDiv.style.left = x - width / 2 + 8 + "px";
+            tipDiv.style.top = y - 45 + "px";
         }
     }
 </script>
