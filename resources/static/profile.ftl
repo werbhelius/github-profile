@@ -266,12 +266,14 @@
                                 <#assign r = angle + langRatio.ratio / 2>
                                 <#assign angle = angle + langRatio.ratio>
                                 <#assign ratio = langRatio.ratio>
+                                <#assign name = langRatio.language.name>
                                 <#if langRatio?is_last>
                                     <#assign r = angle + (1- angle) / 2>
                                     <#assign ratio = (1- angle)>
+                                    <#assign name = "Other">
                                 </#if>
                                 <#if ratio gt 0.002>
-                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${langRatio.language.name}"  fill="#ffffff"
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${name}"  fill="#ffffff"
                                           transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
@@ -319,12 +321,14 @@
                                 <#assign r = angle + langRatio.ratio / 2>
                                 <#assign angle = angle + langRatio.ratio>
                                 <#assign ratio = langRatio.ratio>
+                                <#assign name = langRatio.language.name>
                                 <#if langRatio?is_last>
                                     <#assign r = angle + (1- angle) / 2>
                                     <#assign ratio = (1- angle)>
+                                    <#assign name = "Other">
                                 </#if>
                                 <#if ratio gt 0.002>
-                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${langRatio.language.name}" fill="#ffffff"
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${name}" fill="#ffffff"
                                           transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
@@ -372,12 +376,14 @@
                                 <#assign r = angle + langRatio.ratio / 2>
                                 <#assign angle = angle + langRatio.ratio>
                                 <#assign ratio = langRatio.ratio>
+                                <#assign name = langRatio.language.name>
                                 <#if langRatio?is_last>
                                     <#assign r = angle + (1- angle) / 2>
                                     <#assign ratio = (1- angle)>
+                                    <#assign name = "Other">
                                 </#if>
                                 <#if ratio gt 0.002>
-                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${langRatio.language.name}" fill="#ffffff"
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${name}" fill="#ffffff"
                                           transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
@@ -427,12 +433,14 @@
                                 <#assign r = angle + langRatio.ratio / 2>
                                 <#assign angle = angle + langRatio.ratio>
                                 <#assign ratio = langRatio.ratio>
+                                <#assign name = langRatio.language.name>
                                 <#if langRatio?is_last>
                                     <#assign r = angle + (1- angle) / 2>
                                     <#assign ratio = (1- angle)>
+                                    <#assign name = "Other">
                                 </#if>
                                 <#if ratio gt 0.002>
-                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${langRatio.language.name}" fill="#ffffff"
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${name}" fill="#ffffff"
                                           transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
@@ -481,12 +489,14 @@
                                 <#assign r = angle + repos.commitRadio / 2>
                                 <#assign angle = angle + repos.commitRadio>
                                 <#assign ratio = repos.commitRadio>
+                                <#assign name = repos.nameWithOwner>
                                 <#if repos?is_last>
                                     <#assign r = angle + (1- angle) / 2>
                                     <#assign ratio = (1- angle)>
+                                    <#assign name = "Other">
                                 </#if>
                                 <#if ratio gt 0.002>
-                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" fill="#ffffff" data-name="${repos.nameWithOwner}"
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" fill="#ffffff" data-name="${name}"
                                           transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
