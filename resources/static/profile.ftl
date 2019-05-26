@@ -496,7 +496,7 @@
                                     <#assign name = "Other">
                                 </#if>
                                 <#if ratio gt 0.002>
-                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" fill="#ffffff" data-name="${name}"
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" fill="#ffffff" data-name="${name?replace(login + "/", "")}"
                                           transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
