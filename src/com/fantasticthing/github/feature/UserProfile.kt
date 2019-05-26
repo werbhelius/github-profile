@@ -255,7 +255,7 @@ class UserProfile {
             launch {
                 val allMyRepos = myRepos.nodes.size
                 myRepos.nodes.forEach { repo ->
-                    languageRatioByMyRepos.find { it.language.name == repo.primaryLanguage?.name ?: "unKnow" }?.also {
+                    languageRatioByMyRepos.find { it.language.name == repo.primaryLanguage?.name ?: "UnKnow" }?.also {
                         it.count++
                         it.ratio = ((it.count.toFloat()) / allMyRepos).format()
                     } ?: run {
@@ -272,7 +272,7 @@ class UserProfile {
             launch {
                 val allMyReposStarCount = myRepos.nodes.sumBy { it.stargazers.totalCount }
                 myRepos.nodes.filter { !it.isFork }.forEach { repo ->
-                    languageRatioByMyReposWithStar.find { it.language.name == repo.primaryLanguage?.name ?: "unKnow" }?.also {
+                    languageRatioByMyReposWithStar.find { it.language.name == repo.primaryLanguage?.name ?: "UnKnow" }?.also {
                         it.count = it.count + repo.stargazers.totalCount
                         it.ratio = ((it.count.toFloat()) / allMyReposStarCount).format()
                     } ?: run {
@@ -305,7 +305,7 @@ class UserProfile {
         private fun formatStarRepos(): Deferred<Boolean> = GlobalScope.async(Dispatchers.IO) {
             val allStarRepos = starRepos.nodes.size
             starRepos.nodes.forEach { repo ->
-                languageRatioByStarRepos.find { it.language.name == repo.primaryLanguage?.name ?: "unKnow" }?.also {
+                languageRatioByStarRepos.find { it.language.name == repo.primaryLanguage?.name ?: "UnKnow" }?.also {
                     it.count++
                     it.ratio = ((it.count.toFloat()) / allStarRepos).format()
                 } ?: run {
@@ -359,7 +359,7 @@ class UserProfile {
                 myRepos.nodes.filter { !it.isFork }.forEach { repo ->
                     repo.commitCount = repo.refs?.nodes?.sumBy { it.target.history.totalCount } ?: 0
                     repo.commitRadio = (repo.commitCount.toFloat() / allCommitCount).format()
-                    languageRatioByMyReposCommit.find { it.language.name == repo.primaryLanguage?.name ?: "unKnow" }?.also {
+                    languageRatioByMyReposCommit.find { it.language.name == repo.primaryLanguage?.name ?: "UnKnow" }?.also {
                         it.count = it.count + repo.commitCount
                         it.ratio = ((it.count.toFloat()) / allCommitCount).format()
                     } ?: run {
@@ -368,7 +368,7 @@ class UserProfile {
                                 LanguageRatio(
                                     it,
                                     repo.commitCount,
-                                    repo.commitCount.toFloat() / allCommitCount
+                                    (repo.commitCount.toFloat() / allCommitCount).format()
                                 )
                             )
                         } ?: run {
@@ -376,7 +376,7 @@ class UserProfile {
                                 LanguageRatio(
                                     Lang.default(),
                                     repo.commitCount,
-                                    repo.commitCount.toFloat() / allCommitCount
+                                    (repo.commitCount.toFloat() / allCommitCount).format()
                                 )
                             )
                         }
