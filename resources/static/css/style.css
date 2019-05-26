@@ -763,3 +763,13 @@ a:hover {
     height: 65px;
     background-color: #161A1B;
 }
+
+.visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 100ms linear;
+}
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+}

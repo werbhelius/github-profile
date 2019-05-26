@@ -257,7 +257,8 @@
 
                                 <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
                                         stroke-dasharray="${start} ${end}"
-                                        transform="rotate(${rotate}, 142.5,142.5)"></circle>
+                                        transform="rotate(${rotate}, 142.5,142.5)"
+                                        onmouseover="displayTip('languageRatioByMyRepos', ${langRatio?index})"></circle>
 
                                 <#assign r = r + langRatio.ratio>
                             </#list>
@@ -273,7 +274,8 @@
                                     <#assign name = "Other">
                                 </#if>
                                 <#if ratio gt 0.002>
-                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${name}"  fill="#ffffff"
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${name}"
+                                          fill="#ffffff"
                                           transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
@@ -312,7 +314,8 @@
 
                                 <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
                                         stroke-dasharray="${start} ${end}"
-                                        transform="rotate(${rotate}, 142.5,142.5)"></circle>
+                                        transform="rotate(${rotate}, 142.5,142.5)"
+                                        onmouseover="displayTip('languageRatioByMyReposWithStar', ${langRatio?index})"></circle>
 
                                 <#assign r = r + langRatio.ratio>
                             </#list>
@@ -328,7 +331,8 @@
                                     <#assign name = "Other">
                                 </#if>
                                 <#if ratio gt 0.002>
-                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${name}" fill="#ffffff"
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${name}"
+                                          fill="#ffffff"
                                           transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
@@ -367,7 +371,8 @@
 
                                 <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
                                         stroke-dasharray="${start} ${end}"
-                                        transform="rotate(${rotate}, 142.5,142.5)"></circle>
+                                        transform="rotate(${rotate}, 142.5,142.5)"
+                                        onmouseover="displayTip('languageRatioByMyReposCommit', ${langRatio?index})"></circle>
 
                                 <#assign r = r + langRatio.ratio>
                             </#list>
@@ -383,7 +388,8 @@
                                     <#assign name = "Other">
                                 </#if>
                                 <#if ratio gt 0.002>
-                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${name}" fill="#ffffff"
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${name}"
+                                          fill="#ffffff"
                                           transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
@@ -424,7 +430,8 @@
 
                                 <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
                                         stroke-dasharray="${start} ${end}"
-                                        transform="rotate(${rotate}, 142.5,142.5)"></circle>
+                                        transform="rotate(${rotate}, 142.5,142.5)"
+                                        onmouseover="displayTip('languageRatioByStarRepos', ${langRatio?index})"></circle>
 
                                 <#assign r = r + langRatio.ratio>
                             </#list>
@@ -440,7 +447,8 @@
                                     <#assign name = "Other">
                                 </#if>
                                 <#if ratio gt 0.002>
-                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${name}" fill="#ffffff"
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${name}"
+                                          fill="#ffffff"
                                           transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
@@ -480,7 +488,8 @@
 
                                 <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
                                         stroke-dasharray="${start} ${end}"
-                                        transform="rotate(${rotate}, 142.5,142.5)"></circle>
+                                        transform="rotate(${rotate}, 142.5,142.5)"
+                                        onmouseover="displayTip('commitTopRepos', ${repos?index})"></circle>
 
                                 <#assign r = r + repos.commitRadio>
                             </#list>
@@ -496,7 +505,8 @@
                                     <#assign name = "Other">
                                 </#if>
                                 <#if ratio gt 0.002>
-                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" fill="#ffffff" data-name="${name?replace(login + "/", "")}"
+                                    <text class="pie-text-percent" data-angle="${(360 * r - 90)}" fill="#ffffff"
+                                          data-name="${name?replace(login + "/", "")}"
                                           transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                     </text>
                                 </#if>
@@ -550,6 +560,27 @@
             var width = tipDiv.offsetWidth;
             tipDiv.style.left = x - width / 2 + 8 + "px";
             tipDiv.style.top = y - 45 + "px";
+
+            if (i <= 2) {
+                tipDiv.classList.add("visible");
+            } else {
+                tipDiv.classList.add("hidden");
+            }
+        }
+    }
+
+    function displayTip(div, index) {
+        var targetDiv = document.getElementById(div);
+        var tips = targetDiv.getElementsByClassName("tip");
+        for (var i = 0; i < tips.length; i++) {
+            var tip = tips[i];
+            if (i === index) {
+                tip.classList.add("visible");
+                tip.classList.remove("hidden");
+            } else {
+                tip.classList.add("hidden");
+                tip.classList.remove("visible");
+            }
         }
     }
 </script>
