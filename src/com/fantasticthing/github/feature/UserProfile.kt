@@ -343,10 +343,15 @@ class UserProfile {
                 contributionsByMonth.add(contributionByMonth)
             }
 
-            maxCount = Math.round((maxCount / 5f) / 10) * 10
-            contributionsCounts.maxCount = maxCount * 5
-            repeat(6) {
-                contributionsCounts.counts.add(0, 0 + maxCount * it)
+            if (maxCount <= 20) {
+                contributionsCounts.maxCount = maxCount
+                contributionsCounts.counts.add(maxCount)
+            } else {
+                maxCount = Math.round((maxCount / 5f) / 10) * 10
+                contributionsCounts.maxCount = maxCount * 5
+                repeat(6) {
+                    contributionsCounts.counts.add(0, 0 + maxCount * it)
+                }
             }
 
             return@async true
