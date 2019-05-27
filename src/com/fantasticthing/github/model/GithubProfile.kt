@@ -59,7 +59,7 @@ fun UserProfile.User.toGithubProfile(): GithubProfile = GithubProfile(
     this.repositories.totalCount,
     this.contributions,
     this.rank,
-    this.organizations.nodes,
+    this.organizations.nodes.subListSafe(0, 4),
     this.pinnedRepos.nodes,
     this.myRepos.nodes.subListSafe(0, 6),
     this.starRepos.nodes.subListSafe(0, 6),

@@ -92,29 +92,25 @@
                 <div style="margin-top: 30px">
                     <p class="more-content">Company : ${company}</p>
                     <p class="more-content">Location : ${location}</p>
-                    <p class="more-content">Email : <a class="a-link" target="_blank" href="mailto:${email}">${email} </a></p>
-                    <p class="more-content">Website : <a class="a-link" target="_blank" href="${websiteUrl}">${websiteUrl}</a></p>
+                    <p class="more-content">Email : <a class="a-link" target="_blank"
+                                                       href="mailto:${email}">${email} </a></p>
+                    <p class="more-content">Website : <a class="a-link" target="_blank"
+                                                         href="${websiteUrl}">${websiteUrl}</a></p>
                 </div>
             </div>
             <div class="profile-more">
                 <p class="content-title" style="margin-top: 50px">Organizations</p>
                 <div style="padding-top: 10px">
-                    <div class="organizations-div">
-                        <img class="organizations-img" src="https://avatars0.githubusercontent.com/u/1342004?s=70&v=4">
-                        <p class="organizations-name">Google</p>
-                    </div>
-                    <div class="organizations-div">
-                        <img class="organizations-img" src="https://avatars0.githubusercontent.com/u/1342004?s=70&v=4">
-                        <p class="organizations-name">Google</p>
-                    </div>
-                    <div class="organizations-div">
-                        <img class="organizations-img" src="https://avatars0.githubusercontent.com/u/1342004?s=70&v=4">
-                        <p class="organizations-name">Google</p>
-                    </div>
-                    <div class="organizations-div">
-                        <img class="organizations-img" src="https://avatars0.githubusercontent.com/u/1342004?s=70&v=4">
-                        <p class="organizations-name">Google</p>
-                    </div>
+                    <#if (organizations?size) gt 0>
+                        <#list organizations as org>
+                            <div class="organizations-div">
+                                <img class="organizations-img" src="${org.avatarUrl}">
+                                <p class="organizations-name">${org.name}</p>
+                            </div>
+                        </#list>
+                    <#else >
+                        <p class="more-content">You haven't joined any organizations!</p>
+                    </#if>
                 </div>
             </div>
         </div>
@@ -123,7 +119,9 @@
             <div class="repos-bg">
                 <#list pinnedRepos as repos>
                     <div class="repo">
-                        <p class="repos-name"><a class="a-repos" target="_blank" href="https://github.com/${repos.nameWithOwner}">${repos.nameWithOwner}</a></p>
+                        <p class="repos-name"><a class="a-repos" target="_blank"
+                                                 href="https://github.com/${repos.nameWithOwner}">${repos.nameWithOwner}</a>
+                        </p>
                         <p class="repos-desc">${repos.description}</p>
                         <div class="repos-star">
                             <div class="repos-lang" style="background-color:${repos.primaryLanguage.color};"></div>
@@ -145,7 +143,9 @@
             <div class="repos-bg">
                 <#list myRepos as repos>
                     <div class="repo">
-                        <p class="repos-name"><a class="a-repos" target="_blank" href="https://github.com/${repos.nameWithOwner}">${repos.nameWithOwner}</a></p>
+                        <p class="repos-name"><a class="a-repos" target="_blank"
+                                                 href="https://github.com/${repos.nameWithOwner}">${repos.nameWithOwner}</a>
+                        </p>
                         <p class="repos-desc">${repos.description}</p>
                         <div class="repos-star">
                             <div class="repos-lang" style="background-color:${repos.primaryLanguage.color}"></div>
