@@ -260,9 +260,9 @@ class UserProfile {
                         it.ratio = ((it.count.toFloat()) / allMyRepos).format()
                     } ?: run {
                         repo.primaryLanguage?.also {
-                            languageRatioByMyRepos.add(LanguageRatio(it, 1, 1f / allMyRepos))
+                            languageRatioByMyRepos.add(LanguageRatio(it, 1, (1f / allMyRepos).format()))
                         } ?: run {
-                            languageRatioByMyRepos.add(LanguageRatio(Lang.default(), 1, 1f / allMyRepos))
+                            languageRatioByMyRepos.add(LanguageRatio(Lang.default(), 1, (1f / allMyRepos).format()))
                         }
 
                     }
@@ -310,9 +310,9 @@ class UserProfile {
                     it.ratio = ((it.count.toFloat()) / allStarRepos).format()
                 } ?: run {
                     repo.primaryLanguage?.also {
-                        languageRatioByStarRepos.add(LanguageRatio(it, 1, 1f / allStarRepos))
+                        languageRatioByStarRepos.add(LanguageRatio(it, 1, (1f / allStarRepos).format()))
                     } ?: run {
-                        languageRatioByStarRepos.add(LanguageRatio(Lang.default(), 1, 1f / allStarRepos))
+                        languageRatioByStarRepos.add(LanguageRatio(Lang.default(), 1, (1f / allStarRepos).format()))
                     }
 
                 }

@@ -128,51 +128,55 @@
             </div>
             <div class="profile-repos-block" style="margin-right: 81px">
                 <p class="content-title">Pinned Repos</p>
-                <div class="repos-bg">
-                    <#list pinnedRepos as repos>
-                        <div class="repo">
-                            <p class="repos-name"><a class="a-repos" target="_blank"
-                                                     href="https://github.com/${repos.nameWithOwner}">${repos.nameWithOwner}</a>
-                            </p>
-                            <p class="repos-desc">${repos.description!}</p>
-                            <div class="repos-star">
-                                <div class="repos-lang" style="background-color:${(repos.primaryLanguage.color)!'#262626'};"></div>
-                                <p class="repos-star-text">${(repos.primaryLanguage.name)!'Unknow'}</p>
-                                <img src="../static/css/svg/star.svg">
-                                <p class="repos-star-text">${repos.stargazers.totalCount}</p>
-                                <img src="../static/css/svg/fork.svg">
-                                <p class="repos-star-text">${repos.forkCount}</p>
+                <#if pinnedRepos?size != 0>
+                    <div class="repos-bg">
+                        <#list pinnedRepos as repos>
+                            <div class="repo">
+                                <p class="repos-name"><a class="a-repos" target="_blank"
+                                                         href="https://github.com/${repos.nameWithOwner}">${repos.nameWithOwner}</a>
+                                </p>
+                                <p class="repos-desc">${repos.description!}</p>
+                                <div class="repos-star">
+                                    <div class="repos-lang" style="background-color:${(repos.primaryLanguage.color)!'#262626'};"></div>
+                                    <p class="repos-star-text">${(repos.primaryLanguage.name)!'Unknow'}</p>
+                                    <img src="../static/css/svg/star.svg">
+                                    <p class="repos-star-text">${repos.stargazers.totalCount}</p>
+                                    <img src="../static/css/svg/fork.svg">
+                                    <p class="repos-star-text">${repos.forkCount}</p>
+                                </div>
                             </div>
-                        </div>
-                        <#if !repos?is_last>
-                            <div class="repos-line"></div>
-                        </#if>
-                    </#list>
-                </div>
+                            <#if !repos?is_last>
+                                <div class="repos-line"></div>
+                            </#if>
+                        </#list>
+                    </div>
+                </#if>
             </div>
             <div class="profile-repos-block">
                 <p class="content-title">Top Star Repos</p>
-                <div class="repos-bg">
-                    <#list myRepos as repos>
-                        <div class="repo">
-                            <p class="repos-name"><a class="a-repos" target="_blank"
-                                                     href="https://github.com/${repos.nameWithOwner}">${repos.nameWithOwner}</a>
-                            </p>
-                            <p class="repos-desc">${repos.description!}</p>
-                            <div class="repos-star">
-                                <div class="repos-lang" style="background-color:${(repos.primaryLanguage.color)!'#262626'}"></div>
-                                <p class="repos-star-text">${(repos.primaryLanguage.name)!'Unknow'}</p>
-                                <img src="../static/css/svg/star.svg">
-                                <p class="repos-star-text">${repos.stargazers.totalCount}</p>
-                                <img src="../static/css/svg/fork.svg">
-                                <p class="repos-star-text">${repos.forkCount}</p>
+                <#if myRepos?size != 0>
+                    <div class="repos-bg">
+                        <#list myRepos as repos>
+                            <div class="repo">
+                                <p class="repos-name"><a class="a-repos" target="_blank"
+                                                         href="https://github.com/${repos.nameWithOwner}">${repos.nameWithOwner}</a>
+                                </p>
+                                <p class="repos-desc">${repos.description!}</p>
+                                <div class="repos-star">
+                                    <div class="repos-lang" style="background-color:${(repos.primaryLanguage.color)!'#262626'}"></div>
+                                    <p class="repos-star-text">${(repos.primaryLanguage.name)!'Unknow'}</p>
+                                    <img src="../static/css/svg/star.svg">
+                                    <p class="repos-star-text">${repos.stargazers.totalCount}</p>
+                                    <img src="../static/css/svg/fork.svg">
+                                    <p class="repos-star-text">${repos.forkCount}</p>
+                                </div>
                             </div>
-                        </div>
-                        <#if !repos?is_last>
-                            <div class="repos-line"></div>
-                        </#if>
-                    </#list>
-                </div>
+                            <#if !repos?is_last>
+                                <div class="repos-line"></div>
+                            </#if>
+                        </#list>
+                    </div>
+                </#if>
             </div>
         </div>
         <#if rank?size != 0>
@@ -213,22 +217,22 @@
                                 <p class="lang-world-text">${rn.language}</p>
                                 <div class="lang-world">
                                     <img class="lang-img" src="../static/css/svg/city.svg">
-                                    <p class="lang-world-city-text">${city}</p>
+                                    <p class="lang-world-city-text">${(city)}</p>
                                     <p class="lang-world-rank-text"><span
-                                                class="lang-world-rank-text-high">${rn.city_rank}</span> / ${rn.city_count}</p>
+                                                class="lang-world-rank-text-high">${(rn.city_rank)!'1'}</span> / ${(rn.city_count)!'1'}</p>
                                 </div>
                                 <div class="lang-world">
                                     <img class="lang-img" src="../static/css/svg/country.svg">
-                                    <p class="lang-world-city-text">${country}</p>
+                                    <p class="lang-world-city-text">${(country)}</p>
                                     <p class="lang-world-rank-text"><span
-                                                class="lang-world-rank-text-high">${rn.country_rank}</span>
-                                        / ${rn.country_count}</p>
+                                                class="lang-world-rank-text-high">${(rn.country_rank)!'1'}</span>
+                                        / ${(rn.country_count)!'1'}</p>
                                 </div>
                                 <div class="lang-world">
                                     <img class="lang-img" src="../static/css/svg/world.svg">
                                     <p class="lang-world-city-text">Worldwide</p>
                                     <p class="lang-world-rank-text"><span
-                                                class="lang-world-rank-text-high">${rn.world_rank}</span> / ${rn.world_count}
+                                                class="lang-world-rank-text-high">${(rn.world_rank)!'1'}</span> / ${(rn.world_count)!'1'}
                                     </p>
                                 </div>
                             </div>
