@@ -6,6 +6,10 @@ html body {
 }
 
 a {
+  color: #FFFFFF;
+}
+
+a:hover {
     color: #F18E33;
 }
 
@@ -17,6 +21,10 @@ a {
 @font-face {
     font-family: "ProducSansRegular";
     src: url("fonts/Product Sans Regular.ttf");
+}
+
+.a-link {
+    color: #F18E33;
 }
 
 .index-title {

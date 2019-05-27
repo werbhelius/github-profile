@@ -31,8 +31,8 @@
     <div class="profile-user-info-div">
         <div id="user-info" class="profile-user-info">
             <div id="user-detail" class="user-detail">
-                <img class="user-img" src="${avatarUrl}">
-                <p class="user-name">${login}(${name})</p>
+                <a target="_blank" href="https://github.com/${login}"><img class="user-img" src="${avatarUrl}"></a>
+                <p class="user-name"><a target="_blank" href="https://github.com/${login}">${login}(${name})</a></p>
                 <p class="user-bio">${bio}</p>
                 <div class="flex">
                     <div class="user-friends">
@@ -92,8 +92,8 @@
                 <div style="margin-top: 30px">
                     <p class="more-content">Company : ${company}</p>
                     <p class="more-content">Location : ${location}</p>
-                    <p class="more-content">Email : <a target="_blank" href="mailto:${email}">${email} </a></p>
-                    <p class="more-content">Website : <a target="_blank" href="${websiteUrl}">${websiteUrl}</a></p>
+                    <p class="more-content">Email : <a class="a-link" target="_blank" href="mailto:${email}">${email} </a></p>
+                    <p class="more-content">Website : <a class="a-link" target="_blank" href="${websiteUrl}">${websiteUrl}</a></p>
                 </div>
             </div>
             <div class="profile-more">
