@@ -123,7 +123,7 @@
             <div class="repos-bg">
                 <#list pinnedRepos as repos>
                     <div class="repo">
-                        <p class="repos-name">${repos.nameWithOwner}</p>
+                        <p class="repos-name"><a class="a-repos" target="_blank" href="https://github.com/${repos.nameWithOwner}">${repos.nameWithOwner}</a></p>
                         <p class="repos-desc">${repos.description}</p>
                         <div class="repos-star">
                             <div class="repos-lang" style="background-color:${repos.primaryLanguage.color};"></div>
@@ -145,7 +145,7 @@
             <div class="repos-bg">
                 <#list myRepos as repos>
                     <div class="repo">
-                        <p class="repos-name">${repos.nameWithOwner}</p>
+                        <p class="repos-name"><a class="a-repos" target="_blank" href="https://github.com/${repos.nameWithOwner}">${repos.nameWithOwner}</a></p>
                         <p class="repos-desc">${repos.description}</p>
                         <div class="repos-star">
                             <div class="repos-lang" style="background-color:${repos.primaryLanguage.color}"></div>
