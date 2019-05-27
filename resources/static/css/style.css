@@ -5,6 +5,10 @@ html body {
     padding: 0;
 }
 
+a {
+    color: #F18E33;
+}
+
 @font-face {
     font-family: "ProducSansBold";
     src: url("fonts/Product Sans Bold.ttf");
@@ -426,7 +430,7 @@ a:hover {
 
 .more-content {
     color: #FFFFFF;
-    font-size: 20px;
+    font-size: 18px;
     font-family: ProducSansRegular, serif;
     margin: 20px 0 0 0;
     overflow: hidden;

@@ -91,9 +91,9 @@
                 <p class="content-title">More</p>
                 <div style="margin-top: 30px">
                     <p class="more-content">Company : ${company}</p>
-                    <p class="more-content">Email : ${email} </p>
                     <p class="more-content">Location : ${location}</p>
-                    <p class="more-content">Website : ${websiteUrl}</p>
+                    <p class="more-content">Email : <a target="_blank" href="mailto:${email}">${email} </a></p>
+                    <p class="more-content">Website : <a target="_blank" href="${websiteUrl}">${websiteUrl}</a></p>
                 </div>
             </div>
             <div class="profile-more">
