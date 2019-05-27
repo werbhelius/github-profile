@@ -5,6 +5,7 @@
     <title>GitHub Profile Summary</title>
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="../static/css/loaders.min.css">
+    <script type="text/javascript" src="../static/js/github-profile.js"></script>
 </head>
 <body>
 <div style="height: 100%">
@@ -44,50 +45,5 @@
                 class="index-title-span">Github</span></a></p>
     </footer>
 </div>
-<script>
-    function checkName(e, input) {
-        if (e.code !== "Enter") return;
-        if (input.value === "") {
-            input.classList.add("shake");
-            setTimeout(function () {
-                input.classList.remove("shake");
-            }, 500);
-        } else {
-            requestName(input)
-        }
-    }
-
-    function requestName(input) {
-        input.disabled = "disabled";
-        document.getElementById("loading").style.display = "block";
-        var name = input.value;
-        var ajaxObj = new XMLHttpRequest();
-        ajaxObj.open('get', '/api/user?username=' + name);
-        ajaxObj.setRequestHeader("client", "web");
-        ajaxObj.send();
-        ajaxObj.onreadystatechange = function () {
-            if (ajaxObj.readyState !== 4) return ;
-            document.getElementById("loading").style.display = "none";
-            input.disabled = "";
-            if (ajaxObj.status >= 200 && ajaxObj.status < 400) {
-                window.location = ajaxObj.responseText
-            } else {
-                document.getElementById("index-page").style.display = "none";
-                var errorPage = document.getElementById("error-page");
-                errorPage.innerHTML = ajaxObj.responseText;
-                var errorCode = document.getElementById("errorCode");
-                errorCode.classList.add("shake");
-                setTimeout(function () {
-                    errorCode.classList.remove("shake");
-                }, 500);
-            }
-        }
-    }
-
-    function backToHome() {
-        document.getElementById("error-page").innerHTML = "";
-        document.getElementById("index-page").style.display = "block";
-    }
-</script>
 </body>
 </html>

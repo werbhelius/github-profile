@@ -169,6 +169,20 @@ a:hover {
     margin: 50px auto 0;
 }
 
+.loading-div {
+    width: fit-content;
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    margin-top: -20px;
+    margin-left: 380px;
+}
+
+.profile-loading {
+    width: fit-content;
+    margin: auto auto;
+}
+
 .line-scale-pulse-out > div {
     background-color: #F18E33;
 }
