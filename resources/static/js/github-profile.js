@@ -77,6 +77,9 @@ function requestName(input) {
             window.location = ajaxObj.responseText
         } else {
             document.getElementById("index-page").style.display = "none";
+            var footer = document.getElementById("footer");
+            footer.classList.remove("profile-footer");
+            footer.classList.add("index-footer");
             var errorPage = document.getElementById("error-page");
             errorPage.innerHTML = ajaxObj.responseText;
             var errorCode = document.getElementById("errorCode");
@@ -89,6 +92,5 @@ function requestName(input) {
 }
 
 function backToHome() {
-    document.getElementById("error-page").innerHTML = "";
-    document.getElementById("index-page").style.display = "block";
+    window.location = "/"
 }
