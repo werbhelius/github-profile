@@ -281,7 +281,7 @@ class UserProfile {
                                 LanguageRatio(
                                     it,
                                     repo.stargazers.totalCount,
-                                    repo.stargazers.totalCount.toFloat() / allMyReposStarCount
+                                    (repo.stargazers.totalCount.toFloat() / allMyReposStarCount).format()
                                 )
                             )
                         } ?: run {
@@ -289,7 +289,7 @@ class UserProfile {
                                 LanguageRatio(
                                     Lang.default(),
                                     repo.stargazers.totalCount,
-                                    repo.stargazers.totalCount.toFloat() / allMyReposStarCount
+                                    (repo.stargazers.totalCount.toFloat() / allMyReposStarCount).format()
                                 )
                             )
                         }

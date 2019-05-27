@@ -263,12 +263,13 @@
                                 <#assign r = r + langRatio.ratio>
                             </#list>
                             <#assign angle = 0>
+                            <#assign r = 0>
                             <#list languageRatioByMyRepos as langRatio >
                                 <#assign r = angle + langRatio.ratio / 2>
                                 <#assign angle = angle + langRatio.ratio>
                                 <#assign ratio = langRatio.ratio>
                                 <#assign name = langRatio.language.name>
-                                <#if langRatio?is_last>
+                                <#if langRatio?is_last && angle lt 1>
                                     <#assign r = angle + (1- angle) / 2>
                                     <#assign ratio = (1- angle)>
                                     <#assign name = "Other">
@@ -320,12 +321,13 @@
                                 <#assign r = r + langRatio.ratio>
                             </#list>
                             <#assign angle = 0>
+                            <#assign r = 0>
                             <#list languageRatioByMyReposWithStar as langRatio >
                                 <#assign r = angle + langRatio.ratio / 2>
                                 <#assign angle = angle + langRatio.ratio>
                                 <#assign ratio = langRatio.ratio>
                                 <#assign name = langRatio.language.name>
-                                <#if langRatio?is_last>
+                                <#if langRatio?is_last && angle lt 1>
                                     <#assign r = angle + (1- angle) / 2>
                                     <#assign ratio = (1- angle)>
                                     <#assign name = "Other">
@@ -377,12 +379,13 @@
                                 <#assign r = r + langRatio.ratio>
                             </#list>
                             <#assign angle = 0>
+                            <#assign r = 0>
                             <#list languageRatioByMyReposCommit as langRatio >
                                 <#assign r = angle + langRatio.ratio / 2>
                                 <#assign angle = angle + langRatio.ratio>
                                 <#assign ratio = langRatio.ratio>
                                 <#assign name = langRatio.language.name>
-                                <#if langRatio?is_last>
+                                <#if langRatio?is_last && angle lt 1>
                                     <#assign r = angle + (1- angle) / 2>
                                     <#assign ratio = (1- angle)>
                                     <#assign name = "Other">
@@ -436,12 +439,13 @@
                                 <#assign r = r + langRatio.ratio>
                             </#list>
                             <#assign angle = 0>
+                            <#assign r = 0>
                             <#list languageRatioByStarRepos as langRatio >
                                 <#assign r = angle + langRatio.ratio / 2>
                                 <#assign angle = angle + langRatio.ratio>
                                 <#assign ratio = langRatio.ratio>
                                 <#assign name = langRatio.language.name>
-                                <#if langRatio?is_last>
+                                <#if langRatio?is_last && angle lt 1>
                                     <#assign r = angle + (1- angle) / 2>
                                     <#assign ratio = (1- angle)>
                                     <#assign name = "Other">
@@ -494,12 +498,13 @@
                                 <#assign r = r + repos.commitRadio>
                             </#list>
                             <#assign angle = 0>
+                            <#assign r = 0>
                             <#list commitTopRepos as repos >
                                 <#assign r = angle + repos.commitRadio / 2>
                                 <#assign angle = angle + repos.commitRadio>
                                 <#assign ratio = repos.commitRadio>
                                 <#assign name = repos.nameWithOwner>
-                                <#if repos?is_last>
+                                <#if repos?is_last && angle lt 1>
                                     <#assign r = angle + (1- angle) / 2>
                                     <#assign ratio = (1- angle)>
                                     <#assign name = "Other">
