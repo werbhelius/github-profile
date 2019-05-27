@@ -134,10 +134,10 @@
                             <p class="repos-name"><a class="a-repos" target="_blank"
                                                      href="https://github.com/${repos.nameWithOwner}">${repos.nameWithOwner}</a>
                             </p>
-                            <p class="repos-desc">${repos.description}</p>
+                            <p class="repos-desc">${repos.description!}</p>
                             <div class="repos-star">
-                                <div class="repos-lang" style="background-color:${repos.primaryLanguage.color};"></div>
-                                <p class="repos-star-text">${repos.primaryLanguage.name}</p>
+                                <div class="repos-lang" style="background-color:${(repos.primaryLanguage.color)!'#262626'};"></div>
+                                <p class="repos-star-text">${(repos.primaryLanguage.name)!'Unknow'}</p>
                                 <img src="../static/css/svg/star.svg">
                                 <p class="repos-star-text">${repos.stargazers.totalCount}</p>
                                 <img src="../static/css/svg/fork.svg">
@@ -158,10 +158,10 @@
                             <p class="repos-name"><a class="a-repos" target="_blank"
                                                      href="https://github.com/${repos.nameWithOwner}">${repos.nameWithOwner}</a>
                             </p>
-                            <p class="repos-desc">${repos.description}</p>
+                            <p class="repos-desc">${repos.description!}</p>
                             <div class="repos-star">
-                                <div class="repos-lang" style="background-color:${repos.primaryLanguage.color}"></div>
-                                <p class="repos-star-text">${repos.primaryLanguage.name}</p>
+                                <div class="repos-lang" style="background-color:${(repos.primaryLanguage.color)!'#262626'}"></div>
+                                <p class="repos-star-text">${(repos.primaryLanguage.name)!'Unknow'}</p>
                                 <img src="../static/css/svg/star.svg">
                                 <p class="repos-star-text">${repos.stargazers.totalCount}</p>
                                 <img src="../static/css/svg/fork.svg">
@@ -175,66 +175,68 @@
                 </div>
             </div>
         </div>
-        <div class="profile-lang-div">
-            <div class="profile-lang-rank">
-                <p class="content-title">Top Star Language</p>
-                <div class="lang-bg">
-                    <#list rank as rn>
-                        <#if rn?index < 4>
-                            <div class="lang-detail" <#if rn?index == 0 || rn?index == 2> style="background-color: #ffffff" </#if>>
-                                <#if rn?index == 0>
-                                    <div class="lang-rank-bg" style="background-color: #FFBD43">1</div>
-                                </#if>
-                                <#if rn?index == 1>
-                                    <div class="lang-rank-bg" style="background-color: #C7C7C7">2</div>
-                                </#if>
-                                <#if rn?index == 2>
-                                    <div class="lang-rank-bg" style="background-color: #CD8989">3</div>
-                                </#if>
-                                <#if rn?index == 3>
-                                    <div class="lang-rank-bg-without-shadow" style="color: #F18E33">4</div>
-                                </#if>
-                                <p class="lang-rank-lang">${rn.language}</p>
-                                <img style="margin-left: 14px" src="../static/css/svg/code-small.svg">
-                                <p class="lang-rank-count">${rn.repository_count}</p>
-                                <img style="margin-left: 14px" src="../static/css/svg/star-small.svg">
-                                <p class="lang-rank-count">${rn.stars_count}</p>
+        <#if rank?size != 0>
+            <div class="profile-lang-div">
+                <div class="profile-lang-rank">
+                    <p class="content-title">Top Star Language</p>
+                    <div class="lang-bg">
+                        <#list rank as rn>
+                            <#if rn?index < 4>
+                                <div class="lang-detail" <#if rn?index == 0 || rn?index == 2> style="background-color: #ffffff" </#if>>
+                                    <#if rn?index == 0>
+                                        <div class="lang-rank-bg" style="background-color: #FFBD43">1</div>
+                                    </#if>
+                                    <#if rn?index == 1>
+                                        <div class="lang-rank-bg" style="background-color: #C7C7C7">2</div>
+                                    </#if>
+                                    <#if rn?index == 2>
+                                        <div class="lang-rank-bg" style="background-color: #CD8989">3</div>
+                                    </#if>
+                                    <#if rn?index == 3>
+                                        <div class="lang-rank-bg-without-shadow" style="color: #F18E33">4</div>
+                                    </#if>
+                                    <p class="lang-rank-lang">${rn.language}</p>
+                                    <img style="margin-left: 14px" src="../static/css/svg/code-small.svg">
+                                    <p class="lang-rank-count">${rn.repository_count}</p>
+                                    <img style="margin-left: 14px" src="../static/css/svg/star-small.svg">
+                                    <p class="lang-rank-count">${rn.stars_count}</p>
+                                </div>
+                            </#if>
+                        </#list>
+                    </div>
+                </div>
+                <div class="profile-lang-world">
+                    <p class="content-title">Top Language Rank</p>
+                    <div class="profile-lang-world-list">
+                        <#list rank as rn>
+                            <div class="lang-world-bg">
+                                <p class="lang-world-text">${rn.language}</p>
+                                <div class="lang-world">
+                                    <img class="lang-img" src="../static/css/svg/city.svg">
+                                    <p class="lang-world-city-text">${city}</p>
+                                    <p class="lang-world-rank-text"><span
+                                                class="lang-world-rank-text-high">${rn.city_rank}</span> / ${rn.city_count}</p>
+                                </div>
+                                <div class="lang-world">
+                                    <img class="lang-img" src="../static/css/svg/country.svg">
+                                    <p class="lang-world-city-text">${country}</p>
+                                    <p class="lang-world-rank-text"><span
+                                                class="lang-world-rank-text-high">${rn.country_rank}</span>
+                                        / ${rn.country_count}</p>
+                                </div>
+                                <div class="lang-world">
+                                    <img class="lang-img" src="../static/css/svg/world.svg">
+                                    <p class="lang-world-city-text">Worldwide</p>
+                                    <p class="lang-world-rank-text"><span
+                                                class="lang-world-rank-text-high">${rn.world_rank}</span> / ${rn.world_count}
+                                    </p>
+                                </div>
                             </div>
-                        </#if>
-                    </#list>
+                        </#list>
+                    </div>
                 </div>
             </div>
-            <div class="profile-lang-world">
-                <p class="content-title">Top Language Rank</p>
-                <div class="profile-lang-world-list">
-                    <#list rank as rn>
-                        <div class="lang-world-bg">
-                            <p class="lang-world-text">${rn.language}</p>
-                            <div class="lang-world">
-                                <img class="lang-img" src="../static/css/svg/city.svg">
-                                <p class="lang-world-city-text">${city}</p>
-                                <p class="lang-world-rank-text"><span
-                                            class="lang-world-rank-text-high">${rn.city_rank}</span> / ${rn.city_count}</p>
-                            </div>
-                            <div class="lang-world">
-                                <img class="lang-img" src="../static/css/svg/country.svg">
-                                <p class="lang-world-city-text">${country}</p>
-                                <p class="lang-world-rank-text"><span
-                                            class="lang-world-rank-text-high">${rn.country_rank}</span>
-                                    / ${rn.country_count}</p>
-                            </div>
-                            <div class="lang-world">
-                                <img class="lang-img" src="../static/css/svg/world.svg">
-                                <p class="lang-world-city-text">Worldwide</p>
-                                <p class="lang-world-rank-text"><span
-                                            class="lang-world-rank-text-high">${rn.world_rank}</span> / ${rn.world_count}
-                                </p>
-                            </div>
-                        </div>
-                    </#list>
-                </div>
-            </div>
-        </div>
+        </#if>
         <div class="profile-chart">
             <div class="profile-chart-div">
                 <div class="profile-chart-1">

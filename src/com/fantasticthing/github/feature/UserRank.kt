@@ -8,7 +8,15 @@ import io.ktor.client.request.*
  */
 class UserRank {
 
-    suspend fun request(userName: String) = client.get<Response>(rank + userName)
+    suspend fun request(userName: String): Response  {
+        var response = Response(User("", userName, "", "", ""))
+        try {
+            response = client.get(rank + userName)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return response
+    }
 
     data class Response(val user: User)
 
