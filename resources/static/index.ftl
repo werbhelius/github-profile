@@ -1,3 +1,4 @@
+<#import "temp.ftl" as layout />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,17 +34,7 @@
         </div>
     </div>
     <div id="error-page"></div>
-    <footer id="footer" class="index-footer">
-        <p class="index-footer-title">Licensed under the <a target="_blank"
-                                                            href="https://github.com/werbhelius/github-profile"><span
-                class="index-title-span">Apache 2 license</span></a></p>
-        <p class="index-footer-title">Design & Develop <img src="../static/css/svg/heart.svg"> by <a target="_blank"
-                                                                                                  href="https://about.me/werbhelius"><span
-                class="index-title-span">werbhelius</span></a></p>
-        <p class="index-footer-title">Source is on <a target="_blank"
-                                                      href="https://github.com/werbhelius/github-profile"><span
-                class="index-title-span">Github</span></a></p>
-    </footer>
+    <@layout.footer "index-footer"/>
 </div>
 </body>
 </html>

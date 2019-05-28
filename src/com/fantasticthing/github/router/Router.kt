@@ -25,7 +25,7 @@ fun Routing.api() {
 
     // Render
     get<Index> {
-        call.respond(FreeMarkerContent("index.html", null))
+        call.respond(FreeMarkerContent("index.ftl", null))
     }
     get<Profile> { profile ->
         val username = profile.username
@@ -36,7 +36,7 @@ fun Routing.api() {
         Cache.getUser(username)?.also {
             call.respond(FreeMarkerContent("profile.ftl", it.toGithubProfile()))
         } ?: run {
-            call.respond(FreeMarkerContent("index.html", null))
+            call.respond(FreeMarkerContent("index.ftl", null))
         }
     }
 
@@ -73,7 +73,7 @@ fun Routing.staticFile() {
         staticBasePackage = "static"
         route("static") {
             files(File(staticPath))
-            default("$staticPath/index.html")
+            default("$staticPath/index.ftl")
         }
     }
 
@@ -82,7 +82,7 @@ fun Routing.staticFile() {
 fun Routing.handlerNotMatchedRouter() {
     route("{...}") {
         handle {
-            call.respond(FreeMarkerContent("index.html", null))
+            call.respond(FreeMarkerContent("index.ftl", null))
         }
     }
 }
