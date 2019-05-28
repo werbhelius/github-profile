@@ -2,11 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>GitHub Profile Summary</title>
-    <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="stylesheet" href="../static/css/loaders.min.css">
-    <script type="text/javascript" src="../static/js/github-profile.js"></script>
+    <@layout.head "${login}'s GitHub Profile Summary"/>
 </head>
 <body>
 <div id="index-page">

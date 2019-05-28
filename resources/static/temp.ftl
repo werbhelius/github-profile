@@ -48,3 +48,11 @@
         </div>
     </div>
 </#macro>
+
+<#macro head title>
+    <meta charset="UTF-8">
+    <title>${title}</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/loaders.min.css">
+    <script type="text/javascript" src="../static/js/github-profile.js"></script>
+</#macro>
