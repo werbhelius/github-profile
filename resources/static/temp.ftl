@@ -21,15 +21,7 @@
                        placeholder="Input your GitHub Username Like 'werbhelius'"
                        onkeypress="checkName(event, this)"/>
             </div>
-            <div id="loading" class="loading-div" style="display: none">
-                <div class="line-scale-pulse-out profile-loading">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
+            <@loading "loading-div"/>
         </div>
         <p class="index-title-small">GitHub Profile <span class="index-title-span">Summary</span></p>
         <div class="header-search">
@@ -43,4 +35,16 @@
             </div>
         </div>
     </header>
+</#macro>
+
+<#macro loading loadingStyle>
+    <div id="loading" class="${loadingStyle}" style="display: none">
+        <div class="line-scale-pulse-out">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
 </#macro>

@@ -23,15 +23,7 @@
             <a target="_blank" href="https://www.instagram.com/i.am.werb/"><img
                     src="../static/css/svg/ins.svg"></a>&nbsp;&nbsp;<span class="index-title-span">and</span>&nbsp;&nbsp;
             <a target="_blank" href="mailto:werbhelius@gmail.com"><img src="../static/css/svg/email.svg"></a> .</p>
-        <div id="loading" class="loading" style="display: none">
-            <div class="line-scale-pulse-out">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-        </div>
+        <@layout.loading "loading"/>
     </div>
     <div id="error-page"></div>
     <@layout.footer "index-footer"/>
