@@ -1,9 +1,7 @@
 <#import "temp.ftl" as layout />
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <@layout.head "${login}'s GitHub Profile Summary"/>
-</head>
+<@layout.head "${login}'s GitHub Profile Summary"/>
 <body>
 <div id="index-page">
     <@layout.header/>
@@ -105,7 +103,8 @@
                                 </p>
                                 <p class="repos-desc">${repos.description!}</p>
                                 <div class="repos-star">
-                                    <div class="repos-lang" style="background-color:${(repos.primaryLanguage.color)!'#262626'};"></div>
+                                    <div class="repos-lang"
+                                         style="background-color:${(repos.primaryLanguage.color)!'#262626'};"></div>
                                     <p class="repos-star-text">${(repos.primaryLanguage.name)!'Unknow'}</p>
                                     <img src="../static/css/svg/star.svg">
                                     <p class="repos-star-text">${repos.stargazers.totalCount}</p>
@@ -131,7 +130,8 @@
                                 </p>
                                 <p class="repos-desc">${repos.description!}</p>
                                 <div class="repos-star">
-                                    <div class="repos-lang" style="background-color:${(repos.primaryLanguage.color)!'#262626'}"></div>
+                                    <div class="repos-lang"
+                                         style="background-color:${(repos.primaryLanguage.color)!'#262626'}"></div>
                                     <p class="repos-star-text">${(repos.primaryLanguage.name)!'Unknow'}</p>
                                     <img src="../static/css/svg/star.svg">
                                     <p class="repos-star-text">${repos.stargazers.totalCount}</p>
@@ -187,7 +187,8 @@
                                     <img class="lang-img" src="../static/css/svg/city.svg">
                                     <p class="lang-world-city-text">${(city)}</p>
                                     <p class="lang-world-rank-text"><span
-                                                class="lang-world-rank-text-high">${(rn.city_rank)!'1'}</span> / ${(rn.city_count)!'1'}</p>
+                                                class="lang-world-rank-text-high">${(rn.city_rank)!'1'}</span>
+                                        / ${(rn.city_count)!'1'}</p>
                                 </div>
                                 <div class="lang-world">
                                     <img class="lang-img" src="../static/css/svg/country.svg">
@@ -200,7 +201,8 @@
                                     <img class="lang-img" src="../static/css/svg/world.svg">
                                     <p class="lang-world-city-text">Worldwide</p>
                                     <p class="lang-world-rank-text"><span
-                                                class="lang-world-rank-text-high">${(rn.world_rank)!'1'}</span> / ${(rn.world_count)!'1'}
+                                                class="lang-world-rank-text-high">${(rn.world_rank)!'1'}</span>
+                                        / ${(rn.world_count)!'1'}
                                     </p>
                                 </div>
                             </div>
@@ -242,10 +244,10 @@
                                     </#if>
 
                                     <#if r lt 0.99>
-                                    <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
-                                            stroke-dasharray="${start} ${end}"
-                                            transform="rotate(${rotate}, 142.5,142.5)"
-                                            onmouseover="displayTip('languageRatioByMyRepos', ${langRatio?index})"></circle>
+                                        <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
+                                                stroke-dasharray="${start} ${end}"
+                                                transform="rotate(${rotate}, 142.5,142.5)"
+                                                onmouseover="displayTip('languageRatioByMyRepos', ${langRatio?index})"></circle>
                                     </#if>
                                     <#assign r = r + langRatio.ratio>
                                 </#list>
@@ -262,7 +264,8 @@
                                         <#assign name = "Other">
                                     </#if>
                                     <#if ratio gt 0.002>
-                                        <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${name}"
+                                        <text class="pie-text-percent" data-angle="${(360 * r - 90)}"
+                                              data-name="${name}"
                                               fill="#ffffff"
                                               transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                         </text>
@@ -322,7 +325,8 @@
                                         <#assign name = "Other">
                                     </#if>
                                     <#if ratio gt 0.002>
-                                        <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${name}"
+                                        <text class="pie-text-percent" data-angle="${(360 * r - 90)}"
+                                              data-name="${name}"
                                               fill="#ffffff"
                                               transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                         </text>
@@ -360,10 +364,10 @@
                                         <#assign end = 700*(r)>
                                     </#if>
                                     <#if r lt 0.99>
-                                    <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
-                                            stroke-dasharray="${start} ${end}"
-                                            transform="rotate(${rotate}, 142.5,142.5)"
-                                            onmouseover="displayTip('languageRatioByMyReposCommit', ${langRatio?index})"></circle>
+                                        <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
+                                                stroke-dasharray="${start} ${end}"
+                                                transform="rotate(${rotate}, 142.5,142.5)"
+                                                onmouseover="displayTip('languageRatioByMyReposCommit', ${langRatio?index})"></circle>
                                     </#if>
                                     <#assign r = r + langRatio.ratio>
                                 </#list>
@@ -380,7 +384,8 @@
                                         <#assign name = "Other">
                                     </#if>
                                     <#if ratio gt 0.002>
-                                        <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${name}"
+                                        <text class="pie-text-percent" data-angle="${(360 * r - 90)}"
+                                              data-name="${name}"
                                               fill="#ffffff"
                                               transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                         </text>
@@ -420,10 +425,10 @@
                                         <#assign end = 700*(r)>
                                     </#if>
                                     <#if r lt 0.99>
-                                    <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
-                                            stroke-dasharray="${start} ${end}"
-                                            transform="rotate(${rotate}, 142.5,142.5)"
-                                            onmouseover="displayTip('languageRatioByStarRepos', ${langRatio?index})"></circle>
+                                        <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
+                                                stroke-dasharray="${start} ${end}"
+                                                transform="rotate(${rotate}, 142.5,142.5)"
+                                                onmouseover="displayTip('languageRatioByStarRepos', ${langRatio?index})"></circle>
                                     </#if>
                                     <#assign r = r + langRatio.ratio>
                                 </#list>
@@ -440,7 +445,8 @@
                                         <#assign name = "Other">
                                     </#if>
                                     <#if ratio gt 0.002>
-                                        <text class="pie-text-percent" data-angle="${(360 * r - 90)}" data-name="${name}"
+                                        <text class="pie-text-percent" data-angle="${(360 * r - 90)}"
+                                              data-name="${name}"
                                               fill="#ffffff"
                                               transform="rotate(90, 142.5,142.5)">${ratio * 100}%
                                         </text>
@@ -479,10 +485,10 @@
                                         <#assign end = 700*(r)>
                                     </#if>
                                     <#if r lt 0.99>
-                                    <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
-                                            stroke-dasharray="${start} ${end}"
-                                            transform="rotate(${rotate}, 142.5,142.5)"
-                                            onmouseover="displayTip('commitTopRepos', ${repos?index})"></circle>
+                                        <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
+                                                stroke-dasharray="${start} ${end}"
+                                                transform="rotate(${rotate}, 142.5,142.5)"
+                                                onmouseover="displayTip('commitTopRepos', ${repos?index})"></circle>
                                     </#if>
                                     <#assign r = r + repos.commitRadio>
                                 </#list>
@@ -514,7 +520,7 @@
         </div>
     </div>
 </div>
-<div id="error-page" ></div>
+<div id="error-page"></div>
 <@layout.footer "profile-footer"/>
 </body>
 </html>

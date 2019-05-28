@@ -1,9 +1,7 @@
 <#import "temp.ftl" as layout />
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <@layout.head "GitHub Profile Summary"/>
-</head>
+<@layout.head "GitHub Profile Summary"/>
 <body>
 <div style="height: 100%">
     <div id="error-page">
