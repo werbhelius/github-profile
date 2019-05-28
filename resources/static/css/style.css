@@ -483,6 +483,10 @@ a:hover {
     line-height: 47px;
 }
 
+.profile-repos-block {
+    min-width: 381px;
+}
+
 .repos-bg {
     width: 381px;
     background-color: #FFFFFF;

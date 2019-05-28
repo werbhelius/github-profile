@@ -222,8 +222,8 @@ class UserProfile {
     ) {
 
         val requestTime = System.currentTimeMillis()
-        var city = ""
-        var country = ""
+        var city = "no place"
+        var country = "no place"
         var contributions = 0
         var contributionsByMonth = arrayListOf<ContributionByMonth>()
         var contributionsCounts = ContributionsCounts(0, arrayListOf())
