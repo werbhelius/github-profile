@@ -273,11 +273,12 @@
                                         <#assign end = 700*(r)>
                                     </#if>
 
+                                    <#if r lt 0.99>
                                     <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
                                             stroke-dasharray="${start} ${end}"
                                             transform="rotate(${rotate}, 142.5,142.5)"
                                             onmouseover="displayTip('languageRatioByMyRepos', ${langRatio?index})"></circle>
-
+                                    </#if>
                                     <#assign r = r + langRatio.ratio>
                                 </#list>
                                 <#assign angle = 0>
@@ -331,10 +332,12 @@
                                         <#assign end = 700*(r)>
                                     </#if>
 
-                                    <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
-                                            stroke-dasharray="${start} ${end}"
-                                            transform="rotate(${rotate}, 142.5,142.5)"
-                                            onmouseover="displayTip('languageRatioByMyReposWithStar', ${langRatio?index})"></circle>
+                                    <#if r lt 0.99>
+                                        <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
+                                                stroke-dasharray="${start} ${end}"
+                                                transform="rotate(${rotate}, 142.5,142.5)"
+                                                onmouseover="displayTip('languageRatioByMyReposWithStar', ${langRatio?index})"></circle>
+                                    </#if>
 
                                     <#assign r = r + langRatio.ratio>
                                 </#list>
@@ -388,12 +391,12 @@
                                         <#assign start = 700*((1-r))>
                                         <#assign end = 700*(r)>
                                     </#if>
-
+                                    <#if r lt 0.99>
                                     <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
                                             stroke-dasharray="${start} ${end}"
                                             transform="rotate(${rotate}, 142.5,142.5)"
                                             onmouseover="displayTip('languageRatioByMyReposCommit', ${langRatio?index})"></circle>
-
+                                    </#if>
                                     <#assign r = r + langRatio.ratio>
                                 </#list>
                                 <#assign angle = 0>
@@ -448,12 +451,12 @@
                                         <#assign start = 700*((1-r))>
                                         <#assign end = 700*(r)>
                                     </#if>
-
+                                    <#if r lt 0.99>
                                     <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
                                             stroke-dasharray="${start} ${end}"
                                             transform="rotate(${rotate}, 142.5,142.5)"
                                             onmouseover="displayTip('languageRatioByStarRepos', ${langRatio?index})"></circle>
-
+                                    </#if>
                                     <#assign r = r + langRatio.ratio>
                                 </#list>
                                 <#assign angle = 0>
@@ -507,12 +510,12 @@
                                         <#assign start = 700*((1-r))>
                                         <#assign end = 700*(r)>
                                     </#if>
-
+                                    <#if r lt 0.99>
                                     <circle class="pie-1" r="111.5" cx="142.5" cy="142.5" stroke="${bgColor}"
                                             stroke-dasharray="${start} ${end}"
                                             transform="rotate(${rotate}, 142.5,142.5)"
                                             onmouseover="displayTip('commitTopRepos', ${repos?index})"></circle>
-
+                                    </#if>
                                     <#assign r = r + repos.commitRadio>
                                 </#list>
                                 <#assign angle = 0>

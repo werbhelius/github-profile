@@ -28,7 +28,7 @@ fun StatusPages.Configuration.handlerException() {
         call.respond(
             HttpStatusCode.InternalServerError,
             FreeMarkerContent(
-                "error.ftl",
+                "error-page.ftl",
                 ErrorMessage(
                     HttpStatusCode.InternalServerError.value.toString(),
                     HttpStatusCode.InternalServerError.description
