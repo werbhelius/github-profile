@@ -8,11 +8,7 @@
 <div style="height: 100%">
     <div id="error-page">
         <@layout.header/>
-        <div align="center">
-            <p id="errorCode" class="error-code">${code}</p>
-            <p class="error-message">${message}, Sorry </p>
-            <button class="error-button" onclick="backToHome()">Back to the home page</button>
-        </div>
+        <@layout.error/>
     </div>
     <@layout.footer "index-footer"/>
 </div>
