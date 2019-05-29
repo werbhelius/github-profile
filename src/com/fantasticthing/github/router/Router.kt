@@ -69,8 +69,9 @@ fun Routing.api() {
 
 fun Routing.staticFile() {
     val staticPath = "resources/static"
-    static {
-        staticBasePackage = "static"
+    static("/") {
+        resources("/css")
+        resources("/js")
         route("static") {
             files(File(staticPath))
             default("$staticPath/index.ftl")
