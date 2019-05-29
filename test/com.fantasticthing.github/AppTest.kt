@@ -10,16 +10,5 @@ import kotlin.test.*
  */
 class AppTest {
 
-    @Test
-    fun checkUsername() = withTestApplication(Application::main) {
-        with(handleRequest(HttpMethod.Get, "/profile?username=werb")) {
-            assertEquals(HttpStatusCode.OK, response.status())
-            assertEquals("username is werb", response.content)
-        }
-        with(handleRequest(HttpMethod.Get, "/profile")) {
-            assertEquals(HttpStatusCode.BadRequest, response.status())
-            assertEquals("username is werb", response.content)
-        }
-    }
 
 }

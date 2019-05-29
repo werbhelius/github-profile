@@ -1,11 +1,9 @@
-val kotlinVersion = "1.3.30"
-val ktorVersion = "1.1.4"
-val logbackVersion= "1.2.1"
-val konfig = "1.6.10.0"
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     application
     kotlin("jvm") version "1.3.30"
+    id("com.github.johnrengelman.shadow") version "4.0.2"
 }
 
 application {
@@ -26,9 +24,16 @@ repositories {
     jcenter()
     maven { setUrl("https://kotlin.bintray.com/ktor") }
     maven { setUrl("https://kotlin.bintray.com/kotlinx") }
+
 }
 
 dependencies {
+
+    val kotlinVersion = "1.3.30"
+    val ktorVersion = "1.1.4"
+    val logbackVersion= "1.2.1"
+    val konfig = "1.6.10.0"
+
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
@@ -41,4 +46,10 @@ dependencies {
     implementation("com.natpryce:konfig:$konfig")
     implementation("io.ktor:ktor-freemarker:$ktorVersion")
     testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
+}
+
+tasks.withType<ShadowJar> {
+    baseName = "github-profile"
+    classifier = ""
+    version = ""
 }
