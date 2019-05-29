@@ -68,16 +68,20 @@ fun Routing.api() {
 }
 
 fun Routing.staticFile() {
-    val staticPath = "resources/static"
-    static("/") {
-        resources("/css")
-        resources("/js")
-        route("static") {
-            files(File(staticPath))
-            default("$staticPath/index.ftl")
+    static("static") {
+        static("js") {
+            resources("static/js")
+        }
+        static("css") {
+            resources("static/css")
+        }
+        static("fonts") {
+            resources("static/fonts")
+        }
+        static("svg") {
+            resources("static/svg")
         }
     }
-
 }
 
 fun Routing.handlerNotMatchedRouter() {

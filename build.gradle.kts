@@ -1,4 +1,14 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import proguard.gradle.ProGuardTask
+
+buildscript {
+    repositories {
+        maven("https://plugins.gradle.org/m2")
+    }
+    dependencies {
+        classpath("net.sf.proguard:proguard-gradle:6.1.0")
+    }
+}
 
 plugins {
     application
@@ -31,7 +41,7 @@ dependencies {
 
     val kotlinVersion = "1.3.30"
     val ktorVersion = "1.1.4"
-    val logbackVersion= "1.2.1"
+    val logbackVersion = "1.2.1"
     val konfig = "1.6.10.0"
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
@@ -52,4 +62,17 @@ tasks.withType<ShadowJar> {
     baseName = "github-profile"
     classifier = ""
     version = ""
+}
+
+task(name = "minimizedJar", type = ProGuardTask::class) {
+    dependsOn("shadowJar")
+    injars("build/libs/github-profile.jar")
+    outjars("build/libs/github-profile.min.jar")
+    libraryjars(System.getProperties()["java.home"].toString() + "/lib/rt.jar")
+    printmapping("build/libs/github-profile.map")
+    ignorewarnings()
+    dontobfuscate()
+    dontoptimize()
+    dontwarn()
+    configuration("proguard.pro")
 }

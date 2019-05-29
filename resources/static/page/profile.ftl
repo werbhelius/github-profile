@@ -14,21 +14,21 @@
                     <p class="user-bio">${bio}</p>
                     <div class="flex">
                         <div class="user-friends">
-                            <img src="../static/css/svg/follower.svg">
+                            <img src="../static/svg/follower.svg">
                             <div>
                                 <p class="user-friends-count">${followers}</p>
                                 <p class="user-friends-name">Followers</p>
                             </div>
                         </div>
                         <div class="user-friends">
-                            <img class="no-margin" src="../static/css/svg/following.svg">
+                            <img class="no-margin" src="../static/svg/following.svg">
                             <div>
                                 <p class="user-friends-count">${following}</p>
                                 <p class="user-friends-name">Following</p>
                             </div>
                         </div>
                         <div class="user-friends">
-                            <img src="../static/css/svg/repositories.svg">
+                            <img src="../static/svg/repositories.svg">
                             <div>
                                 <p class="user-friends-count">${repositories}</p>
                                 <p class="user-friends-name">Repositories</p>
@@ -49,7 +49,7 @@
                                 <div>
                                     <img class="dot margin-3"
                                          style="margin-top: ${155 - (con.count/contributionsCounts.maxCount* 155)}px"
-                                         src="../static/css/svg/dot.svg">
+                                         src="../static/svg/dot.svg">
                                 </div>
                             </#list>
                         </div>
@@ -106,9 +106,9 @@
                                     <div class="repos-lang"
                                          style="background-color:${(repos.primaryLanguage.color)!'#262626'};"></div>
                                     <p class="repos-star-text">${(repos.primaryLanguage.name)!'Unknow'}</p>
-                                    <img src="../static/css/svg/star.svg">
+                                    <img src="../static/svg/star.svg">
                                     <p class="repos-star-text">${repos.stargazers.totalCount}</p>
-                                    <img src="../static/css/svg/fork.svg">
+                                    <img src="../static/svg/fork.svg">
                                     <p class="repos-star-text">${repos.forkCount}</p>
                                 </div>
                             </div>
@@ -133,9 +133,9 @@
                                     <div class="repos-lang"
                                          style="background-color:${(repos.primaryLanguage.color)!'#262626'}"></div>
                                     <p class="repos-star-text">${(repos.primaryLanguage.name)!'Unknow'}</p>
-                                    <img src="../static/css/svg/star.svg">
+                                    <img src="../static/svg/star.svg">
                                     <p class="repos-star-text">${repos.stargazers.totalCount}</p>
-                                    <img src="../static/css/svg/fork.svg">
+                                    <img src="../static/svg/fork.svg">
                                     <p class="repos-star-text">${repos.forkCount}</p>
                                 </div>
                             </div>
@@ -168,9 +168,9 @@
                                         <div class="lang-rank-bg-without-shadow" style="color: #F18E33">4</div>
                                     </#if>
                                     <p class="lang-rank-lang">${rn.language}</p>
-                                    <img style="margin-left: 14px" src="../static/css/svg/code-small.svg">
+                                    <img style="margin-left: 14px" src="../static/svg/code-small.svg">
                                     <p class="lang-rank-count">${rn.repository_count}</p>
-                                    <img style="margin-left: 14px" src="../static/css/svg/star-small.svg">
+                                    <img style="margin-left: 14px" src="../static/svg/star-small.svg">
                                     <p class="lang-rank-count">${rn.stars_count}</p>
                                 </div>
                             </#if>
@@ -184,21 +184,21 @@
                             <div class="lang-world-bg">
                                 <p class="lang-world-text">${rn.language}</p>
                                 <div class="lang-world">
-                                    <img class="lang-img" src="../static/css/svg/city.svg">
+                                    <img class="lang-img" src="../static/svg/city.svg">
                                     <p class="lang-world-city-text">${(city)}</p>
                                     <p class="lang-world-rank-text"><span
                                                 class="lang-world-rank-text-high">${(rn.city_rank)!'1'}</span>
                                         / ${(rn.city_count)!'1'}</p>
                                 </div>
                                 <div class="lang-world">
-                                    <img class="lang-img" src="../static/css/svg/country.svg">
+                                    <img class="lang-img" src="../static/svg/country.svg">
                                     <p class="lang-world-city-text">${(country)}</p>
                                     <p class="lang-world-rank-text"><span
                                                 class="lang-world-rank-text-high">${(rn.country_rank)!'1'}</span>
                                         / ${(rn.country_count)!'1'}</p>
                                 </div>
                                 <div class="lang-world">
-                                    <img class="lang-img" src="../static/css/svg/world.svg">
+                                    <img class="lang-img" src="../static/svg/world.svg">
                                     <p class="lang-world-city-text">Worldwide</p>
                                     <p class="lang-world-rank-text"><span
                                                 class="lang-world-rank-text-high">${(rn.world_rank)!'1'}</span>

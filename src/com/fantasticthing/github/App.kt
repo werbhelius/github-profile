@@ -26,7 +26,7 @@ fun Application.install() {
     install(CallLogging)
     install(Locations)
     install(FreeMarker) {
-        templateLoader = ClassTemplateLoader(this::class.java.classLoader, "static")
+        templateLoader = ClassTemplateLoader(this::class.java.classLoader, "static/page")
     }
     install(ContentNegotiation) {
         jackson {

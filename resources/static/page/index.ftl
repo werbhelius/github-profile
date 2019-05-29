@@ -11,12 +11,12 @@
                    onkeypress="checkName(event, this)"/>
         </div>
         <p class="index-find-me">Find me on&nbsp;&nbsp;&nbsp;
-            <a target="_blank" href="http://github.com/werbhelius"><img src="../static/css/svg/github.svg"></a> ,&nbsp;&nbsp;&nbsp;
-            <a target="_blank" href="https://twitter.com/WerbHelius"><img src="../static/css/svg/twitter.svg"></a> ,&nbsp;&nbsp;&nbsp;
-            <a target="_blank" href="https://weibo.com/singerwannber"><img src="../static/css/svg/weibo.svg"></a> ,&nbsp;&nbsp;&nbsp;
+            <a target="_blank" href="http://github.com/werbhelius"><img src="/static/svg/github.svg"></a> ,&nbsp;&nbsp;&nbsp;
+            <a target="_blank" href="https://twitter.com/WerbHelius"><img src="/static/svg/twitter.svg"></a> ,&nbsp;&nbsp;&nbsp;
+            <a target="_blank" href="https://weibo.com/singerwannber"><img src="/static/svg/weibo.svg"></a> ,&nbsp;&nbsp;&nbsp;
             <a target="_blank" href="https://www.instagram.com/i.am.werb/"><img
-                    src="../static/css/svg/ins.svg"></a>&nbsp;&nbsp;<span class="index-title-span">and</span>&nbsp;&nbsp;
-            <a target="_blank" href="mailto:werbhelius@gmail.com"><img src="../static/css/svg/email.svg"></a> .</p>
+                    src="/static/svg/ins.svg"></a>&nbsp;&nbsp;<span class="index-title-span">and</span>&nbsp;&nbsp;
+            <a target="_blank" href="mailto:werbhelius@gmail.com"><img src="/static/svg/email.svg"></a> .</p>
         <@layout.loading "loading"/>
     </div>
     <div id="error-page"></div>
