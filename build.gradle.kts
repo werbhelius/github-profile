@@ -20,7 +20,7 @@ application {
     applicationName = "github-profile"
     mainClassName = "io.ktor.server.netty.EngineMain"
     group = "github-profile"
-    version = "0.1.0"
+    version = "1.0.0"
 }
 
 java.sourceSets {
@@ -59,9 +59,9 @@ dependencies {
 }
 
 tasks.withType<ShadowJar> {
-    baseName = "github-profile"
+    baseName = application.applicationName
+    version = "1.0.0"
     classifier = ""
-    version = ""
 }
 
 task(name = "minimizedJar", type = ProGuardTask::class) {
