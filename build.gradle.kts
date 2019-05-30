@@ -64,7 +64,7 @@ tasks.withType<ShadowJar> {
 
 task(name = "minimizedJar", type = ProGuardTask::class) {
     dependsOn("shadowJar")
-    injars("build/libs/github-profile.jar")
+    injars("build/libs/github-profile-1.0.0.jar")
     outjars("build/libs/github-profile.min.jar")
     libraryjars(System.getProperties()["java.home"].toString() + "/lib/rt.jar")
     printmapping("build/libs/github-profile.map")
