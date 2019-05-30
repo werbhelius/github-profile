@@ -19,7 +19,6 @@ object Cache {
 
     fun init() {
         users = readUserProfilesFromDisk()
-        logger.debug("Cache init succeed！")
     }
 
     fun putUser(user: UserProfile.User) {
