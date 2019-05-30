@@ -40,7 +40,7 @@ repositories {
 dependencies {
 
     val kotlinVersion = "1.3.30"
-    val ktorVersion = "1.1.4"
+    val ktorVersion = "1.2.1"
     val logbackVersion = "1.2.1"
     val konfig = "1.6.10.0"
 
