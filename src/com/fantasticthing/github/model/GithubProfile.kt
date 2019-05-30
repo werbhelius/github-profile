@@ -50,7 +50,7 @@ fun UserProfile.User.toGithubProfile(): GithubProfile = GithubProfile(
     this.createdAt,
     this.email,
     this.url,
-    this.company,
+    this.company ?: "",
     this.websiteUrl ?: "",
     this.followers.totalCount,
     this.following.totalCount,

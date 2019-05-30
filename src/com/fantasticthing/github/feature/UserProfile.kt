@@ -208,7 +208,7 @@ class UserProfile {
         val createdAt: String,
         val email: String,
         val url: String,
-        val company: String,
+        val company: String? = "",
         val websiteUrl: String? = "",
         val followers: XCount,
         val following: XCount,
