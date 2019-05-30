@@ -8,7 +8,7 @@ RUN chown -R $APPLICATION_USER /app
 
 USER $APPLICATION_USER
 
-COPY ./build/libs/github-profile.jar /app/github-profile.jar
+COPY ./build/libs/github-profile-1.0.0.jar /app/github-profile.jar
 WORKDIR /app
 
 CMD ["java", "-server", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-XX:InitialRAMFraction=2", "-XX:MinRAMFraction=2", "-XX:MaxRAMFraction=2", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=100", "-XX:+UseStringDeduplication", "-jar", "github-profile.jar"]
