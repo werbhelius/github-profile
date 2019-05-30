@@ -1,14 +1,20 @@
 package com.fantasticthing.github.http
 
-import com.fantasticthing.github.exception.*
-import com.natpryce.konfig.*
+import com.fantasticthing.github.exception.InternalServerErrorException
+import com.natpryce.konfig.ConfigurationProperties
 import com.natpryce.konfig.ConfigurationProperties.Companion.systemProperties
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.engine.okhttp.*
-import io.ktor.client.features.json.*
-import io.ktor.content.*
-import io.ktor.http.*
+import com.natpryce.konfig.Key
+import com.natpryce.konfig.overriding
+import com.natpryce.konfig.stringType
+import io.ktor.client.HttpClient
+import io.ktor.client.call.call
+import io.ktor.client.call.receive
+import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.features.json.JacksonSerializer
+import io.ktor.client.features.json.JsonFeature
+import io.ktor.content.TextContent
+import io.ktor.http.HttpMethod
+import okhttp3.Protocol
 
 /**
  * Created by wanbo on 2019-01-10.
@@ -27,6 +33,7 @@ val client = HttpClient(OkHttp) {
     }
     engine {
         config {
+            protocols(listOf(Protocol.HTTP_1_1, Protocol.HTTP_2))
             addInterceptor(HeaderInterceptor())
         }
     }
