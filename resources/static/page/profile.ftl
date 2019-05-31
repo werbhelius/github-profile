@@ -4,7 +4,7 @@
 <@layout.head "${login}'s GitHub Profile Summary"/>
 <body>
 <div id="index-page">
-    <@layout.header/>
+    <@layout.header "${login}"/>
     <div id="profile-page" class="profile-page">
         <div class="profile-user-info-div">
             <div id="user-info" class="profile-user-info">

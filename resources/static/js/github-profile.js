@@ -94,3 +94,13 @@ function requestName(input) {
 function backToHome() {
     window.location = "/"
 }
+
+function shareTweet(login) {
+    var domain = document.domain;
+    window.open("https://twitter.com/intent/tweet?url=http://" + domain + "/profile/" + login + "&text=" + login + "'s Github Profile Summary" + "&via=WerbHelius")
+}
+
+function shareFb(login) {
+    var domain = document.domain;
+    window.open("https://facebook.com/sharer.php?u=http://" + domain + "/profile/" + login + "&text=" + login + "'s Github Profile Summary");
+}

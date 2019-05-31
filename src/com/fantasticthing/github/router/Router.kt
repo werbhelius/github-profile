@@ -33,11 +33,18 @@ fun Routing.api() {
             throw ParametersMissingException(listOf(profile.username))
         }
 
-        Cache.getUser(username)?.also {
-            call.respond(FreeMarkerContent("profile.ftl", it.toGithubProfile()))
+        val auth = async {
+            UserAuthentication().request(username)
+        }.apply { start() }
+
+        val githubProfile = Cache.getUser(username)?.let {
+            launch { auth.cancel() }
+            return@let it.toGithubProfile()
         } ?: run {
-            call.respond(FreeMarkerContent("index.ftl", null))
+            return@run UserProfile().request(username, auth.await()).toGithubProfile()
         }
+
+        call.respond(FreeMarkerContent("profile.ftl", githubProfile))
     }
 
     // API
