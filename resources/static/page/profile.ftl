@@ -47,9 +47,13 @@
                         <div class="user-contributions-chart">
                             <#list contributionsByMonth as con>
                                 <div>
-                                    <img class="dot margin-3"
-                                         style="margin-top: ${155 - (con.count/contributionsCounts.maxCount* 155)}px"
-                                         src="../static/svg/dot.svg">
+                                    <#assign maxCount = contributionsCounts.maxCount />
+                                    <#if maxCount != 0>
+                                        <img class="dot margin-3"
+                                             style="margin-top: ${155 - (con.count/maxCount* 155)}px"
+                                             src="../static/svg/dot.svg">
+                                    </#if>
+
                                 </div>
                             </#list>
                         </div>

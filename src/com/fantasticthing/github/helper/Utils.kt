@@ -58,6 +58,7 @@ val logger = LoggerFactory.getLogger("Application")
 
 
 fun Float.format(): Float {
+    if (this.equals(Float.NaN)) return 0f
     val df = DecimalFormat("#.000")
     return df.format(this).toFloat()
 }

@@ -96,11 +96,13 @@ function backToHome() {
 }
 
 function shareTweet(login) {
+    if (login === "") return;
     var domain = document.domain;
     window.open("https://twitter.com/intent/tweet?url=http://" + domain + "/profile/" + login + "&text=" + login + "'s Github Profile Summary" + "&via=WerbHelius")
 }
 
 function shareFb(login) {
+    if (login === "") return;
     var domain = document.domain;
     window.open("https://facebook.com/sharer.php?u=http://" + domain + "/profile/" + login + "&text=" + login + "'s Github Profile Summary");
 }

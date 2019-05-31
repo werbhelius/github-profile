@@ -184,8 +184,8 @@ class UserProfile {
         }
         userResponse.data?.user?.also {
             return it.format().apply {
-                it.city = rankResponse.user.city ?: ""
-                it.country = rankResponse.user.country ?: ""
+                it.city = rankResponse.user.city ?: "no place"
+                it.country = rankResponse.user.country ?: "no place"
                 it.rank = rankResponse.user.rankings
                 Cache.putUser(this)
             }
@@ -253,7 +253,7 @@ class UserProfile {
 
         private fun formatMyRepos(): Deferred<Boolean> = GlobalScope.async(Dispatchers.IO) {
             launch {
-                val allMyRepos = myRepos.nodes.size
+                val allMyRepos = myRepos.nodes.size.toFloat()
                 myRepos.nodes.forEach { repo ->
                     languageRatioByMyRepos.find { it.language.name == repo.primaryLanguage?.name ?: "UnKnow" }?.also {
                         it.count++
@@ -270,7 +270,7 @@ class UserProfile {
                 languageRatioByMyRepos.sortByDescending { it.count }
             }
             launch {
-                val allMyReposStarCount = myRepos.nodes.sumBy { it.stargazers.totalCount }
+                val allMyReposStarCount = myRepos.nodes.sumBy { it.stargazers.totalCount }.toFloat()
                 myRepos.nodes.filter { !it.isFork }.forEach { repo ->
                     languageRatioByMyReposWithStar.find { it.language.name == repo.primaryLanguage?.name ?: "UnKnow" }?.also {
                         it.count = it.count + repo.stargazers.totalCount
@@ -303,7 +303,7 @@ class UserProfile {
         }
 
         private fun formatStarRepos(): Deferred<Boolean> = GlobalScope.async(Dispatchers.IO) {
-            val allStarRepos = starRepos.nodes.size
+            val allStarRepos = starRepos.nodes.size.toFloat()
             starRepos.nodes.forEach { repo ->
                 languageRatioByStarRepos.find { it.language.name == repo.primaryLanguage?.name ?: "UnKnow" }?.also {
                     it.count++
@@ -360,7 +360,7 @@ class UserProfile {
         private fun formatCommitByMyRepos(): Deferred<Boolean> = GlobalScope.async(Dispatchers.IO) {
             launch {
                 val allCommitCount = myRepos.nodes.filter { !it.isFork }
-                    .sumBy { repo -> repo.refs?.nodes?.sumBy { it.target.history.totalCount } ?: 0 }
+                    .sumBy { repo -> repo.refs?.nodes?.sumBy { it.target.history.totalCount } ?: 0 }.toFloat()
                 myRepos.nodes.filter { !it.isFork }.forEach { repo ->
                     repo.commitCount = repo.refs?.nodes?.sumBy { it.target.history.totalCount } ?: 0
                     repo.commitRadio = (repo.commitCount.toFloat() / allCommitCount).format()

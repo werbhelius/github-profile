@@ -5,7 +5,7 @@
 <body>
 <div style="height: 100%">
     <div id="error-page">
-        <@layout.header/>
+        <@layout.header ""/>
         <@layout.error/>
     </div>
     <@layout.footer "index-footer"/>
