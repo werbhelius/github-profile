@@ -4,7 +4,7 @@
                                                             href="https://github.com/werbhelius/github-profile"><span
                         class="index-title-span">Apache 2 license</span></a></p>
         <p class="index-footer-title">Design & Develop <img src="../static/svg/heart.svg"> by <a target="_blank"
-                                                                                          href="https://about.me/werbhelius"><span
+                                                                                                 href="https://about.me/werbhelius"><span
                         class="index-title-span">werbhelius</span></a></p>
         <p class="index-footer-title">Source is on <a target="_blank"
                                                       href="https://github.com/werbhelius/github-profile"><span
@@ -51,11 +51,12 @@
 
 <#macro head title>
     <head>
-    <meta charset="UTF-8">
-    <title>${title}</title>
-    <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="stylesheet" href="../static/css/loaders.min.css">
-    <script type="text/javascript" src="../static/js/github-profile.js"></script>
+        <meta charset="UTF-8">
+        <title>${title}</title>
+        <link rel="shortcut icon" href="../static/svg/icon.png">
+        <link rel="stylesheet" href="../static/css/style.css">
+        <link rel="stylesheet" href="../static/css/loaders.min.css">
+        <script type="text/javascript" src="../static/js/github-profile.js"></script>
     </head>
 </#macro>
 
