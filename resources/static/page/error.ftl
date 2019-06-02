@@ -1,3 +1,3 @@
 <#import "temp.ftl" as layout />
-<@layout.header/>
+<@layout.header ""/>
 <@layout.error/>
