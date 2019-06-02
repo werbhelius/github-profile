@@ -110,6 +110,10 @@ html {
         max-width: 1440px;
     }
 
+    .profile-user-info {
+        max-width: 1440px;
+    }
+
     #pinned-repos {
         margin-right: 81px;
     }
