@@ -165,9 +165,9 @@ a:hover {
 }
 
 .loading {
-    width: 100px;
+    width: fit-content;
     height: 50px;
-    margin: 50px auto 0;
+    margin: 5rem auto;
 }
 
 .loading-div {
@@ -176,7 +176,6 @@ a:hover {
     position: absolute;
     top: 50%;
     margin-top: -20px;
-    margin-left: 380px;
 }
 
 .profile-loading {
