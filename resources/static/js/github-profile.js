@@ -3,7 +3,7 @@ var htmlDom = document.getElementsByTagName("html")[0];
 if (htmlWidth > 1440) {
     htmlWidth = 1440
 }
-htmlDom.style.fontSize = htmlWidth/1440*10 + "px";
+htmlDom.style.fontSize = htmlWidth / 1440 * 10 + "px";
 
 function calculateXY(svg, div) {
     var texts = svg.getElementsByTagName("text");
@@ -77,7 +77,7 @@ function requestName(input) {
     ajaxObj.setRequestHeader("client", "web");
     ajaxObj.send();
     ajaxObj.onreadystatechange = function () {
-        if (ajaxObj.readyState !== 4) return ;
+        if (ajaxObj.readyState !== 4) return;
         document.getElementById("loading").style.display = "none";
         input.disabled = "";
         if (ajaxObj.status >= 200 && ajaxObj.status < 400) {
@@ -103,13 +103,19 @@ function backToHome() {
 }
 
 function shareTweet(login) {
-    if (login === "") return;
     var domain = document.domain;
+    if (login === "") {
+        window.open("https://twitter.com/intent/tweet?url=http://" + domain + "&text= See Your Github Profile Summary" + "&via=WerbHelius");
+        return;
+    }
     window.open("https://twitter.com/intent/tweet?url=http://" + domain + "/profile/" + login + "&text=" + login + "'s Github Profile Summary" + "&via=WerbHelius")
 }
 
 function shareFb(login) {
-    if (login === "") return;
     var domain = document.domain;
+    if (login === "") {
+        window.open("https://twitter.com/intent/tweet?url=http://" + domain + "&text= See Your Github Profile Summary" + "&via=WerbHelius");
+        return;
+    }
     window.open("https://facebook.com/sharer.php?u=http://" + domain + "/profile/" + login + "&text=" + login + "'s Github Profile Summary");
 }
