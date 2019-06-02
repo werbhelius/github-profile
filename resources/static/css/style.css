@@ -6,17 +6,88 @@ html {
     padding: 0;
 }
 
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 1024px) {
     #header-search {
-        visibility: hidden;
+        display: none;
     }
+
     #header-search-share {
-        visibility: hidden;
+        display: none;
     }
+
+    #header-title {
+        margin: 0 auto;
+        width: fit-content;
+    }
+
+    .profile-user-info-div {
+        height: 45rem;
+    }
+
+    .user-contributions {
+        display: none;
+    }
+
+    .user-detail {
+        margin: 0 auto;
+        width: 50rem;
+        height: 50rem;
+        padding-top: 30px;
+        padding-bottom: 17px;
+    }
+
+    .user-friends img {
+        display: none;
+    }
+
+    .profile-repos-div {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .profile-repos-block {
+        margin-top: 30px;
+    }
+
+    .profile-repos-block .content-title {
+        padding-left: 5.5rem;
+    }
+
+    .repos-bg {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+}
+
+@media screen and (min-width: 1025px) {
+    .user-detail {
+        width: 35.7rem;
+        height: 25.2rem;
+        padding: 7.6rem 6.5rem 5.5rem 5.5rem;
+    }
+
+    .profile-repos-div {
+        display: flex;
+    }
+
+    .repos-bg {
+        width: 381px;
+    }
+
+    .profile-repos-div {
+        max-width: 1440px;
+    }
+
+    #pinned-repos {
+        margin-right: 81px;
+    }
+
 }
 
 a {
-  color: #FFFFFF;
+    color: #FFFFFF;
 }
 
 a:hover {
@@ -309,14 +380,10 @@ a:hover {
 
 .profile-user-info-div {
     width: 100%;
-    height: 383px;
+    height: 38.3rem;
     background-color: #2F363D;
-    margin-top: 65px;
+    margin-top: 6.5rem;
     display: block;
-}
-
-.profile-user-info-div > div {
-    max-width: 1440px;
 }
 
 .profile-user-info {
@@ -325,23 +392,24 @@ a:hover {
     display: flex;
 }
 
-.user-detail {
-    width: 357px;
-    height: 252px;
-    padding: 76px 65px 55px 55px;
-}
-
 .user-contributions {
     width: 888px;
     height: 271px;
     padding: 78px 75px 34px 0;
 }
 
+.avatar-a {
+    width: 100%;
+    display: block;
+    vertical-align: middle;
+    text-align: center;
+}
+
 .user-img {
-    width: 115px;
-    height: 115px;
+    width: 11.5rem;
+    height: 11.5rem;
     border-radius: 50%;
-    margin-left: 121px;
+    margin: 0 auto;
 }
 
 .user-name {
@@ -367,7 +435,7 @@ a:hover {
 .user-friends {
     width: 33.3%;
     height: 38px;
-    margin-top: 31px;
+    margin-top: 3rem;
     display: flex;
 }
 
@@ -445,15 +513,13 @@ a:hover {
 }
 
 .profile-repos-div {
-    display: flex;
     margin: 30px auto;
-    max-width: 1440px;
 }
 
 .profile-more {
-    margin-left: 55px;
+    margin-left: 5.5rem;
     width: 310px;
-    margin-right: 100px;
+    margin-right: 10rem;
 }
 
 .content-title {
@@ -492,12 +558,7 @@ a:hover {
     line-height: 47px;
 }
 
-.profile-repos-block {
-    min-width: 381px;
-}
-
 .repos-bg {
-    width: 381px;
     background-color: #FFFFFF;
     border-radius: 10px;
     box-shadow: 0 2px 7px 0 rgba(0, 0, 0, .10);
@@ -558,7 +619,7 @@ a:hover {
 
 .profile-lang-div {
     display: flex;
-    margin: 50px auto 0 auto;
+    margin: 5rem auto 0 auto;
     max-width: 1440px;
     padding-bottom: 50px;
 }
@@ -812,6 +873,7 @@ a:hover {
     opacity: 1;
     transition: opacity 100ms linear;
 }
+
 .hidden {
     visibility: hidden;
     opacity: 0;

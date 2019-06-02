@@ -23,7 +23,7 @@
             </div>
             <@loading "loading-div"/>
         </div>
-        <p class="index-title-small">GitHub Profile <span class="index-title-span">Summary</span></p>
+        <p class="index-title-small" id="header-title">GitHub Profile <span class="index-title-span">Summary</span></p>
         <div class="header-search" id="header-search-share">
             <p class="header-search-share">share to</p>
             <div class="header-search-share-imag">

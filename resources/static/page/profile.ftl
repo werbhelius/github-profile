@@ -9,7 +9,9 @@
         <div class="profile-user-info-div">
             <div id="user-info" class="profile-user-info">
                 <div id="user-detail" class="user-detail">
-                    <a target="_blank" href="https://github.com/${login}"><img class="user-img" src="${avatarUrl}"></a>
+                    <a target="_blank" class="avatar-a" href="https://github.com/${login}">
+                        <img class="user-img" src="${avatarUrl}">
+                    </a>
                     <p class="user-name"><a target="_blank" href="https://github.com/${login}">${login}(${name})</a></p>
                     <p class="user-bio">${bio}</p>
                     <div class="flex">
@@ -96,8 +98,8 @@
                     </div>
                 </div>
             </div>
-            <div class="profile-repos-block" style="margin-right: 81px">
-                <p class="content-title">Pinned Repos</p>
+            <div class="profile-repos-block" id="pinned-repos">
+                <p class="content-title ">Pinned Repos</p>
                 <#if pinnedRepos?size != 0>
                     <div class="repos-bg">
                         <#list pinnedRepos as repos>
@@ -124,7 +126,7 @@
                 </#if>
             </div>
             <div class="profile-repos-block">
-                <p class="content-title">Top Star Repos</p>
+                <p class="content-title ">Top Star Repos</p>
                 <#if myRepos?size != 0>
                     <div class="repos-bg">
                         <#list myRepos as repos>
