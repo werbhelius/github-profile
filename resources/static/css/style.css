@@ -59,6 +59,36 @@ html {
         margin-right: auto;
     }
 
+    .profile-lang-div {
+        width: 100%;
+        display: inline-block;
+    }
+
+    .profile-lang-div .content-title {
+        padding-left: 5.5rem;
+    }
+
+    .profile-lang-world {
+        margin-top: 30px;
+        width: 100%;
+    }
+
+    .profile-lang-world-list {
+        display: inline-block;
+    }
+
+    .lang-world-bg {
+        width: 100%;
+    }
+
+    .lang-bg {
+        width: 100%;
+    }
+
+    .lang-world-bg {
+        padding-top: 2px;
+    }
+
 }
 
 @media screen and (min-width: 1025px) {
@@ -82,6 +112,36 @@ html {
 
     #pinned-repos {
         margin-right: 81px;
+    }
+
+    .profile-lang-rank {
+        margin-left: 55px;
+        width: 333px;
+        margin-right: 74px;
+    }
+
+    .profile-lang-div {
+        margin: 5rem auto 0 auto;
+        display: flex;
+    }
+
+    .profile-lang-world {
+        width: 886px;
+    }
+
+    .profile-lang-world-list {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .lang-world-bg {
+        min-width: 333px;
+        margin-right: 35px;
+    }
+
+    .lang-bg {
+        width: 333px;
     }
 
 }
@@ -618,20 +678,11 @@ a:hover {
 }
 
 .profile-lang-div {
-    display: flex;
-    margin: 5rem auto 0 auto;
     max-width: 1440px;
     padding-bottom: 50px;
 }
 
-.profile-lang-rank {
-    margin-left: 55px;
-    width: 333px;
-    margin-right: 74px;
-}
-
 .lang-bg {
-    width: 333px;
     background-color: #FBFBFB;
     border-radius: 10px;
     box-shadow: 0 2px 7px 0 rgba(0, 0, 0, .10);
@@ -699,24 +750,15 @@ a:hover {
     line-height: 53px;
 }
 
-.profile-lang-world {
-    width: 886px;
-}
-
 .profile-lang-world-list {
     width: 100%;
-    display: flex;
-    overflow-x: auto;
-    white-space: nowrap;
 }
 
 .lang-world-bg {
-    min-width: 333px;
     background-color: #FFFFFF;
     border-radius: 10px;
     box-shadow: 0 2px 7px 0 rgba(0, 0, 0, .10);
     margin-top: 20px;
-    margin-right: 35px;
     padding-bottom: 12px;
 }
 
