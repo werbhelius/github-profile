@@ -6,6 +6,15 @@ html {
     padding: 0;
 }
 
+@media screen and (max-width: 1024px){
+    #header-search {
+        visibility: hidden;
+    }
+    #header-search-share {
+        visibility: hidden;
+    }
+}
+
 a {
   color: #FFFFFF;
 }
@@ -64,7 +73,7 @@ a:hover {
 }
 
 .header-search-input-div {
-    width: 277px;
+    width: 27.7rem;
     height: 30px;
     background-color: #3F4448;
     border-radius: 5px;
@@ -86,13 +95,13 @@ a:hover {
     height: 30px;
     width: 100%;
     line-height: 30px;
-    font-size: 13px;
+    font-size: 1.3rem;
     font-family: ProducSansBold, serif;
     color: #ffffff;
 }
 
 .header-search-share {
-    font-size: 20px;
+    font-size: 2rem;
     font-family: ProducSansBold, serif;
     color: #8D8F92;
     text-align: center;
@@ -159,8 +168,8 @@ a:hover {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 65px;
+    width: 100%;
+    height: 6.5rem;
     background-color: #23292F;
 }
 
@@ -196,7 +205,7 @@ a:hover {
 }
 
 .error-code {
-    font-size: 300px;
+    font-size: 30rem;
     font-family: ProducSansBold, serif;
     color: #4B565F;
     text-align: center;
@@ -220,7 +229,7 @@ a:hover {
     border-radius: 8px;
     color: #ffffff;
     border: none;
-    margin-top: 60px;
+    margin-top: 6rem;
     cursor: pointer;
     font-size: 15px;
     font-family: ProducSansBold, serif;
