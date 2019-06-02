@@ -36,6 +36,20 @@ html {
         padding-bottom: 17px;
     }
 
+    .flex {
+        width: 100%;
+    }
+
+    .user-friends-count {
+        text-align: center;
+        margin: 0;
+    }
+
+    .user-friends-name {
+        text-align: center;
+        margin: 0;
+    }
+
     .user-friends img {
         display: none;
     }
@@ -135,6 +149,14 @@ html {
 
     .profile-user-info {
         max-width: 1440px;
+    }
+
+    .user-friends-count {
+        margin: 2px 0 0 12px;
+    }
+
+    .user-friends-name {
+        margin: 0 0 0 12px;
     }
 
     #pinned-repos {
@@ -548,18 +570,20 @@ a:hover {
     display: flex;
 }
 
+.user-friends-detail {
+    width: 100%;
+}
+
 .user-friends-count {
     font-size: 17px;
     font-family: ProducSansBold, serif;
     color: #ffffff;
-    margin: 2px 0 0 12px;
 }
 
 .user-friends-name {
     font-size: 11px;
     font-family: ProducSansRegular, serif;
     color: #757272;
-    margin: 0 0 0 12px;
 }
 
 .user-contributions-count {

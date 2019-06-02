@@ -57,7 +57,7 @@ function displayTip(div, index) {
 }
 
 function checkName(e, input) {
-    if (e.code !== "Enter") return;
+    if (e.code !== "Enter" && e.key !== "Enter") return;
     if (input.value === "") {
         input.classList.add("shake");
         setTimeout(function () {

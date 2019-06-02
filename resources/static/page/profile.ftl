@@ -17,21 +17,21 @@
                     <div class="flex">
                         <div class="user-friends">
                             <img src="../static/svg/follower.svg">
-                            <div>
+                            <div class="user-friends-detail">
                                 <p class="user-friends-count">${followers}</p>
                                 <p class="user-friends-name">Followers</p>
                             </div>
                         </div>
                         <div class="user-friends">
                             <img class="no-margin" src="../static/svg/following.svg">
-                            <div>
+                            <div class="user-friends-detail">
                                 <p class="user-friends-count">${following}</p>
                                 <p class="user-friends-name">Following</p>
                             </div>
                         </div>
                         <div class="user-friends">
                             <img src="../static/svg/repositories.svg">
-                            <div>
+                            <div class="user-friends-detail">
                                 <p class="user-friends-count">${repositories}</p>
                                 <p class="user-friends-name">Repositories</p>
                             </div>
