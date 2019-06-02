@@ -402,7 +402,7 @@
                     </div>
                 </div>
                 <div class="profile-chart-2">
-                    <div class="profile-chart-detail" style="width: 50%">
+                    <div class="profile-chart-detail">
                         <p class="content-title">My Stared Repos per Language</p>
                         <div class="pie" id="languageRatioByStarRepos">
                             <svg class="pie-svg" onload="calculateXY(this, 'languageRatioByStarRepos')">
@@ -462,7 +462,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="profile-chart-detail" style="width: 50%">
+                    <div class="profile-chart-detail">
                         <p class="content-title">Commits per My Repos</p>
                         <div class="pie" id="commitTopRepos">
                             <svg class="pie-svg" onload="calculateXY(this, 'commitTopRepos')">

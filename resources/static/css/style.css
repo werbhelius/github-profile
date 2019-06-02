@@ -89,6 +89,29 @@ html {
         padding-top: 2px;
     }
 
+    .profile-chart-1 {
+        width: 100%;
+        display: inline-block;
+    }
+
+    .profile-chart-2 {
+        width: 100%;
+        display: inline-block;
+    }
+
+    .profile-chart-detail {
+        width: 100%;
+    }
+
+    .profile-chart-detail .content-title {
+        padding-left: 5.5rem;
+        margin-top: 30px;
+    }
+
+    .pie {
+        margin: 0 auto;
+    }
+
 }
 
 @media screen and (min-width: 1025px) {
@@ -146,6 +169,28 @@ html {
 
     .lang-bg {
         width: 333px;
+    }
+
+    .profile-chart-div {
+        padding: 48px 111px 0 111px;
+        height: 900px;
+    }
+
+    .profile-chart-detail {
+        width: 33.3%;
+    }
+
+    .profile-chart-1 {
+        display: flex;
+    }
+
+    .profile-chart-2 {
+        width: 761px;
+        display: flex;
+    }
+
+    .profile-chart-2 .profile-chart-detail {
+        width: 50%;
     }
 
 }
@@ -439,7 +484,7 @@ a:hover {
 /*profile*/
 
 .profile-page {
-    min-height: 100%;
+    height: fit-content;
 }
 
 .profile-user-info-div {
@@ -819,24 +864,15 @@ a:hover {
 
 .profile-chart-div {
     max-width: 1218px;
-    height: 900px;
     margin: 0 auto;
-    padding: 48px 111px 0 111px;
 }
 
 .profile-chart-1 {
-    display: flex;
     margin-bottom: 55px;
 }
 
 .profile-chart-2 {
-    display: flex;
-    width: 761px;
     margin: 0 auto 55px auto;
-}
-
-.profile-chart-detail {
-    width: 33.3%;
 }
 
 .pie {
