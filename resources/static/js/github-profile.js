@@ -1,3 +1,10 @@
+var htmlWidth = document.documentElement.clientWidth || document.body.clientWidth;
+var htmlDom = document.getElementsByTagName("html")[0];
+if (htmlWidth > 1440) {
+    htmlWidth = 1440
+}
+htmlDom.style.fontSize = htmlWidth/1440*10 + "px";
+
 function calculateXY(svg, div) {
     var texts = svg.getElementsByTagName("text");
     console.log(texts.length);

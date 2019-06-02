@@ -3,7 +3,7 @@
 <html lang="en">
 <@layout.head "GitHub Profile Summary"/>
 <body>
-<div style="height: 100%">
+<div>
     <div id="index-page">
         <p class="index-title">GitHub Profile <span class="index-title-span">Summary</span></p>
         <div id="userNameDiv" class="index-input-div">
