@@ -9,4 +9,5 @@
 * Repos commits pie chart
 
 ## screenshot
-![image](images/detail.png)
+![image](images/image1.png)
+![image](images/image2.png)
