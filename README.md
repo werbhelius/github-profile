@@ -9,5 +9,24 @@
 * Repos commits pie chart
 
 ## screenshot
-![image](images/image1.png)
-![image](images/image2.png)
+![image](images/images.png)
+
+### build
+```
+./gradlew clean build
+```
+
+### docker
+```
+docker build -t github-profile .
+docker run -p 3000:8000 --rm github-profile
+```
+
+### docker with heroku
+```
+heroku login
+heroku container:login
+heroku container:push web --app APP_NAME   
+heroku container:release web --app APP_NAME
+heroku open --app APP_NAME  
+```
