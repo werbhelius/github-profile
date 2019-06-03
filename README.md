@@ -12,6 +12,12 @@
 ![image](images/images.png)
 
 ### build
+Create a new file named `config.properties` and write code like:
+```
+github.host = https://api.github.com/graphql
+github.token = XXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+github.rank = http://git-awards.com/api/v0/users/
+```
 ```
 ./gradlew clean build
 ```
